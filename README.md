@@ -18,3 +18,8 @@ TravisDW is Travis Williams
 || berogi33 - Phillip
 || ChrisMoore56 - Christopher
 || Pixelmixery - Aya
+
+[The Others]
+Harry Martin
+Nick Wood
+Mariam Dhanani
