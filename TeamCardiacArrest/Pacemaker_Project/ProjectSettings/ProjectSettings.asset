@@ -168,7 +168,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.Deakin.SIT383.CardiacArrest.ARProject
+    Android: jectDeakin.SIT383.CardiacArrest.ARProject
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 29
