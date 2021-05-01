@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
 public class addHeartbeat : MonoBehaviour
 {
+
     private float currentHeartrate;
 
     private float scalePeriod;
@@ -49,6 +51,8 @@ public class addHeartbeat : MonoBehaviour
         scaleIncreaseX = Mathf.Abs(Mathf.Cos(Time.time * Mathf.PI * scalePeriod)) * maxScaleX;
         scaleIncreaseY = Mathf.Abs(Mathf.Cos(Time.time * Mathf.PI * scalePeriod)) * maxScaleY;
         scaleIncreaseZ = Mathf.Abs(Mathf.Cos(Time.time * Mathf.PI * scalePeriod)) * maxScaleZ;
+
+
 
         /*
         if(scaleIncreaseX == 0)

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class heartDetails : MonoBehaviour
 {
+
     public float min, max;
     private float current, target;
     private List<float> sensitivityArray;
@@ -33,6 +34,7 @@ public class heartDetails : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void updateCVTText()
@@ -162,5 +164,7 @@ public class heartDetails : MonoBehaviour
     {
         return max;
     }
+
+
 
 }
