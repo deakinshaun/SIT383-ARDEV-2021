@@ -8,7 +8,7 @@ using Photon.Realtime;
 
 public class RoomManger : MonoBehaviourPunCallbacks
 {
-
+    //DownGrade to Unity4.21
 
     // Start is called before the first frame update
     void Start()
