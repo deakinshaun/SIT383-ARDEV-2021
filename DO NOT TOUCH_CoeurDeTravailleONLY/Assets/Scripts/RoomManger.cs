@@ -9,6 +9,8 @@ using Photon.Realtime;
 public class RoomManger : MonoBehaviourPunCallbacks
 {
     //DownGrade to Unity4.21
+    public Text MessageText;
+    public GameObject MessagePanel;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public class RoomManger : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("You are in a room with  " + PhotonNetwork.CurrentRoom.PlayerCount + "  Other Players.");
-        
+        showMessageStatus("You have join the room", 3);
     }
 
 
@@ -39,5 +41,18 @@ public class RoomManger : MonoBehaviourPunCallbacks
 
     }
 
+    public void showMessageStatus(string message, int seconds)
+    {
+
+        // Set the game status message, show it, and hide it after user defined seconds
+        MessageText.text = message;
+        MessagePanel.SetActive(true);
+        Invoke("hideMessageStatus", seconds);
+    }
+
+    public void hideMessageStatus ()
+    {
+        MessagePanel.SetActive(false);
+    }
 
 }
