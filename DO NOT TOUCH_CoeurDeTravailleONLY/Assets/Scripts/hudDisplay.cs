@@ -34,7 +34,7 @@ public class hudDisplay : MonoBehaviour
     {
         countDownValue -= Time.deltaTime;
         TimerDisplay.text = string.Format("{0:00}:{1:00}", ((int)(countDownValue / 60) % 60).ToString("d2"), ((int)(countDownValue % 60)).ToString("d2"));
-}
+    }
 
     public void updateHUD()
     {
@@ -44,8 +44,7 @@ public class hudDisplay : MonoBehaviour
         else if (activeTask == "atrial") displayForAtrial();
         else if (activeTask == "ventrical") displayForVentrical();
         else displayForDebug();
-}
-
+    }
 
 public string getActiveTask()
     {
@@ -122,6 +121,7 @@ public string getActiveTask()
 
     public float getGap()
     {
+        //Atrial and Ventrical gaps not yet calculated
         if (GetComponent<activitySelector>().getAtrialIsActive())
         {
             return GetComponent<heartDetails>().getTarget() - GetComponent<atrialDetails>().getCurrent();
