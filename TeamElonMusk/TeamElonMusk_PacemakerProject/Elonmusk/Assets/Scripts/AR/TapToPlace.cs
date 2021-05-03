@@ -24,7 +24,8 @@ public class TapToPlace : MonoBehaviour
     public GameObject placeObjectsButton;
     public GameObject PlaceObjectsPanel;
 
-
+    [Header("Text")]
+    public GameObject RotationMessage;
 
     private void Start()
     {
