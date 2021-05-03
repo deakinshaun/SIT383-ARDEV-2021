@@ -62,9 +62,9 @@ public class addCameraView : MonoBehaviour
 
     void Start()
     {
-        webcamTexture = new WebCamTexture();
-        showCameras();
-        camTexMaterial.mainTexture = webcamTexture;
-        webcamTexture.Play();
+        //webcamTexture = new WebCamTexture();
+        //showCameras();
+        //camTexMaterial.mainTexture = webcamTexture;
+        //webcamTexture.Play();
     }
 }

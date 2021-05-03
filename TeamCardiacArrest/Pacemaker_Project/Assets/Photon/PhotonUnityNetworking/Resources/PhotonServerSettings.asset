@@ -15,7 +15,7 @@ MonoBehaviour:
   AppSettings:
     AppIdRealtime: f647b783-c6c4-4a5a-8b1d-917504fee48f
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: 79a0c2bf-f424-44a9-9880-767c90a1f9f2
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -25,7 +25,7 @@ MonoBehaviour:
     Protocol: 0
     EnableProtocolFallback: 1
     AuthMode: 0
-    EnableLobbyStatistics: 0
+    EnableLobbyStatistics: 1
     NetworkLogging: 1
   DevRegion: 
   PunLogging: 0
@@ -34,5 +34,5 @@ MonoBehaviour:
   StartInOfflineMode: 0
   RpcList: []
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 0
