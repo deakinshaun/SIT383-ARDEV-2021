@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public float distance = 20.0f;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +22,7 @@ public class SoundManager : MonoBehaviour
     }
     public static void hospitalTrolley()
     {
-        //
-        float x = -10;
-        float z = 2;
-        Instantiate(TrolleyWaker,Vector3(x,-2,z));
-        while (x<10)
-        {
-        x = distance * Time.time;
-        transform position = new Vector3(transform.position.x);
-        }
+        
     }
     public static void manInPain()
     {
