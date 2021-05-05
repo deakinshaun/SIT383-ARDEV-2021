@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GyroControl : MonoBehaviour
 {
     public Text RotationMessage;
+    private float maxRotation;
 
     void Start()
     {
@@ -12,7 +13,8 @@ public class GyroControl : MonoBehaviour
         {
             Input.gyro.enabled = true;
         }
-
+        maxRotation = 90.0f;
+        //Vibrator.Vibrate();
     }
 
     // Update is called once per frame
@@ -24,6 +26,11 @@ public class GyroControl : MonoBehaviour
         transform.rotation = deviceRotation;
 
         RotationMessage.text = (deviceRotation.eulerAngles.z.ToString());
+
+        if (deviceRotation.eulerAngles.z > maxRotation)
+        {
+            Vibrator.Vibrate();
+        }
 
     }
 
