@@ -40,6 +40,7 @@
             v2f vert (appdata v)
             {
                 v2f o;
+                o.objvertex = v.vertex;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
@@ -56,7 +57,7 @@
             uv.y = 0.5 + latitude / 3.14159; 
             uv.x = longitude / (2 * 3.14159);
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
