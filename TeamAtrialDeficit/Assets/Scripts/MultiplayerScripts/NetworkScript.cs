@@ -12,6 +12,10 @@ public class NetworkScript : MonoBehaviourPunCallbacks
     public GameObject Portal1;
     public GameObject Portal2;
     public GameObject Portal3;
+
+    //For the Flexible Controller: Variables
+    public GameObject ControlPointer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,4 +43,22 @@ public class NetworkScript : MonoBehaviourPunCallbacks
         avatarPlayer.GetComponent<ChangeUniverse>().portal3 = Portal3;
 
     }
+
+    //The Following sections of code is used for the Flexible Controller, if it Causing issues Uncomment the /* */ given above and below the section of code.
+    //Currently, for it to work there should only be two versions of the same person in the join, this might get in the way of other components as is.
+    //Therefore for the moment please disable the Flexi Controller through the Main Scene Heirachy if it becomes a problem
+    // The below code should not affect anything else - Rahul
+    // /*
+    [PunRPC]
+    void ControllerUpdate(Quaternion ControllerOrientation, bool ButtonAState, bool ButtonXState)
+    {
+        Debug.Log("Recieved Controller info: " + ControllerOrientation + " " + ButtonAState + " " + ButtonXState);
+        ControlPointer.transform.rotation = ControllerOrientation;
+    }
+
+    public void SendControllerState(Quaternion ControllerOrientation, bool ButtonAState, bool ButtonXState)
+    {
+        photonView.RPC("ControllerUpdate", RpcTarget.All, ControllerOrientation, ButtonAState, ButtonXState);
+    }
+    // */
 }
