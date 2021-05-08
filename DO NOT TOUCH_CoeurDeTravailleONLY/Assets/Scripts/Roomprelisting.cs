@@ -11,7 +11,7 @@ public class Roomprelisting : MonoBehaviour
 
     public void SetRoomInfo(RoomInfo roomInfo)
     {
-        roomInfo = roomInfo;
+        RoomInfo = roomInfo;
         _text.text = roomInfo.Name;
     }
 
