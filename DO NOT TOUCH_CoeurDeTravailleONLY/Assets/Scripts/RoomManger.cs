@@ -54,6 +54,11 @@ public class RoomManger : MonoBehaviourPunCallbacks
             {
             StartCounting();
         }
+        if (TimerDisplay.text == "00:00")
+            {
+            showMessageStatus("Game Over", 3);
+            GameStart = false;
+        }
         //countDownValue -= Time.deltaTime;
         //TimerDisplay.text = string.Format("{0:00}:{1:00}", ((int)(countDownValue / 60) % 60).ToString("d2"), ((int)(countDownValue % 60)).ToString("d2"));
     }

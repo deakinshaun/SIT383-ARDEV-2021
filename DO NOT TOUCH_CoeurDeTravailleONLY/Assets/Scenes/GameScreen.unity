@@ -1146,7 +1146,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fceec6f155285a94f99e331f05ab6ad0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4145640811279493405, guid: fceec6f155285a94f99e331f05ab6ad0,
         type: 3}
@@ -1961,6 +1961,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 710317292}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &884837402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2117,11 +2128,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897f25b099ce7c340a91dbd88119dd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimerDisplay: {fileID: 770071028}
   MessageText: {fileID: 1830645479}
   MessagePanel: {fileID: 637957683}
+  GameStart: 0
   _roomName: {fileID: 1232168284}
   _content: {fileID: 942147565}
-  _roomListing: {fileID: 226866146766175218, guid: b554dcc7636a9364ab1898e93260b7a4,
+  _roomListing: {fileID: -5206231759287098565, guid: b554dcc7636a9364ab1898e93260b7a4,
     type: 3}
 --- !u!1 &1045286624
 GameObject:
@@ -3679,7 +3692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac25c230863f4d4880abb5b204e1ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimerDisplay: {fileID: 770071028}
   activeActivityText: {fileID: 1771374873}
   debugMessageText: {fileID: 861137723}
   maximumSliderValueText: {fileID: 881196009}
