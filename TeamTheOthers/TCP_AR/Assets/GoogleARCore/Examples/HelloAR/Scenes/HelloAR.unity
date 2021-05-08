@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb172c260d42e4f62945afda50892c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundMaterial: {fileID: 0}
+  BackgroundMaterial: {fileID: 2100000, guid: 90a1f0dbe0279e34494110d01507add0, type: 2}
 --- !u!114 &53379609
 MonoBehaviour:
   m_ObjectHideFlags: 0
