@@ -9,6 +9,7 @@ public class FlashPluginInterface : MonoBehaviour
     public Text debugText;
     // UI Image that is used to display the web cam texture
     public Image camImage;
+    public Canvas canvas;
 
     // package name of created plugin
     private const string pluginName = "com.appliedalgorithms.unity.MyPlugin";
@@ -16,9 +17,11 @@ public class FlashPluginInterface : MonoBehaviour
     // created plugin class
     private static AndroidJavaClass _pluginClass;
     private static AndroidJavaObject _pluginInstance;
+    AndroidJavaObject _context;
+    AndroidJavaObject _activity;
 
     // used for debugging. ensures there is communication between the plugin and this script.
-    private float elapsedTime = 0;
+    //private float elapsedTime = 0;
     // boolean which indicates if the camera flash is on or not. false by default.
     private bool flashOn = false;
     // the id of the back facing camera
@@ -29,18 +32,39 @@ public class FlashPluginInterface : MonoBehaviour
 
     private void Start()
     {
-        SetContext();
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            SetContext();
+            PluginInstance.Call("OnStart", _context, _activity, (int)canvas.pixelRect.width, (int)canvas.pixelRect.height);
+
+        }
         GetBackFacingCameraImage();
         PutCamOnUIImage();
     }
 
-    private void Update()
+    private void OnApplicationPause(bool pause)
     {
-        // make sure cam tex is playing
-        if (!camTex.isPlaying)
-            camTex.Play();
+        if (pause && Application.platform == RuntimePlatform.Android)
+        {
+            //PluginInstance.Call("OnPause");
+        }
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus && Application.platform == RuntimePlatform.Android)
+        {
+            //PluginInstance.Call("OnResume", (int)camImage.flexibleWidth, (int)camImage.flexibleHeight);
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            //PluginInstance.Call("OnQuit");
+        }
+    }
 
     /// <summary>
     /// Retrieves the plugin class that coresponds to the package name.
@@ -77,7 +101,7 @@ public class FlashPluginInterface : MonoBehaviour
     /// plugin instance was initiated. Ensures continued communication is acived.
     /// </summary>
     /// <returns></returns>
-    private double GetElapsedTime()
+    /*private double GetElapsedTime()
     {
         if (Application.platform == RuntimePlatform.Android) 
         {
@@ -85,14 +109,14 @@ public class FlashPluginInterface : MonoBehaviour
         }
         Debug.LogWarning("Wrong Platform");
         return 0;
-    }
+    }*/
 
     /// <summary>
     /// Only works when on an android device.
     /// Finds the default unity android java class and use it to get the 
-    /// application context from the current activity. Passes this context 
-    /// onto the flash plugin intance.
+    /// application context from the current activity.
     /// </summary>
+    /// <returns>Returns the Context as an Android Java Object</returns>
     private void SetContext() 
     {
         // only do for android
@@ -101,12 +125,13 @@ public class FlashPluginInterface : MonoBehaviour
             // get default unity player android java class
             var unityClass = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");
             // get activity object from the unity java class
-            var unityActivity = unityClass.GetStatic<AndroidJavaObject>("currentActivity");
+            _activity = unityClass.GetStatic<AndroidJavaObject>("currentActivity");
             // get context from unity activity
-            var unityContext = unityActivity.Call<AndroidJavaObject>("getApplicationContext");
-            // pass the context onto the flash plugin instance
-            PluginInstance.CallStatic("receiveContextInstance", unityContext);
+            _context = _activity.Call<AndroidJavaObject>("getApplicationContext");
+            return;
         }
+        _context = null;
+        _activity = null;
     }
 
     /// <summary>
@@ -167,8 +192,25 @@ public class FlashPluginInterface : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// If a back facing camera was found, then apply the image as the 
+    /// material texture of the UI image if it is set.
+    /// </summary>
     private void PutCamOnUIImage() 
     {
+        // make sure cam image is set
+        if (camImage == null)
+            return;
+
+        // chacks if plugin instance is not null
+        if (PluginInstance != null)
+        {
+            // set up the camera
+            PluginInstance.Call("SetupCamera", (int)camImage.flexibleWidth, 
+                (int)camImage.flexibleHeight);
+            debugText.text = "\nCamera should be set up";
+        }
+        /*
         if (camIndex == -1)
         {
             if (!GetBackFacingCameraImage())
@@ -178,6 +220,29 @@ public class FlashPluginInterface : MonoBehaviour
             }
         }
         camTex = new WebCamTexture(WebCamTexture.devices[camIndex].name);
-        camImage.material.mainTexture = camTex;
+
+        if (camImage != null)
+            camImage.material.mainTexture = camTex;*/
     }
+
+    /// <summary>
+    /// If the WebCam Texture is playing, stop it. If it is stopped, make it play.
+    /// </summary>
+    public void ToggleCamTexture()
+    {
+        // check if the cam tex is playing
+        if (camTex.isPlaying)
+        {
+            // cam tex is playing so it needs to be stopped
+            camTex.Stop();
+        }
+        else
+        {
+            // camera is stopped so it needs to be stopped
+            camTex.Play();
+        }
+            
+    }
+
+
 }
