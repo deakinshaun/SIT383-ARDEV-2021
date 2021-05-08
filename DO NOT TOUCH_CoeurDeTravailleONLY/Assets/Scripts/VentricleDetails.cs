@@ -12,18 +12,21 @@ public class VentricleDetails : MonoBehaviour
      * Developed by Stephen Caines for SIT383 Augmented Reality Systems
      */
 
-    [Tooltip("Sets a minimum value when generating a random number for Atrial Noise")]
-    public float min = 0;
-    [Tooltip("Sets a maximum value when generating a random number for Atrial Noise")]
-    public float max = 180;
+    [Tooltip("Sets a minimum value when generating a random number for Ventricle Noise")]
+    public float minimumVentricleValue = 0.0f;
+    [Tooltip("Sets a maximum value when generating a random number for Ventricle Noise")]
+    public float maximumVentricleValue = 180.0f;
 
-    private float current, target;
-    private List<float> sensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
-    private int sensitivityIndex = 0;
-    private float sensitivityAmount;
-
+    [Tooltip("Connect this to Canvas element valueCurrentValue")]
     public Text textCurrent;
+    [Tooltip("Connect this to Canvas element valueTargetValue")]
     public Text textTarget;
+
+    private float currentVentricleValue;
+    private float targetVentricleValue;
+    private List<float> ventricleSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+    private int ventricleSensitivityIndex = 0;
+    private float ventricleSensitivityAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +34,7 @@ public class VentricleDetails : MonoBehaviour
         //current = NEED CODE TO PRODUCE WAVEFORM
         //target = INVERSE OF WAVEFORM TO CANCEL NOISE
 
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
     }
 
     // Update is called once per frame
@@ -39,11 +42,11 @@ public class VentricleDetails : MonoBehaviour
     {
     }
 
-    public void updateCVTText()
+    public void UpdateCurrentValueText()
     {
-        GetComponent<HudDisplay>().setActiveTask("ventrical");
+        GetComponent<HudDisplay>().SetActiveTask("ventrical");
 
-        if (current == target)
+        if (currentVentricleValue == targetVentricleValue)
         {
             textCurrent.color = new Color32(0, 255, 0, 255);
             textTarget.color = new Color32(0, 255, 0, 255);
@@ -56,90 +59,90 @@ public class VentricleDetails : MonoBehaviour
     }
 
 
-    public float getCurrent()
+    public float GetCurrentVentricalValue()
     {
-        return current;
+        return currentVentricleValue;
     }
-    public void setCurrent(float newValue)
+    public void SetCurrentVentricleValue(float newValue)
     {
-        current = newValue;
+        currentVentricleValue = newValue;
         textCurrent.text = newValue.ToString();
     }
 
-    public void increaseCurrent()
+    public void IncreaseCurrentVentricleValue()
     {
-        current += sensitivityAmount;
+        currentVentricleValue += ventricleSensitivityAmount;
     }
 
-    public void decreaseCurrent()
+    public void DecreaseCurrentVentricleValue()
     {
-        current -= sensitivityAmount;
+        currentVentricleValue -= ventricleSensitivityAmount;
     }
 
-    public float getTarget()
+    public float GetTargetVentricleValue()
     {
-        return target;
+        return targetVentricleValue;
     }
 
-    public void setTarget(float newValue)
+    public void SetTargetVentricleValue(float newValue)
     {
-        target = newValue;
+        targetVentricleValue = newValue;
         textTarget.text = newValue.ToString();
     }
 
-    public int getSensitivityIndex()
+    public int GetVentricleSensitivityIndex()
     {
-        return sensitivityIndex;
+        return ventricleSensitivityIndex;
     }
 
-    public void setSensitivityIndex(int newValue)
+    public void SetVentricleSensitivityIndex(int newValue)
     {
-        sensitivityIndex = newValue;
-        setSensitivity(newValue);
+        ventricleSensitivityIndex = newValue;
+        setVentricleSensitivityAmount(newValue);
     }
 
-    public float getSensitivity()
+    public float GetVentricleSensitivityAmount()
     {
-        return sensitivityAmount;
+        return ventricleSensitivityAmount;
     }
 
-    public void setSensitivity(int newIndex)
+    public void setVentricleSensitivityAmount(int newIndex)
     {
-        sensitivityAmount = sensitivityArray[newIndex];
+        ventricleSensitivityAmount = ventricleSensitivityArray[newIndex];
     }
 
-    public void raiseSensitivity()
+    public void RaiseVentricleSensitivityAmount()
     {
         Debug.Log("Raising Ventrical Sensitivity");
-        sensitivityIndex += 1;
-        if (sensitivityIndex > 9)
+        ventricleSensitivityIndex += 1;
+        if (ventricleSensitivityIndex > 9)
         {
-            sensitivityIndex = 9;
+            ventricleSensitivityIndex = 9;
         }
 
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
     }
 
-    public void lowerSensitivity()
+    public void LowerVentricleSensitivityAmount()
     {
         Debug.Log("Lowering Ventrical Sensitivity");
-        sensitivityIndex -= 1;
-        if (sensitivityIndex < 9)
+        ventricleSensitivityIndex -= 1;
+        if (ventricleSensitivityIndex < 9)
         {
-            sensitivityIndex = 0;
+            ventricleSensitivityIndex = 0;
         }
 
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
     }
 
-    public float getMin()
+    public float GetMinimumVentricleValue()
     {
-        return min;
+        return minimumVentricleValue;
     }
 
-    public float getMax()
+    public float GetMaximumVentricleValue()
     {
-        return max;
+        return maximumVentricleValue;
     }
 
 }

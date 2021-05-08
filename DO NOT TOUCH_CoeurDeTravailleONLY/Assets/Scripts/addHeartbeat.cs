@@ -37,7 +37,7 @@ public class AddHeartbeat : MonoBehaviour
         initialScaleY = this.transform.localScale.y;
         initialScaleZ = this.transform.localScale.z;
 
-        currentHeartrate = GetComponent<HeartDetails>().getCurrent();
+        currentHeartrate = GetComponent<HeartDetails>().GetCurrentHeartrate();
         audioSource = GetComponent<AudioSource>();
         //thisWaveForm = new waveForms();
     }
@@ -45,7 +45,7 @@ public class AddHeartbeat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentHeartrate = GetComponent<HeartDetails>().getCurrent();
+        currentHeartrate = GetComponent<HeartDetails>().GetCurrentHeartrate();
 
         // Scale of 1 = 60 beats per second
         scalePeriod = currentHeartrate / 60.0f;

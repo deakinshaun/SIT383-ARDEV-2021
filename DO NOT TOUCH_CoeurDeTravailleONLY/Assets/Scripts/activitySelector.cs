@@ -36,7 +36,7 @@ public class ActivitySelector : MonoBehaviour
             atrialIsActive = false;
             ventricalIsActive = false;
 
-            GetComponent<HudDisplay>().setActiveTask("heartrate");
+            GetComponent<HudDisplay>().SetActiveTask("heartrate");
         }
     }
 
@@ -48,7 +48,7 @@ public class ActivitySelector : MonoBehaviour
             atrialIsActive = true;
             ventricalIsActive = false;
 
-            GetComponent<HudDisplay>().setActiveTask("atrial");
+            GetComponent<HudDisplay>().SetActiveTask("atrial");
         }
     }
 
@@ -60,11 +60,11 @@ public class ActivitySelector : MonoBehaviour
             atrialIsActive = false;
             ventricalIsActive = true;
 
-            GetComponent<HudDisplay>().setActiveTask("ventrical");
+            GetComponent<HudDisplay>().SetActiveTask("ventrical");
         }
     }
 
-    public bool GetRateIsActive()
+    public bool GetHeartrateIsActive()
     {
         return rateIsActive;
     }

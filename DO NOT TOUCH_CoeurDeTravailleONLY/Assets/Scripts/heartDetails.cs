@@ -5,27 +5,31 @@ using UnityEngine.UI;
 
 public class HeartDetails : MonoBehaviour
 {
+    [Tooltip ("Minimum Heartrate allowed, zero means stopped")]
+    public float minimumHeartrate = 0.0f;
+    [Tooltip("Maximum Heartrate allowed, 180 is a very fit athlete")]
+    public float maximumHeartrate = 180.0f;
 
-    public float min, max;
-    private float current, target;
-    private List<float> sensitivityArray;
-    private int sensitivityIndex;
-    private float sensitivityAmount;
+    [Tooltip("Connect this to Canvas element valueCurrentValue")]
+    public Text textCurrentHeartrate;
+    [Tooltip("Connect this to Canvas element valueTargetValue")]
+    public Text textTargetHeartrate;
 
-    public Text textCurrent;
-    public Text textTarget;
+    private float currentHeartrate;
+    private float targetHeartrate;
+    private List<float> heartSensitivityArray;
+    private int heartSensitivityIndex;
+    private float heartSensitivityAmount;
 
     // Start is called before the first frame update
     void Start()
     {
-        min = 0;
-        max = 180;
-        current = RandomGaussian(30.0f, 180.0f);
-        target = RandomGaussian(60.0f, 90.0f);
+        currentHeartrate = RandomGaussian(30.0f, 180.0f);
+        targetHeartrate = RandomGaussian(60.0f, 90.0f);
 
-        sensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
-        sensitivityIndex = 0;
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        heartSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+        heartSensitivityIndex = 0;
+        heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
 
         //Force click Heartrate Actvity to get us started
         GetComponent<ActivitySelector>().OnClickRate();
@@ -37,19 +41,19 @@ public class HeartDetails : MonoBehaviour
 
     }
 
-    public void updateCVTText()
+    public void UpdateCurrentValueText()
     {
-        GetComponent<HudDisplay>().setActiveTask("heartrate");
+        GetComponent<HudDisplay>().SetActiveTask("heartrate");
 
-        if (current == target)
+        if (currentHeartrate == targetHeartrate)
         {
-            textCurrent.color = new Color32(0, 255, 0, 255);
-            textTarget.color = new Color32(0, 255, 0, 255);
+            textCurrentHeartrate.color = new Color32(0, 255, 0, 255);
+            textTargetHeartrate.color = new Color32(0, 255, 0, 255);
         }
         else
         {
-            textCurrent.color = new Color32(255, 255, 0, 255);
-            textTarget.color = new Color32(255, 255, 0, 255);
+            textCurrentHeartrate.color = new Color32(255, 255, 0, 255);
+            textTargetHeartrate.color = new Color32(255, 255, 0, 255);
         }
     }
 
@@ -81,88 +85,88 @@ public class HeartDetails : MonoBehaviour
         return temp;
     }
 
-    public float getCurrent()
+    public float GetCurrentHeartrate()
     {
-        return current;
+        return currentHeartrate;
     }
-    public void setCurrent(float newValue)
+    public void SetCurrentHeartrate(float newValue)
     {
-        current = newValue;
-        updateCVTText();
-    }
-
-    public void increaseCurrent()
-    {
-        current += sensitivityAmount;
+        currentHeartrate = newValue;
+        UpdateCurrentValueText();
     }
 
-    public void decreaseCurrent()
+    public void IncreaseCurrentHeartrate()
     {
-        current -= sensitivityAmount;
+        currentHeartrate += heartSensitivityAmount;
     }
 
-    public float getTarget()
+    public void DecreaseCurrentHeartrate()
     {
-        return target;
+        currentHeartrate -= heartSensitivityAmount;
     }
 
-    public void setTarget(float newValue)
+    public float GetTargetHeartrate()
     {
-        target = newValue;
-        updateCVTText();
+        return targetHeartrate;
     }
 
-    public int getSensitivityIndex()
+    public void SetTargetHeartrate(float newValue)
     {
-        return sensitivityIndex;
+        targetHeartrate = newValue;
+        UpdateCurrentValueText();
     }
 
-    public void setSensitivityIndex(int newValue)
+    public int GetHeartSensitivityIndex()
     {
-        sensitivityIndex = newValue;
-        setSensitivity(newValue);
+        return heartSensitivityIndex;
     }
 
-    public float getSensitivity()
+    public void SetHeartSensitivityIndex(int newValue)
     {
-        return sensitivityAmount;
+        heartSensitivityIndex = newValue;
+        SetHeartSensitivityAmount(newValue);
     }
 
-    public void setSensitivity(int newIndex)
+    public float GetHeartSensitivityAmount()
     {
-        sensitivityAmount = sensitivityArray[newIndex];
+        return heartSensitivityAmount;
     }
 
-    public void raiseSensitivity()
+    public void SetHeartSensitivityAmount(int newIndex)
     {
-        sensitivityIndex += 1;
-        if (sensitivityIndex > 9)
+        heartSensitivityAmount = heartSensitivityArray[newIndex];
+    }
+
+    public void RaiseHeartSensitivityAmount()
+    {
+        heartSensitivityIndex += 1;
+        if (heartSensitivityIndex > 9)
         {
-            sensitivityIndex = 9;
+            heartSensitivityIndex = 9;
         }
 
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
     }
 
-    public void lowerSensitivity()
+    public void LowerHeartSensitivityAmount()
     {
-        sensitivityIndex -= 1;
-        if (sensitivityIndex < 9)
+        heartSensitivityIndex -= 1;
+        if (heartSensitivityIndex < 9)
         {
-            sensitivityIndex = 0;
+            heartSensitivityIndex = 0;
         }
 
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
     }
 
-    public float getMin()
+    public float GetMinimumHeartrate()
     {
-        return min;
+        return minimumHeartrate;
     }
 
-    public float getMax()
+    public float GetMaximumHeartrate()
     {
-        return max;
+        return maximumHeartrate;
     }
 
 

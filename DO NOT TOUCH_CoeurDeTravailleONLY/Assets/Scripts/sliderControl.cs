@@ -29,14 +29,14 @@ public class SliderControl : MonoBehaviour
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<VentricleDetails>().increaseCurrent();
+            GetComponent<VentricleDetails>().IncreaseCurrentVentricleValue();
         }
         else
         {
-            GetComponent<HeartDetails>().increaseCurrent();
+            GetComponent<HeartDetails>().IncreaseCurrentHeartrate();
         }
 
-        GetComponent<HudDisplay>().updateHUD();
+        GetComponent<HudDisplay>().UpdateHUD();
     }
 
     public void OnClickDown()
@@ -47,13 +47,13 @@ public class SliderControl : MonoBehaviour
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<VentricleDetails>().decreaseCurrent();
+            GetComponent<VentricleDetails>().DecreaseCurrentVentricleValue();
         }
         else
         {
-            GetComponent<HeartDetails>().decreaseCurrent();
+            GetComponent<HeartDetails>().DecreaseCurrentHeartrate();
         }
 
-        GetComponent<HudDisplay>().updateHUD();
+        GetComponent<HudDisplay>().UpdateHUD();
     }
 }

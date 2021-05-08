@@ -34,7 +34,7 @@ public class AtrialDetails : MonoBehaviour
 
     public void updateCVTText()
     {
-        GetComponent<HudDisplay>().setActiveTask("atrial");
+        GetComponent<HudDisplay>().SetActiveTask("atrial");
 
         if (currentAtrial == targetAtrial)
         {

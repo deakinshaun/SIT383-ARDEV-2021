@@ -4926,10 +4926,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136fde73fc1b3d14bb8468f93b167615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min: 5
-  max: 10
-  textCurrent: {fileID: 914850948}
-  textTarget: {fileID: 440867657}
+  atrialMinimum: 0
+  atrialMaximum: 0
+  textCurrentAtrial: {fileID: 914850948}
+  textTargetAtrial: {fileID: 440867657}
 --- !u!114 &1294851142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4942,8 +4942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e107115744ba5564fa18306e75902ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min: 10
-  max: 15
+  minimumVentricleValue: 0
+  maximumVentricleValue: 180
   textCurrent: {fileID: 914850948}
   textTarget: {fileID: 440867657}
 --- !u!114 &1294851143
@@ -4973,10 +4973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ed52f5c69f7bd4cb4b121439fcadca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min: 0
-  max: 180
-  textCurrent: {fileID: 914850948}
-  textTarget: {fileID: 440867657}
+  minimumHeartrate: 0
+  maximumHeartrate: 180
+  textCurrentHeartrate: {fileID: 914850948}
+  textTargetHeartrate: {fileID: 440867657}
 --- !u!82 &1294851145
 AudioSource:
   m_ObjectHideFlags: 0

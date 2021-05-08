@@ -8,7 +8,7 @@ public class EcgVisualiser : MonoBehaviour
     /*
      * EGC Visualiser Component
      * 
-     * Creates a visualising of the three audio sources - heart, atrial, ventricle
+     * Creates a visualisation of the three audio sources - heart, atrial, ventricle
      * 
      * Currently uses heartbeat, breathing simulation, and background noise.
      * Could be expanded to include more realistic sound simulations for Atrial and 
@@ -71,7 +71,7 @@ public class EcgVisualiser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentHeartRate = heart.GetComponent<HeartDetails>().getCurrent();
+        currentHeartRate = heart.GetComponent<HeartDetails>().GetCurrentHeartrate();
         currentRespiratoryRate = currentHeartRate * RandomGaussian(20.0f, 40.0f) / 100.0f;
 
         ecgSource.pitch = currentHeartRate / 60.0f;

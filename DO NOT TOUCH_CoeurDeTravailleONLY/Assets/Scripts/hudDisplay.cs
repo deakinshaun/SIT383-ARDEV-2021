@@ -5,8 +5,18 @@ using UnityEngine.UI;
 
 public class HudDisplay : MonoBehaviour
 {
+    /*
+     * This is the main control script for the Canvas headup display.  It is called via various methods 
+     * to update HUD information.
+     * 
+     * For each of the three display types (Heart, Atrial, Ventricle) it will retrieve and display the 
+     * required set of data values for the active component.
+     * 
+     * Developed by Stephen Caines
+     */
+
     public Text TimerDisplay;
-    private float countDownValue = 60f * 1f;
+    private float countDownValue = 60.0f * 1.0f;
     public Text activeActivityText;
     public Text debugMessageText;
     public Text maximumSliderValueText;
@@ -32,29 +42,19 @@ public class HudDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Added by Ken - displays a one minute countdown
         countDownValue -= Time.deltaTime;
         TimerDisplay.text = string.Format("{0:00}:{1:00}", ((int)(countDownValue / 60) % 60).ToString("d2"), ((int)(countDownValue % 60)).ToString("d2"));
     }
 
-    public void updateHUD()
+    public void UpdateHUD()
     {
-        getSliderValues();
+        GetSliderValues();
 
         if (activeTask == "heartrate") displayForHeart();
-        else if (activeTask == "atrial") displayForAtrial();
-        else if (activeTask == "ventrical") displayForVentrical();
-        else displayForDebug();
-    }
-
-public string getActiveTask()
-    {
-        return activeTask;
-    }
-
-    public void setActiveTask (string task)
-    {
-        activeTask = task;
-        updateHUD();
+        else if (activeTask == "atrial") DisplayForAtrial();
+        else if (activeTask == "ventrical") DisplayForVentricle();
+        else DisplayForDebug();
     }
 
     public void displayForHeart()
@@ -63,16 +63,16 @@ public string getActiveTask()
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<HeartDetails>().getTarget().ToString();
+        targetValueText.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString();
         activeItemIcon.GetComponent<Image>().color = new Color32(51, 0, 0, 255);
-        sensitivityValueText.text = GetComponent<HeartDetails>().getSensitivity().ToString();
-        currentValueText.text = GetComponent<HeartDetails>().getCurrent().ToString();
+        sensitivityValueText.text = GetComponent<HeartDetails>().GetHeartSensitivityAmount().ToString();
+        currentValueText.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString();
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
     }
 
-    public void displayForAtrial()
+    public void DisplayForAtrial()
     {
         activeActivityText.text = "Dampening Atrial Vascular Rhythm";
         debugMessageText.text = debugMessage;
@@ -87,72 +87,83 @@ public string getActiveTask()
         trackingSlider.value = currentSliderValue;
     }
 
-    public void displayForVentrical()
+    public void DisplayForVentricle()
     {
         activeActivityText.text = "Dampening Ventrical Vascular Rhythm";
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<VentricleDetails>().getTarget().ToString();
+        targetValueText.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString();
         activeItemIcon.GetComponent<Image>().color = new Color32(44, 51, 0, 255);
-        sensitivityValueText.text = GetComponent<VentricleDetails>().getSensitivity().ToString();
-        currentValueText.text = GetComponent<VentricleDetails>().getCurrent().ToString();
+        sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString();
+        currentValueText.text = GetComponent<VentricleDetails>().GetCurrentVentricalValue().ToString();
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
     }
 
-    public void getSliderValues()
+    public void GetSliderValues()
     {
 
         //Initialise for the deafult Heartrate adjustment activity
-        activeSensitivity = getSensitivity();
-        activeGap = getGap();
+        activeSensitivity = GetActiveTaskSensitivity();
+        activeGap = GetCurrentTargetGap();
 
-        if (activeTask == "heartrate") minSliderValue = -(GetComponent<HeartDetails>().getMax() / activeSensitivity);
+        if (activeTask == "heartrate") minSliderValue = -(GetComponent<HeartDetails>().GetMaximumHeartrate() / activeSensitivity);
         else if (activeTask == "atrial") minSliderValue = -(GetComponent<AtrialDetails>().GetAtrialMaximum() / activeSensitivity);
-        else if (activeTask == "ventrical") minSliderValue = -(GetComponent<VentricleDetails>().getMax() / activeSensitivity);
+        else if (activeTask == "ventrical") minSliderValue = -(GetComponent<VentricleDetails>().GetMaximumVentricleValue() / activeSensitivity);
 
         maxSliderValue = 0.0f;
 
-        currentSliderValue = Mathf.Abs(getGap() / activeSensitivity);
+        currentSliderValue = Mathf.Abs(GetCurrentTargetGap() / activeSensitivity);
     }
 
 
-    public float getGap()
+    public float GetCurrentTargetGap()
     {
         //Atrial and Ventrical gaps not yet calculated
         if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            return GetComponent<HeartDetails>().getTarget() - GetComponent<AtrialDetails>().GetCurrentAtrial();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<AtrialDetails>().GetCurrentAtrial();
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            return GetComponent<HeartDetails>().getTarget() - GetComponent<VentricleDetails>().getCurrent();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<VentricleDetails>().GetCurrentVentricalValue();
         }
         else
         {
-            return GetComponent<HeartDetails>().getTarget() - GetComponent<HeartDetails>().getCurrent();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<HeartDetails>().GetCurrentHeartrate();
         }
     }
 
-    public float getSensitivity()
+    public float GetActiveTaskSensitivity()
     {
         if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            return GetComponent<HeartDetails>().getTarget() - GetComponent<AtrialDetails>().GetAtrialSensitivityIndex();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<AtrialDetails>().GetAtrialSensitivityIndex();
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            return GetComponent<HeartDetails>().getTarget() - GetComponent<VentricleDetails>().getSensitivityIndex();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<VentricleDetails>().GetVentricleSensitivityIndex();
         }
         else
         {
-            return GetComponent<HeartDetails>().getTarget() - GetComponent<HeartDetails>().getSensitivityIndex();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<HeartDetails>().GetHeartSensitivityIndex();
         }
     }
 
-    public void displayForDebug()
+    public string GetActiveTask()
+    {
+        return activeTask;
+    }
+
+    public void SetActiveTask(string task)
+    {
+        activeTask = task;
+        UpdateHUD();
+    }
+
+    public void DisplayForDebug()
     {
 
     }
