@@ -213,85 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa850fbd5b8aded44846f96e35f1a9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4937634588935164180
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5252881404385251723}
-  - component: {fileID: 2292931962438394535}
-  - component: {fileID: 5483985263716022411}
-  m_Layer: 5
-  m_Name: RotationMessage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5252881404385251723
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4937634588935164180}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6966561097326161135}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2292931962438394535
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4937634588935164180}
-  m_CullTransparentMesh: 1
---- !u!114 &5483985263716022411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4937634588935164180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
 --- !u!1 &6061188498426780214
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +225,7 @@ GameObject:
   - component: {fileID: 6858810364817582742}
   - component: {fileID: 8961127441036485002}
   - component: {fileID: 3345104447273230380}
-  - component: {fileID: 288356338588526079}
+  - component: {fileID: 8499337999918679762}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -367,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 0}
   m_DetectionMode: -1
---- !u!114 &288356338588526079
+--- !u!114 &8499337999918679762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,8 +301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: f5d354cd151653f49b50732896938955, type: 2}
-  m_MaxNumberOfMovingImages: 1
-  m_TrackedImagePrefab: {fileID: 6098080242459982933, guid: c9fb1a7df580dd149a81910013bad8bc, type: 3}
+  m_MaxNumberOfMovingImages: 3
+  m_TrackedImagePrefab: {fileID: 4999757706561912744, guid: 35cbad6e65b254143ac44b63d50154c1, type: 3}
 --- !u!1 &6267607692260402016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1210,6 @@ RectTransform:
   - {fileID: 6966561097100683159}
   - {fileID: 6966561096868385867}
   - {fileID: 6966561097052558355}
-  - {fileID: 5252881404385251723}
   m_Father: {fileID: 8705301588874046686}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1713,7 +1633,7 @@ MonoBehaviour:
   backButton: {fileID: 6966561096868385864}
   placeObjectsButton: {fileID: 6267607692260402016}
   PlaceObjectsPanel: {fileID: 6966561097100683156}
-  RotationMessage: {fileID: 4937634588935164180}
+  RotationMessage: {fileID: 0}
 --- !u!222 &1073328986489404146
 CanvasRenderer:
   m_ObjectHideFlags: 0
