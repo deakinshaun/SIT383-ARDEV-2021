@@ -21,7 +21,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 11899803985930426252
       m_GuidHigh: 10206661128537336763
-    m_Size: {x: 1, y: 0.63580245}
+    m_Size: {x: 0.05, y: 0.031790122}
     m_SpecifySize: 1
     m_Name: myki
     m_Texture: {fileID: 2800000, guid: 6629178c98ada524bb6b411d3858a58d, type: 3}
