@@ -9,15 +9,19 @@ using Photon.Realtime;
 public class RoomManger : MonoBehaviourPunCallbacks
 {
     //DownGrade to Unity4.21
-    
+    public Text TimerDisplay;
+    private float countDownValue = 60f * 1f;
     public Text MessageText;
     public GameObject MessagePanel;
+    public bool GameStart = false;
     [SerializeField]
     private Text _roomName;
     [SerializeField]
     private Transform _content;
     [SerializeField]
-    private GameObject _roomListing;
+    private Roomprelisting _roomListing;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +30,13 @@ public class RoomManger : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    //public override void OnConnectedToMaster()
-    //{
+    public override void OnConnectedToMaster()
+    {
         //Debug.Log("We have connected");
         //RoomOptions roomopt = new RoomOptions();
         //PhotonNetwork.JoinOrCreateRoom("AppRoom", roomopt, new TypedLobby("AppLobby", LobbyType.Default));
-    //}
+        //PhotonNetwork.JoinLobby();
+    }
 
     public override void OnJoinedRoom()
     {
@@ -45,7 +50,12 @@ public class RoomManger : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-
+        if (GameStart == true)
+            {
+            StartCounting();
+        }
+        //countDownValue -= Time.deltaTime;
+        //TimerDisplay.text = string.Format("{0:00}:{1:00}", ((int)(countDownValue / 60) % 60).ToString("d2"), ((int)(countDownValue % 60)).ToString("d2"));
     }
 
     public void showMessageStatus(string message, int seconds)
@@ -66,7 +76,9 @@ public class RoomManger : MonoBehaviourPunCallbacks
     {
         Debug.Log("We have connected");
         RoomOptions roomopt = new RoomOptions();
-        PhotonNetwork.JoinOrCreateRoom(_roomName.text , roomopt, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("AppRoom", roomopt, new TypedLobby("AppLobby", LobbyType.Default));
+        GameStart = true;
+        showMessageStatus("You have join the room", 3);
 
     }
 
@@ -82,7 +94,23 @@ public class RoomManger : MonoBehaviourPunCallbacks
          Debug.Log("Failed");
     }
 
-
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        foreach (RoomInfo info in roomList)
+        {
+            Roomprelisting listing = Instantiate(_roomListing, _content);
+            if (listing != null)
+                listing.SetRoomInfo(info);
+        }
+    }
+    public void StartCounting()
+    {
+        if (GameStart == true)
+            {
+            countDownValue -= Time.deltaTime;
+            TimerDisplay.text = string.Format("{0:00}:{1:00}", ((int)(countDownValue / 60) % 60).ToString("d2"), ((int)(countDownValue % 60)).ToString("d2"));
+        }
+    }
 
 
 }
