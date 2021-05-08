@@ -28,7 +28,7 @@ public class ActivitySelector : MonoBehaviour
         
     }
 
-    public void OnClickRate()
+    public void OnClickHeartrate()
     {
         if (!rateIsActive)
         {

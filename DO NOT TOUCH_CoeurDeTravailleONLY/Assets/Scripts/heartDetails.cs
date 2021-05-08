@@ -17,8 +17,8 @@ public class HeartDetails : MonoBehaviour
 
     private float currentHeartrate;
     private float targetHeartrate;
-    private List<float> heartSensitivityArray;
-    private int heartSensitivityIndex;
+    private List<float> heartSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+    private int heartSensitivityIndex = 0;
     private float heartSensitivityAmount;
 
     // Start is called before the first frame update
@@ -27,12 +27,10 @@ public class HeartDetails : MonoBehaviour
         currentHeartrate = RandomGaussian(30.0f, 180.0f);
         targetHeartrate = RandomGaussian(60.0f, 90.0f);
 
-        heartSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
-        heartSensitivityIndex = 0;
         heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
 
         //Force click Heartrate Actvity to get us started
-        GetComponent<ActivitySelector>().OnClickRate();
+        GetComponent<ActivitySelector>().OnClickHeartrate();
     }
 
     // Update is called once per frame

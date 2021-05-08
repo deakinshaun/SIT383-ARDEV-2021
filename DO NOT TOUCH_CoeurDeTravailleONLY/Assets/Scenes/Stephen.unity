@@ -890,7 +890,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1294851137}
-        m_MethodName: onClickUp
+        m_MethodName: OnClickUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2938,7 +2938,7 @@ GameObject:
   - component: {fileID: 719363302}
   - component: {fileID: 719363301}
   m_Layer: 5
-  m_Name: btnSelectRate
+  m_Name: btnSelectHeartrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3008,7 +3008,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1294851138}
-        m_MethodName: onClickRate
+        m_MethodName: OnClickHeartrate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3225,7 +3225,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1294851138}
-        m_MethodName: onClickVentrical
+        m_MethodName: OnClickVentrical
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4096,7 +4096,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1294851139}
-        m_MethodName: onPlusSensitivity
+        m_MethodName: OnPlusSensitivity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4942,8 +4942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e107115744ba5564fa18306e75902ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumVentricleValue: 0
-  maximumVentricleValue: 180
   textCurrent: {fileID: 914850948}
   textTarget: {fileID: 440867657}
 --- !u!114 &1294851143
@@ -5255,7 +5253,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1294851139}
-        m_MethodName: onMinusSensitivity
+        m_MethodName: OnMinusSensitivity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5401,12 +5399,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartAudio: {fileID: 8300000, guid: a5dc2e096301af34fb8a63534d1d365f, type: 3}
-  breatheAudio: {fileID: 8300000, guid: fdad7b7ca21d1644d8809055a6154e0a, type: 3}
-  noiseAudio: {fileID: 8300000, guid: afa4cd63992bbe440b2645151286ee3c, type: 3}
-  heartrate: 0
-  respirationRate: 0
+  breathAudio: {fileID: 8300000, guid: c37061626d83cb04e87c0b81d6c4612d, type: 3}
+  breathInvertedAudio: {fileID: 8300000, guid: 542189e5394ec45489bdab3e685d0a50, type: 3}
+  noiseAudio: {fileID: 8300000, guid: 859ceeabab0b4454eaf1dbd0e84ae3c6, type: 3}
+  noiseInvertedAudio: {fileID: 8300000, guid: 0fc11effbfd6730438af89836b47a2f6, type: 3}
   heart: {fileID: 1294851135}
-  ecgSample: 64
 --- !u!1 &1361796918
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,7 +5723,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1294851138}
-        m_MethodName: onClickAtrial
+        m_MethodName: OnClickAtrial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7601,7 +7598,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1294851137}
-        m_MethodName: onClickDown
+        m_MethodName: OnClickDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

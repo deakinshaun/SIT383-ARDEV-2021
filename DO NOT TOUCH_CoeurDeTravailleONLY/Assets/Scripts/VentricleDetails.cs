@@ -12,15 +12,14 @@ public class VentricleDetails : MonoBehaviour
      * Developed by Stephen Caines for SIT383 Augmented Reality Systems
      */
 
-    [Tooltip("Sets a minimum value when generating a random number for Ventricle Noise")]
-    public float minimumVentricleValue = 0.0f;
-    [Tooltip("Sets a maximum value when generating a random number for Ventricle Noise")]
-    public float maximumVentricleValue = 180.0f;
-
     [Tooltip("Connect this to Canvas element valueCurrentValue")]
     public Text textCurrent;
     [Tooltip("Connect this to Canvas element valueTargetValue")]
     public Text textTarget;
+    [Tooltip("Connect this to the Scene's Heart Object")]
+
+    private float minimumVentricleValue = 20.0f;
+    private float maximumVentricleValue = 60.0f;
 
     private float currentVentricleValue;
     private float targetVentricleValue;
@@ -31,15 +30,46 @@ public class VentricleDetails : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //current = NEED CODE TO PRODUCE WAVEFORM
-        //target = INVERSE OF WAVEFORM TO CANCEL NOISE
+        currentVentricleValue = RandomGaussian(minimumVentricleValue, maximumVentricleValue);
+        targetVentricleValue = RandomGaussian(minimumVentricleValue, maximumVentricleValue);
 
         ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
+
+        //Get current waveform
+        //Invert it
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public float RandomGaussian(float minValue, float maxValue)
+    {
+        // Code by Oneiros90 - This will produce random heart rates aligned to a
+        // standard distribution curve - e.g. more in normal range
+        float u, v, S;
+        float temp;
+
+        do
+        {
+            u = 2.0f * UnityEngine.Random.value - 1.0f;
+            v = 2.0f * UnityEngine.Random.value - 1.0f;
+            S = u * u + v * v;
+        }
+        while (S >= 1.0f);
+
+        // Standard Normal Distribution
+        float std = u * Mathf.Sqrt(-2.0f * Mathf.Log(S) / S);
+
+        // Normal Distribution centered between the min and max value
+        // and clamped following the "three-sigma rule"
+        float mean = (minValue + maxValue) / 2.0f;
+        float sigma = (maxValue - mean) / 3.0f;
+
+        temp = Mathf.Clamp(std * sigma + mean, minValue, maxValue);
+
+        return temp;
     }
 
     public void UpdateCurrentValueText()
