@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 7}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 881, y: 492}
   m_MaxSize: {x: 16006, y: 14042}
   vertical: 0
-  controlID: 18
+  controlID: 153
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -177,7 +177,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &8
 MonoBehaviour:
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_MinSize: {x: 605, y: 492}
   m_MaxSize: {x: 12005, y: 14042}
   vertical: 1
-  controlID: 62
+  controlID: 110
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_MinSize: {x: 605, y: 221}
   m_MaxSize: {x: 12005, y: 4021}
   vertical: 0
-  controlID: 63
+  controlID: 111
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -395,20 +395,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Uni\SIT383\383Pacemaker\TeamCardiacArrest\Pacemaker_Project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 178}
-    m_SelectedIDs: 76660000
-    m_LastClickedID: 26230
-    m_ExpandedIDs: 000000003a6600003c6600003e660000406600004266000044660000466600004866000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: e63c0000
+    m_LastClickedID: 15590
+    m_ExpandedIDs: 00000000c83c0000ca3c0000cc3c0000ce3c0000d03c0000d23c0000d43c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -436,7 +436,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003a6600003c6600003e6600004066000042660000446600004666000048660000
+    m_ExpandedIDs: 00000000c83c0000ca3c0000cc3c0000ce3c0000d03c0000d23c0000d43c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -559,9 +559,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 283d0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 64b4ffff74b5ffff
+      m_ExpandedIDs: 24fbffff00000000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -621,9 +621,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.025556445, y: 0.5724451, z: -10.469054}
+    m_Target: {x: -2.5, y: 2, z: 0}
     speed: 2
-    m_Value: {x: -0.025556445, y: 0.5724451, z: -10.469054}
+    m_Value: {x: -2.5, y: 2, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -669,13 +669,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.032158326, y: 0.95768636, z: -0.1187264, w: 0.2604125}
+    m_Target: {x: 0.0926222, y: 0.20490609, z: -0.019600188, w: 0.9742481}
     speed: 2
-    m_Value: {x: 0.03254707, y: 0.9574555, z: -0.12015633, w: 0.26034993}
+    m_Value: {x: -0.0926222, y: -0.2049061, z: 0.01960019, w: -0.9742481}
   m_Size:
-    m_Target: 1.1697803
+    m_Target: 10
     speed: 2
-    m_Value: 1.1697803
+    m_Value: 10
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -759,7 +759,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 0
+    m_VSlider: 1
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -772,7 +772,7 @@ MonoBehaviour:
       y: 21
       width: 337
       height: 546
-    m_Scale: {x: 0.25277779, y: 0.25277779}
+    m_Scale: {x: 0.2625, y: 0.2625}
     m_Translation: {x: 168.5, y: 273}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -780,12 +780,12 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -666.5934
-      y: -1080
-      width: 1333.1868
-      height: 2160
+      x: -641.9048
+      y: -1040
+      width: 1283.8096
+      height: 2080
     m_MinimalGUI: 1
-  m_defaultScale: 0.25277779
+  m_defaultScale: 0.2625
   m_LastWindowPixelSize: {x: 337, y: 567}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
