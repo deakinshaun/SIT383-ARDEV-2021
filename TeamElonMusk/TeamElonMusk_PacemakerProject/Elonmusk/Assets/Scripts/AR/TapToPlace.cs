@@ -53,7 +53,8 @@ public class TapToPlace : MonoBehaviour
 
     public void PlaceMonitor()
     {
-        NetworkManager.SpawnObject(objectToPlace[0], aRPointerObject.transform.position, Quaternion.LookRotation(new Vector3(Camera.main.transform.position.x - this.gameObject.transform.position.x, 0, Camera.main.transform.position.z - this.gameObject.transform.position.z)));
+        //NetworkManager.SpawnObject(objectToPlace[0], aRPointerObject.transform.position, Quaternion.LookRotation(new Vector3(Camera.main.transform.position.x - this.gameObject.transform.position.x, 0, Camera.main.transform.position.z - this.gameObject.transform.position.z)));
+        NetworkManager.SpawnObject(objectToPlace[0], aRPointerObject.transform.position, Quaternion.LookRotation(new Vector3((Camera.main.transform.forward.x*-1), 0, Camera.main.transform.forward.z)));
     }
 
     public void PlaceOperationTable()

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Voice.Unity;
+using UnityEngine.UI;
 
 public class PhotonConnect : MonoBehaviourPunCallbacks
 {
@@ -14,6 +16,11 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
     {
         Debug.Log("Starting network");
         PhotonNetwork.ConnectUsingSettings();
+
+        /*VoiceConnection vc = GetComponent<VoiceConnection>();
+        vc.Client.AddCallbackTarget(this);
+        vc.ConnectUsingSettings();*/
+
 
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
@@ -28,9 +35,13 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        VoiceConnection vc = GetComponent<VoiceConnection>();
         Debug.Log("Server has acknowledged my existance");
         RoomOptions roompts = new RoomOptions();
         PhotonNetwork.JoinOrCreateRoom("SIT383Room", roompts, new TypedLobby("SIT383Lobby", LobbyType.Default));
+        /*TypedLobby lobby = new TypedLobby("SIT383Room", LobbyType.Default);
+        PhotonNetwork.JoinOrCreateRoom("SIT383Room", roompts, lobby);
+        vc.Client.OpJoinOrCreateRoom(new EnterRoomParams { RoomName = "SIT383Room", RoomOptions = roompts, Lobby = lobby });*/
 
     }
 
@@ -50,4 +61,11 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
 
         Debug.Log("Spawned Object");
     }
+
+    /*public void turnOnMic()
+    {
+        VoiceConnection vc = GetComponent<VoiceConnection>();
+        vc.PrimaryRecorder.TransmitEnabled = true;
+    }*/
+
 }
