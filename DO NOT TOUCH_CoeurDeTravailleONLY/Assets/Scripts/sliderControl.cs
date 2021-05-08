@@ -29,6 +29,7 @@ public class SliderControl : MonoBehaviour
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
+            Debug.Log("Calling Increase Ventricle Value");
             GetComponent<VentricleDetails>().IncreaseCurrentVentricleValue();
         }
         else
@@ -47,6 +48,7 @@ public class SliderControl : MonoBehaviour
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
+            Debug.Log("Calling Decrease Ventricle Value");
             GetComponent<VentricleDetails>().DecreaseCurrentVentricleValue();
         }
         else

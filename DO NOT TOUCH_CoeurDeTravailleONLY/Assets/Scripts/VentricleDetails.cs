@@ -18,9 +18,12 @@ public class VentricleDetails : MonoBehaviour
     public Text textTarget;
     [Tooltip("Connect this to the Scene's Heart Object")]
 
-    private float minimumVentricleValue = 20.0f;
-    private float maximumVentricleValue = 60.0f;
+    public GameObject heart;
 
+    private float minimumVentricleValue = 8.0f;
+    private float maximumVentricleValue = 30.0f;
+
+    private float initialVentricleValue;
     private float currentVentricleValue;
     private float targetVentricleValue;
     private List<float> ventricleSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
@@ -31,12 +34,10 @@ public class VentricleDetails : MonoBehaviour
     void Start()
     {
         currentVentricleValue = RandomGaussian(minimumVentricleValue, maximumVentricleValue);
+        initialVentricleValue = currentVentricleValue;
         targetVentricleValue = RandomGaussian(minimumVentricleValue, maximumVentricleValue);
 
         ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
-
-        //Get current waveform
-        //Invert it
     }
 
     // Update is called once per frame
@@ -89,7 +90,7 @@ public class VentricleDetails : MonoBehaviour
     }
 
 
-    public float GetCurrentVentricalValue()
+    public float GetCurrentVentricleValue()
     {
         return currentVentricleValue;
     }
@@ -101,12 +102,16 @@ public class VentricleDetails : MonoBehaviour
 
     public void IncreaseCurrentVentricleValue()
     {
+        Debug.Log("Increasing Current Ventricle Value");
         currentVentricleValue += ventricleSensitivityAmount;
+        heart.GetComponent<EcgVisualiser>().CheckCancelBreathing();
     }
 
     public void DecreaseCurrentVentricleValue()
     {
+        Debug.Log("Decreasing Current Ventricle Value");
         currentVentricleValue -= ventricleSensitivityAmount;
+        heart.GetComponent<EcgVisualiser>().CheckCancelBreathing();
     }
 
     public float GetTargetVentricleValue()
@@ -175,4 +180,8 @@ public class VentricleDetails : MonoBehaviour
         return maximumVentricleValue;
     }
 
+    public float GetInitialVentricleValue()
+    {
+        return initialVentricleValue;
+    }
 }

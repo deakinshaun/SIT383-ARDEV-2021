@@ -96,7 +96,7 @@ public class HudDisplay : MonoBehaviour
         targetValueText.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString();
         activeItemIcon.GetComponent<Image>().color = new Color32(44, 51, 0, 255);
         sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<VentricleDetails>().GetCurrentVentricalValue().ToString();
+        currentValueText.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString();
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
@@ -128,7 +128,7 @@ public class HudDisplay : MonoBehaviour
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<VentricleDetails>().GetCurrentVentricalValue();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<VentricleDetails>().GetCurrentVentricleValue();
         }
         else
         {

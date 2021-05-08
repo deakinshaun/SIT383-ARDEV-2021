@@ -49,19 +49,32 @@ public class EcgVisualiser : MonoBehaviour
     private AudioSource cancelOutBreathing;
     private AudioSource cancelOutNoise;
 
-    public void CancelBreathing()
+    public void CheckCancelBreathing()
     {
-        // To cancel breathing we will apply an amplifier amount between 0 and 1 on each 
-        // of ten frequency bands each corresponding to one of our 10 sensitivity levels
-        float [] breathingFilter = new float[10];
-
-        noiseSource.volume = 0.0f;
-
         float currentValueV = heart.GetComponent<VentricleDetails>().GetTargetVentricleValue();
-        float targetValueV = heart.GetComponent<VentricleDetails>().GetCurrentVentricalValue();
+        float targetValueV = heart.GetComponent<VentricleDetails>().GetCurrentVentricleValue();
+        float intitalValueV = heart.GetComponent<VentricleDetails>().GetInitialVentricleValue();
 
-        noiseSource.volume = 1.0f - Mathf.Abs(currentValueV / targetValueV);
+        float startToTargetGap = Mathf.Abs(intitalValueV - targetValueV);
+        float currentToTargetGap = Mathf.Abs(currentValueV - targetValueV);
 
+        if (currentToTargetGap > 0.05)
+        {
+            Debug.Log("Current breathing gap is " + currentToTargetGap);
+
+            float delta = currentToTargetGap / startToTargetGap;
+            if (delta > 1.0f) delta = 1.0f;
+
+            //delta = 1 - delta;
+
+            if (delta < 0.05f) delta = 0.0f;
+
+            //If currentToTargetGap = 0, play the cancel noise at 1 to negate base noise
+            breathingSource.volume = delta;
+            Debug.Log("Cancel breathing volume is " + delta);
+
+        }
+        else breathingSource.volume = 0;
     }
 
     // Start is called before the first frame update
@@ -78,10 +91,12 @@ public class EcgVisualiser : MonoBehaviour
         breathingSource = new GameObject("breathAudioSource").AddComponent<AudioSource>();
         breathingSource.loop = true;
         breathingSource.clip = breathAudio;
-
+/*
         cancelOutBreathing = new GameObject("cancelBreathing").AddComponent<AudioSource>();
+        cancelOutBreathing.loop = true;
         cancelOutBreathing.clip = breathInvertedAudio;
-
+        cancelOutBreathing.volume = 0.0f;
+*/
         noiseSource = new GameObject("noiseAudioSource").AddComponent<AudioSource>();
         noiseSource.loop = true;
         noiseSource.clip = noiseAudio;
@@ -91,6 +106,7 @@ public class EcgVisualiser : MonoBehaviour
 
         ecgSource.Play();
         breathingSource.Play();
+        //cancelOutBreathing.Play();
 
         //Noise Plays at a standard pitch
         noiseSource.Play();
@@ -100,23 +116,26 @@ public class EcgVisualiser : MonoBehaviour
     void Update()
     {
         currentHeartRate = heart.GetComponent<HeartDetails>().GetCurrentHeartrate();
-        currentRespiratoryRate = currentHeartRate * RandomGaussian(20.0f, 40.0f) / 100.0f;
+        //currentRespiratoryRate = currentHeartRate * RandomGaussian(20.0f, 40.0f) / 100.0f;
 
         ecgSource.pitch = currentHeartRate / 60.0f;
-        breathingSource.pitch = currentRespiratoryRate/20.0f;
+        //breathingSource.pitch = currentRespiratoryRate/20.0f;
+        //cancelOutBreathing.pitch = currentRespiratoryRate / 20.0f;
 
         float[] heartData = new float[256];
         float[] breathData = new float[256];
+        float[] cancelBreathData = new float[256];
         float[] combinedData = new float[256];
 
         ecgSource.GetSpectrumData(heartData, 0, FFTWindow.Blackman);
         breathingSource.GetSpectrumData(breathData, 0, FFTWindow.Blackman);
+        //cancelOutBreathing.GetSpectrumData(cancelBreathData, 0, FFTWindow.Blackman);
 
         ecgSource.GetSpectrumData(combinedData, 0, FFTWindow.Blackman);
 
         for (int j = 0; j < heartData.Length; j++)
         {
-            combinedData[j] = heartData[j] + (breathData[j] * 5.0f);
+            combinedData[j] = heartData[j] + (breathData[j]  * 5.0f);
         }
         
         for (int i = 0; i < ecgBars.Length; i++)
