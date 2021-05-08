@@ -60,7 +60,7 @@ public class addHeartbeat : MonoBehaviour
         waveformArray = GenerateWaveformImage(heartBeatClip, 500, 1f);
         thisECGImage = PaintWaveformSpectrum(waveformArray, 50, new Color32(51, 0, 0, 255));
 
-        ecgMonitorImage.GetComponent<Image>().overrideSprite = Sprite.Create(thisECGImage, new Rect(0f, 0f, thisECGImage.width, thisECGImage.height), new Vector2(0.5f, 0.5f));
+        //ecgMonitorImage.GetComponent<Image>().overrideSprite = Sprite.Create(thisECGImage, new Rect(0f, 0f, thisECGImage.width, thisECGImage.height), new Vector2(0.5f, 0.5f));
 
         /*
         if(scaleIncreaseX == 0)

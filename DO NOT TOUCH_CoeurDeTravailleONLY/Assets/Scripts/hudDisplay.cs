@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class hudDisplay : MonoBehaviour
 {
-    public Text TimerDisplay;
-    private float countDownValue = 60f * 1f;
+    //public Text TimerDisplay;
+    //private float countDownValue = 60f * 1f;
     public Text activeActivityText;
     public Text debugMessageText;
     public Text maximumSliderValueText;
@@ -32,8 +32,8 @@ public class hudDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        countDownValue -= Time.deltaTime;
-        TimerDisplay.text = string.Format("{0:00}:{1:00}", ((int)(countDownValue / 60) % 60).ToString("d2"), ((int)(countDownValue % 60)).ToString("d2"));
+        //countDownValue -= Time.deltaTime;
+        //TimerDisplay.text = string.Format("{0:00}:{1:00}", ((int)(countDownValue / 60) % 60).ToString("d2"), ((int)(countDownValue % 60)).ToString("d2"));
     }
 
     public void updateHUD()
