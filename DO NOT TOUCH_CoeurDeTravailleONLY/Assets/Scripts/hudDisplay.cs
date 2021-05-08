@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class hudDisplay : MonoBehaviour
+public class HudDisplay : MonoBehaviour
 {
     public Text TimerDisplay;
     private float countDownValue = 60f * 1f;
@@ -63,10 +63,10 @@ public string getActiveTask()
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<heartDetails>().getTarget().ToString();
+        targetValueText.text = GetComponent<HeartDetails>().getTarget().ToString();
         activeItemIcon.GetComponent<Image>().color = new Color32(51, 0, 0, 255);
-        sensitivityValueText.text = GetComponent<heartDetails>().getSensitivity().ToString();
-        currentValueText.text = GetComponent<heartDetails>().getCurrent().ToString();
+        sensitivityValueText.text = GetComponent<HeartDetails>().getSensitivity().ToString();
+        currentValueText.text = GetComponent<HeartDetails>().getCurrent().ToString();
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
@@ -78,10 +78,10 @@ public string getActiveTask()
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<atrialDetails>().getTarget().ToString();
+        targetValueText.text = GetComponent<AtrialDetails>().GetTargetAtrial().ToString();
         activeItemIcon.GetComponent<Image>().color = new Color32(0, 13, 11, 255);
-        sensitivityValueText.text = GetComponent<atrialDetails>().getSensitivity().ToString();
-        currentValueText.text = GetComponent<atrialDetails>().getCurrent().ToString();
+        sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString();
+        currentValueText.text = GetComponent<AtrialDetails>().GetCurrentAtrial().ToString();
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
@@ -93,10 +93,10 @@ public string getActiveTask()
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<ventricalDetails>().getTarget().ToString();
+        targetValueText.text = GetComponent<VentricleDetails>().getTarget().ToString();
         activeItemIcon.GetComponent<Image>().color = new Color32(44, 51, 0, 255);
-        sensitivityValueText.text = GetComponent<ventricalDetails>().getSensitivity().ToString();
-        currentValueText.text = GetComponent<ventricalDetails>().getCurrent().ToString();
+        sensitivityValueText.text = GetComponent<VentricleDetails>().getSensitivity().ToString();
+        currentValueText.text = GetComponent<VentricleDetails>().getCurrent().ToString();
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
@@ -109,9 +109,9 @@ public string getActiveTask()
         activeSensitivity = getSensitivity();
         activeGap = getGap();
 
-        if (activeTask == "heartrate") minSliderValue = -(GetComponent<heartDetails>().getMax() / activeSensitivity);
-        else if (activeTask == "atrial") minSliderValue = -(GetComponent<atrialDetails>().getMax() / activeSensitivity);
-        else if (activeTask == "ventrical") minSliderValue = -(GetComponent<ventricalDetails>().getMax() / activeSensitivity);
+        if (activeTask == "heartrate") minSliderValue = -(GetComponent<HeartDetails>().getMax() / activeSensitivity);
+        else if (activeTask == "atrial") minSliderValue = -(GetComponent<AtrialDetails>().GetAtrialMaximum() / activeSensitivity);
+        else if (activeTask == "ventrical") minSliderValue = -(GetComponent<VentricleDetails>().getMax() / activeSensitivity);
 
         maxSliderValue = 0.0f;
 
@@ -122,33 +122,33 @@ public string getActiveTask()
     public float getGap()
     {
         //Atrial and Ventrical gaps not yet calculated
-        if (GetComponent<activitySelector>().getAtrialIsActive())
+        if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            return GetComponent<heartDetails>().getTarget() - GetComponent<atrialDetails>().getCurrent();
+            return GetComponent<HeartDetails>().getTarget() - GetComponent<AtrialDetails>().GetCurrentAtrial();
         }
-        else if (GetComponent<activitySelector>().getVentricalIsActive())
+        else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            return GetComponent<heartDetails>().getTarget() - GetComponent<ventricalDetails>().getCurrent();
+            return GetComponent<HeartDetails>().getTarget() - GetComponent<VentricleDetails>().getCurrent();
         }
         else
         {
-            return GetComponent<heartDetails>().getTarget() - GetComponent<heartDetails>().getCurrent();
+            return GetComponent<HeartDetails>().getTarget() - GetComponent<HeartDetails>().getCurrent();
         }
     }
 
     public float getSensitivity()
     {
-        if (GetComponent<activitySelector>().getAtrialIsActive())
+        if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            return GetComponent<heartDetails>().getTarget() - GetComponent<atrialDetails>().getSensitivityIndex();
+            return GetComponent<HeartDetails>().getTarget() - GetComponent<AtrialDetails>().GetAtrialSensitivityIndex();
         }
-        else if (GetComponent<activitySelector>().getVentricalIsActive())
+        else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            return GetComponent<heartDetails>().getTarget() - GetComponent<ventricalDetails>().getSensitivityIndex();
+            return GetComponent<HeartDetails>().getTarget() - GetComponent<VentricleDetails>().getSensitivityIndex();
         }
         else
         {
-            return GetComponent<heartDetails>().getTarget() - GetComponent<heartDetails>().getSensitivityIndex();
+            return GetComponent<HeartDetails>().getTarget() - GetComponent<HeartDetails>().getSensitivityIndex();
         }
     }
 

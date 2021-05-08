@@ -3,8 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class activitySelector : MonoBehaviour
+public class ActivitySelector : MonoBehaviour
 {
+    /*
+     * Allows player to select which "Temporary Pacemaker" aspect (Rate, Atrial, Ventricle) is active.  
+     * Is attached to btnSelectRate, btnSelectAtrial and btnSelectVentricle on maim HUD Canvas.  
+     * Has three “On Click” methods to activate individual aspects along with methods for accessing the active
+     * aspect as either a boolean or string value.
+     * 
+     * Develop by Stephen Caines for SIT383 Augemented Reality Systems
+     */
+
+
     private bool rateIsActive, atrialIsActive, ventricalIsActive;
 
     // Start is called before the first frame update
@@ -18,7 +28,7 @@ public class activitySelector : MonoBehaviour
         
     }
 
-    public void onClickRate()
+    public void OnClickRate()
     {
         if (!rateIsActive)
         {
@@ -26,11 +36,11 @@ public class activitySelector : MonoBehaviour
             atrialIsActive = false;
             ventricalIsActive = false;
 
-            GetComponent<hudDisplay>().setActiveTask("heartrate");
+            GetComponent<HudDisplay>().setActiveTask("heartrate");
         }
     }
 
-    public void onClickAtrial()
+    public void OnClickAtrial()
     {
         if (!atrialIsActive)
         {
@@ -38,11 +48,11 @@ public class activitySelector : MonoBehaviour
             atrialIsActive = true;
             ventricalIsActive = false;
 
-            GetComponent<hudDisplay>().setActiveTask("atrial");
+            GetComponent<HudDisplay>().setActiveTask("atrial");
         }
     }
 
-    public void onClickVentrical()
+    public void OnClickVentrical()
     {
         if (!ventricalIsActive)
         {
@@ -50,30 +60,30 @@ public class activitySelector : MonoBehaviour
             atrialIsActive = false;
             ventricalIsActive = true;
 
-            GetComponent<hudDisplay>().setActiveTask("ventrical");
+            GetComponent<HudDisplay>().setActiveTask("ventrical");
         }
     }
 
-    public bool getRateIsActive()
+    public bool GetRateIsActive()
     {
         return rateIsActive;
     }
 
-    public bool getAtrialIsActive()
+    public bool GetAtrialIsActive()
     {
         return atrialIsActive;
     }
 
-    public bool getVentricalIsActive()
+    public bool GetVentricalIsActive()
     {
         return ventricalIsActive;
     }
 
-    public string getActiveActivity()
+    public string GetActiveActivity()
     {
         if (rateIsActive) return "Heartrate";
         if (atrialIsActive) return "Atrial";
-        if (ventricalIsActive) return "Ventrical";
+        if (ventricalIsActive) return "Ventricle";
         return "Unknown";
     }
 

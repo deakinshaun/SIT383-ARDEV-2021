@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class heartDetails : MonoBehaviour
+public class HeartDetails : MonoBehaviour
 {
 
     public float min, max;
@@ -28,7 +28,7 @@ public class heartDetails : MonoBehaviour
         sensitivityAmount = sensitivityArray[sensitivityIndex];
 
         //Force click Heartrate Actvity to get us started
-        GetComponent<activitySelector>().onClickRate();
+        GetComponent<ActivitySelector>().OnClickRate();
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class heartDetails : MonoBehaviour
 
     public void updateCVTText()
     {
-        GetComponent<hudDisplay>().setActiveTask("heartrate");
+        GetComponent<HudDisplay>().setActiveTask("heartrate");
 
         if (current == target)
         {

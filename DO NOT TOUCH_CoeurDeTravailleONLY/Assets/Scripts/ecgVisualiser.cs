@@ -3,8 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ecgVisualiser : MonoBehaviour
+public class EcgVisualiser : MonoBehaviour
 {
+    /*
+     * EGC Visualiser Component
+     * 
+     * Creates a visualising of the three audio sources - heart, atrial, ventricle
+     * 
+     * Currently uses heartbeat, breathing simulation, and background noise.
+     * Could be expanded to include more realistic sound simulations for Atrial and 
+     * Ventricle noise.
+     * 
+     * Develop by Stephen Caines for SIT383 Augemented Reality Systems
+     * 
+     * Uses Random Guassian code developed by Oneiros90 (this will cluster randoms around
+     * the normal rather than the extremes of the allowed range)
+     */
+
     private float minHeight = 10.0f;
     private float maxHeight = 200.0f;
     private float currentHeartRate = 60.0f;
@@ -12,7 +27,7 @@ public class ecgVisualiser : MonoBehaviour
 
     //Rectangular ECG display option
     private Color ecgColor = Color.yellow;
-    private ecgObjectScript [] ecgBars;
+    private EcgObjectScript [] ecgBars;
 
     private AudioSource ecgSource;
     private AudioSource breathingSource;
@@ -32,7 +47,7 @@ public class ecgVisualiser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ecgBars = GetComponentsInChildren<ecgObjectScript>();
+        ecgBars = GetComponentsInChildren<EcgObjectScript>();
 
         if (!heartAudio) return;
 
@@ -56,7 +71,7 @@ public class ecgVisualiser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentHeartRate = heart.GetComponent<heartDetails>().getCurrent();
+        currentHeartRate = heart.GetComponent<HeartDetails>().getCurrent();
         currentRespiratoryRate = currentHeartRate * RandomGaussian(20.0f, 40.0f) / 100.0f;
 
         ecgSource.pitch = currentHeartRate / 60.0f;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 
-public class addHeartbeat : MonoBehaviour
+public class AddHeartbeat : MonoBehaviour
 {
     private float currentHeartrate;
 
@@ -37,7 +37,7 @@ public class addHeartbeat : MonoBehaviour
         initialScaleY = this.transform.localScale.y;
         initialScaleZ = this.transform.localScale.z;
 
-        currentHeartrate = GetComponent<heartDetails>().getCurrent();
+        currentHeartrate = GetComponent<HeartDetails>().getCurrent();
         audioSource = GetComponent<AudioSource>();
         //thisWaveForm = new waveForms();
     }
@@ -45,7 +45,7 @@ public class addHeartbeat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentHeartrate = GetComponent<heartDetails>().getCurrent();
+        currentHeartrate = GetComponent<HeartDetails>().getCurrent();
 
         // Scale of 1 = 60 beats per second
         scalePeriod = currentHeartrate / 60.0f;
@@ -57,8 +57,8 @@ public class addHeartbeat : MonoBehaviour
         scaleIncreaseY = Mathf.Abs(Mathf.Cos(Time.time * Mathf.PI * scalePeriod)) * maxScaleY;
         scaleIncreaseZ = Mathf.Abs(Mathf.Cos(Time.time * Mathf.PI * scalePeriod)) * maxScaleZ;
 
-        waveformArray = GenerateWaveformImage(heartBeatClip, 500, 1f);
-        thisECGImage = PaintWaveformSpectrum(waveformArray, 50, new Color32(51, 0, 0, 255));
+        waveformArray = GenerateWaveFromAudio(heartBeatClip, 500, 1f);
+        thisECGImage = CreateTextureFromWaveForm(waveformArray, 50, new Color32(51, 0, 0, 255));
 
         ecgMonitorImage.GetComponent<Image>().overrideSprite = Sprite.Create(thisECGImage, new Rect(0f, 0f, thisECGImage.width, thisECGImage.height), new Vector2(0.5f, 0.5f));
 
@@ -75,7 +75,7 @@ public class addHeartbeat : MonoBehaviour
                                                 initialScaleZ + scaleIncreaseZ);
     }
 
-    public static float[] GenerateWaveformImage(AudioClip audio, int size, float saturation)
+    public static float[] GenerateWaveFromAudio(AudioClip audio, int size, float saturation)
     {
         //This method takes an audio file and created a waveform image
         float[] samples = new float[audio.channels * audio.samples];
@@ -107,7 +107,7 @@ public class addHeartbeat : MonoBehaviour
         return waveform;
     }
 
-    public static Texture2D PaintWaveformSpectrum(float[] waveform, int height, Color c)
+    public static Texture2D CreateTextureFromWaveForm(float[] waveform, int height, Color c)
     {
         Texture2D waveFormTexture = new Texture2D(waveform.Length, height, TextureFormat.RGBA32, false);
 

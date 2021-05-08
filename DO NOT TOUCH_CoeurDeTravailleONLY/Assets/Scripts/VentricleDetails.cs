@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ventricalDetails : MonoBehaviour
+public class VentricleDetails : MonoBehaviour
 {
-    public float min, max;
+    /*
+     * Ventricle Component
+     * 
+     * 
+     * Developed by Stephen Caines for SIT383 Augmented Reality Systems
+     */
+
+    [Tooltip("Sets a minimum value when generating a random number for Atrial Noise")]
+    public float min = 0;
+    [Tooltip("Sets a maximum value when generating a random number for Atrial Noise")]
+    public float max = 180;
+
     private float current, target;
-    private List<float> sensitivityArray;
-    private int sensitivityIndex;
+    private List<float> sensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+    private int sensitivityIndex = 0;
     private float sensitivityAmount;
 
     public Text textCurrent;
@@ -17,13 +28,9 @@ public class ventricalDetails : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        min = 0;
-        max = 180;
         //current = NEED CODE TO PRODUCE WAVEFORM
         //target = INVERSE OF WAVEFORM TO CANCEL NOISE
 
-        sensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
-        sensitivityIndex = 0;
         sensitivityAmount = sensitivityArray[sensitivityIndex];
     }
 
@@ -34,7 +41,7 @@ public class ventricalDetails : MonoBehaviour
 
     public void updateCVTText()
     {
-        GetComponent<hudDisplay>().setActiveTask("ventrical");
+        GetComponent<HudDisplay>().setActiveTask("ventrical");
 
         if (current == target)
         {
@@ -103,6 +110,7 @@ public class ventricalDetails : MonoBehaviour
 
     public void raiseSensitivity()
     {
+        Debug.Log("Raising Ventrical Sensitivity");
         sensitivityIndex += 1;
         if (sensitivityIndex > 9)
         {
@@ -114,6 +122,7 @@ public class ventricalDetails : MonoBehaviour
 
     public void lowerSensitivity()
     {
+        Debug.Log("Lowering Ventrical Sensitivity");
         sensitivityIndex -= 1;
         if (sensitivityIndex < 9)
         {
