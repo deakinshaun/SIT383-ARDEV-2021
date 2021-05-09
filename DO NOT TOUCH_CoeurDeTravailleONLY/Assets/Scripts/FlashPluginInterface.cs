@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 public class FlashPluginInterface : MonoBehaviour
@@ -29,14 +30,26 @@ public class FlashPluginInterface : MonoBehaviour
     private int camIndex = -1;
     // the webcam texture of the back camera
     private WebCamTexture camTex;
+    public Texture2D camTexture;
 
     private void Start()
     {
         if (Application.platform == RuntimePlatform.Android)
         {
             SetContext();
-            PluginInstance.Call("OnStart", _context, _activity, (int)canvas.pixelRect.width, (int)canvas.pixelRect.height);
+            PluginInstance.Call("OnStart", _context, _activity, (int)canvas.pixelRect.width, 
+                (int)canvas.pixelRect.height);
+            AndroidJNI.AttachCurrentThread();
+            int nativeTextureID = PluginInstance.Call<int>("GetNativeTexturePointer");
+            int texWidth = PluginInstance.Call<int>("GetPreviewSizeWidth");
+            int texHeight = PluginInstance.Call<int>("GetPreviewSizeHeight");
 
+            Assert.IsTrue(nativeTextureID > 0, "nativeTextureID=" + nativeTextureID);
+            Assert.IsTrue(nativeTextureID > 0, "width=" + texWidth);
+            Assert.IsTrue(nativeTextureID > 0, "height=" + texHeight);
+
+            camTexture = Texture2D.CreateExternalTexture(texWidth, texHeight, TextureFormat.YUY2, 
+                false, true, new System.IntPtr(nativeTextureID));
         }
         GetBackFacingCameraImage();
         PutCamOnUIImage();
