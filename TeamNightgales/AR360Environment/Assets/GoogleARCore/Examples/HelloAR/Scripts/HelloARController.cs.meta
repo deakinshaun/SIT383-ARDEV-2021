@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1a798162408ca423ca04c21a04ea7fd2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - DepthMenu: {instanceID: 0}
+  - FirstPersonCamera: {instanceID: 0}
+  - GameObjectVerticalPlanePrefab: {fileID: 4658625761350281372, guid: 6e6e3b78fefbcf64b8fb8c48f5d44031,
+      type: 3}
+  - GameObjectHorizontalPlanePrefab: {fileID: 1029012653202955480, guid: 0002837533f047e4d9b7432a194cf596,
+      type: 3}
+  - GameObjectPointPrefab: {fileID: 1029012653202955480, guid: 0002837533f047e4d9b7432a194cf596,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
