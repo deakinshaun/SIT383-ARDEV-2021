@@ -54,6 +54,23 @@ public class EcgVisualiser : MonoBehaviour
     private AudioSource cancelOutBreathing;
     private AudioSource cancelOutNoise;
 
+    public bool GetHeartSync()
+    {
+        return heartSync;
+    }
+    public bool GetAtrialSync()
+    {
+        return atrialSync;
+    }
+    public bool GetVentricleSync()
+    {
+        return ventricleSync;
+    }
+
+    public void GameReset()
+    {
+        heart.GetComponent<HeartDetails>().Restart();
+    }
     public void CheckCancelBreathing()
     {
         float currentValueV = heart.GetComponent<VentricleDetails>().GetTargetVentricleValue();

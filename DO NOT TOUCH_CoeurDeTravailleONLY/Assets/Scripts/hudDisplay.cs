@@ -64,7 +64,7 @@ public class HudDisplay : MonoBehaviour
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
         targetValueText.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString();
-        activeItemIcon.GetComponent<Image>().color = new Color32(51, 0, 0, 255);
+        //activeItemIcon.GetComponent<Image>().color = new Color32(51, 0, 0, 255);
         sensitivityValueText.text = GetComponent<HeartDetails>().GetHeartSensitivityAmount().ToString();
         currentValueText.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString();
         trackingSlider.minValue = minSliderValue;
@@ -79,7 +79,7 @@ public class HudDisplay : MonoBehaviour
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
         targetValueText.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString();
-        activeItemIcon.GetComponent<Image>().color = new Color32(0, 13, 11, 255);
+        //activeItemIcon.GetComponent<Image>().color = new Color32(0, 13, 11, 255);
         sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString();
         currentValueText.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString();
         trackingSlider.minValue = minSliderValue;
@@ -94,7 +94,7 @@ public class HudDisplay : MonoBehaviour
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
         targetValueText.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString();
-        activeItemIcon.GetComponent<Image>().color = new Color32(44, 51, 0, 255);
+        //activeItemIcon.GetComponent<Image>().color = new Color32(44, 51, 0, 255);
         sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString();
         currentValueText.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString();
         trackingSlider.minValue = minSliderValue;

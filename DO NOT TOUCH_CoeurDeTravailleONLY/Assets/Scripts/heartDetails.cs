@@ -35,6 +35,18 @@ public class HeartDetails : MonoBehaviour
         GetComponent<ActivitySelector>().OnClickHeartrate();
     }
 
+    public void Restart()
+    {
+        currentHeartrate = RandomGaussian(30.0f, 180.0f);
+        targetHeartrate = RandomGaussian(60.0f, 90.0f);
+
+        heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
+
+        //Force click Heartrate Actvity to get us started
+        GetComponent<ActivitySelector>().OnClickHeartrate();
+
+    }
+
     // Update is called once per frame
     void Update()
     {
