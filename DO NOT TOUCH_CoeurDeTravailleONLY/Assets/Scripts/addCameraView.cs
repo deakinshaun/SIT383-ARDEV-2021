@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class addCameraView : MonoBehaviour
+public class AddCameraView : MonoBehaviour
 {
     //This Component retrieves image from a selected connected camera and provides it as a Material that can be applied to a Scene Object
 
@@ -40,7 +40,7 @@ public class addCameraView : MonoBehaviour
     private WebCamTexture webcamTexture;
     private int currentCamera = 0;
 
-    private void showCameras()
+    private void ShowCameras()
     {
         outputText.text = "";
         foreach (WebCamDevice d in WebCamTexture.devices)
@@ -49,14 +49,14 @@ public class addCameraView : MonoBehaviour
         }
     }
 
-    public void nextCamera()
+    public void NextCamera()
     {
         currentCamera = (currentCamera + 1) % WebCamTexture.devices.Length;
         // Change camera only works if the camera is stopped. 
         webcamTexture.Stop();
         webcamTexture.deviceName = WebCamTexture.devices[currentCamera].name;
         webcamTexture.Play();
-        showCameras();
+        ShowCameras();
     }
 
 

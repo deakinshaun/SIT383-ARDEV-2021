@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class adjustSensitivity : MonoBehaviour
+public class AdjustSensitivity : MonoBehaviour
 {
     /*
-    * This class is used by the plus and minus buttons to set the adjustment sensitivity
-    * for the active item
+    * This class is used by the plus and minus buttons on the manin HUD canvas to set the 
+    * adjustment sensitivity for the active item.
+    * 
+    * 
+    * Develop by Stephen Caines for SIT383 Augemented Reality Systems
     */
 
     // Start is called before the first frame update
@@ -20,40 +23,40 @@ public class adjustSensitivity : MonoBehaviour
     {
     }
 
-    public void onPlusSensitivity()
+    public void OnPlusSensitivity()
     {
-        if (GetComponent<activitySelector>().getRateIsActive())
+        if (GetComponent<ActivitySelector>().GetHeartrateIsActive())
         {
-            GetComponent<heartDetails>().raiseSensitivity();
+            GetComponent<HeartDetails>().RaiseHeartSensitivityAmount();
         }
-        if (GetComponent<activitySelector>().getAtrialIsActive())
+        if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<atrialDetails>().raiseSensitivity();
+            GetComponent<AtrialDetails>().IncreaseAtrialSensitivityIndex();
         }
-        if (GetComponent<activitySelector>().getVentricalIsActive())
+        if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<ventricalDetails>().raiseSensitivity();
+            GetComponent<VentricleDetails>().RaiseVentricleSensitivityAmount();
         }
 
-        GetComponent<hudDisplay>().updateHUD();
+        GetComponent<HudDisplay>().UpdateHUD();
     }
 
-    public void onMinusSensitivity()
+    public void OnMinusSensitivity()
     {
-        if (GetComponent<activitySelector>().getRateIsActive())
+        if (GetComponent<ActivitySelector>().GetHeartrateIsActive())
         {
-            GetComponent<heartDetails>().lowerSensitivity();
+            GetComponent<HeartDetails>().LowerHeartSensitivityAmount();
         }
-        if (GetComponent<activitySelector>().getAtrialIsActive())
+        if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<atrialDetails>().lowerSensitivity();
+            GetComponent<AtrialDetails>().DecreaseAtrialSensitivityIndex();
         }
-        if (GetComponent<activitySelector>().getVentricalIsActive())
+        if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<ventricalDetails>().lowerSensitivity();
+            GetComponent<VentricleDetails>().LowerVentricleSensitivityAmount();
         }
 
-        GetComponent<hudDisplay>().updateHUD();
+        GetComponent<HudDisplay>().UpdateHUD();
     }
 
 }

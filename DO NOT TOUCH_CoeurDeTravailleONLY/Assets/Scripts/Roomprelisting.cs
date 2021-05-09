@@ -8,10 +8,10 @@ public class Roomprelisting : MonoBehaviour
 {
     [SerializeField]
     private Text _text;
-
+    private RoomInfo _roomInfo;
     public void SetRoomInfo(RoomInfo roomInfo)
     {
-        RoomInfo = roomInfo;
+        _roomInfo = roomInfo;
         _text.text = roomInfo.Name;
     }
 

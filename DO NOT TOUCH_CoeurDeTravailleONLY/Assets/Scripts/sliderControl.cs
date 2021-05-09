@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class sliderControl : MonoBehaviour
+public class SliderControl : MonoBehaviour
 {
+    /*
+     * Slider Control – allows player to raise or lower active rate by one sensitivity 
+     * unit per click and updates HUD with new information.  Has two methods OnClickUp 
+     * and OnClickDown.
+     */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,39 +21,39 @@ public class sliderControl : MonoBehaviour
     {
     }
 
-    public void onClickUp() 
+    public void OnClickUp() 
     {
-        if (GetComponent<activitySelector>().getAtrialIsActive())
+        if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<atrialDetails>().increaseCurrent();
+            GetComponent<AtrialDetails>().IncreaseCurrentAtrialValue();
         }
-        else if (GetComponent<activitySelector>().getVentricalIsActive())
+        else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<ventricalDetails>().increaseCurrent();
+            GetComponent<VentricleDetails>().IncreaseCurrentVentricleValue();
         }
         else
         {
-            GetComponent<heartDetails>().increaseCurrent();
+            GetComponent<HeartDetails>().IncreaseCurrentHeartrate();
         }
 
-        GetComponent<hudDisplay>().updateHUD();
+        GetComponent<HudDisplay>().UpdateHUD();
     }
 
-    public void onClickDown()
+    public void OnClickDown()
     {
-        if (GetComponent<activitySelector>().getAtrialIsActive())
+        if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<atrialDetails>().decreaseCurrent();
+            GetComponent<AtrialDetails>().DecreaseCurrentAtrialValue();
         }
-        else if (GetComponent<activitySelector>().getVentricalIsActive())
+        else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<ventricalDetails>().decreaseCurrent();
+            GetComponent<VentricleDetails>().DecreaseCurrentVentricleValue();
         }
         else
         {
-            GetComponent<heartDetails>().decreaseCurrent();
+            GetComponent<HeartDetails>().DecreaseCurrentHeartrate();
         }
 
-        GetComponent<hudDisplay>().updateHUD();
+        GetComponent<HudDisplay>().UpdateHUD();
     }
 }
