@@ -78,10 +78,10 @@ public class HudDisplay : MonoBehaviour
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<AtrialDetails>().GetTargetAtrial().ToString();
+        targetValueText.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString();
         activeItemIcon.GetComponent<Image>().color = new Color32(0, 13, 11, 255);
         sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<AtrialDetails>().GetCurrentAtrial().ToString();
+        currentValueText.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString();
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
@@ -124,7 +124,7 @@ public class HudDisplay : MonoBehaviour
         //Atrial and Ventrical gaps not yet calculated
         if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<AtrialDetails>().GetCurrentAtrial();
+            return GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<AtrialDetails>().GetCurrentAtrialValue();
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {

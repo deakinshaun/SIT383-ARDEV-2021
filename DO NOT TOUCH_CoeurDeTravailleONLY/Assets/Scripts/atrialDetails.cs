@@ -5,25 +5,31 @@ using UnityEngine.UI;
 
 public class AtrialDetails : MonoBehaviour
 {
-    public float atrialMinimum, atrialMaximum;
-    private float currentAtrial, targetAtrial;
-    private List<float> atrialSensitivityArray;
-    private int atrialSensitivityIndex;
-    private float atrialSensitivityAmount;
-
+    [Tooltip("Connect this to Canvas element valueCurrentValue")]
     public Text textCurrentAtrial;
+    [Tooltip("Connect this to Canvas element valueTargetValue")]
     public Text textTargetAtrial;
+    [Tooltip("Connect this to the newECGDisplay component in the Canvas")]
+    public GameObject ECG_Reference;
+
+    private float minimumAtrialValue = 8.0f;
+    private float maximumAtrialValue = 30.0f;
+
+    private float initialAtrialValue;
+    private float currentAtrialValue;
+    private float targetAtrialValue;
+
+    private List<float> atrialSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+    private int atrialSensitivityIndex =0;
+    private float atrialSensitivityAmount;
 
     // Start is called before the first frame update
     void Start()
     {
-        atrialMinimum = 0;
-        atrialMaximum = 180;
-        //current = NEED CODE TO PRODUCE WAVEFORM
-        //target = INVERSE OF WAVEFORM TO CANCEL NOISE
+        currentAtrialValue = RandomGaussian(minimumAtrialValue, maximumAtrialValue);
+        initialAtrialValue = currentAtrialValue;
+        targetAtrialValue = initialAtrialValue * RandomGaussian(1.2f, 1.8f);
 
-        atrialSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
-        atrialSensitivityIndex = 0;
         atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
     }
 
@@ -32,11 +38,39 @@ public class AtrialDetails : MonoBehaviour
     {
     }
 
-    public void updateCVTText()
+    public float RandomGaussian(float minValue, float maxValue)
+    {
+        // Code by Oneiros90 - This will produce random heart rates aligned to a
+        // standard distribution curve - e.g. more in normal range
+        float u, v, S;
+        float temp;
+
+        do
+        {
+            u = 2.0f * UnityEngine.Random.value - 1.0f;
+            v = 2.0f * UnityEngine.Random.value - 1.0f;
+            S = u * u + v * v;
+        }
+        while (S >= 1.0f);
+
+        // Standard Normal Distribution
+        float std = u * Mathf.Sqrt(-2.0f * Mathf.Log(S) / S);
+
+        // Normal Distribution centered between the min and max value
+        // and clamped following the "three-sigma rule"
+        float mean = (minValue + maxValue) / 2.0f;
+        float sigma = (maxValue - mean) / 3.0f;
+
+        temp = Mathf.Clamp(std * sigma + mean, minValue, maxValue);
+
+        return temp;
+    }
+
+    public void UpdateCurrentValueText()
     {
         GetComponent<HudDisplay>().SetActiveTask("atrial");
 
-        if (currentAtrial == targetAtrial)
+        if (currentAtrialValue == targetAtrialValue)
         {
             textCurrentAtrial.color = new Color32(0, 255, 0, 255);
             textTargetAtrial.color = new Color32(0, 255, 0, 255);
@@ -48,35 +82,45 @@ public class AtrialDetails : MonoBehaviour
         }
     }
 
-
-    public float GetCurrentAtrial()
+    public float GetInitialAtrialValue()
     {
-        return currentAtrial;
+        return initialAtrialValue;
     }
-    public void SetCurrentAtrial(float newValue)
+    public void SetInitialAtrialValue(float newValue)
     {
-        currentAtrial = newValue;
+        initialAtrialValue = newValue;
+    }
+
+    public float GetCurrentAtrialValue()
+    {
+        return currentAtrialValue;
+    }
+    public void SetCurrentAtrialValue(float newValue)
+    {
+        currentAtrialValue = newValue;
         textCurrentAtrial.text = newValue.ToString();
     }
 
-    public void IncreaseCurrentAtrial()
+    public void IncreaseCurrentAtrialValue()
     {
-        currentAtrial += atrialSensitivityAmount;
+        currentAtrialValue += atrialSensitivityAmount;
+        ECG_Reference.GetComponent<EcgVisualiser>().CheckCancelNoise();
     }
 
-    public void DecreaseCurrentAtrial()
+    public void DecreaseCurrentAtrialValue()
     {
-        currentAtrial -= atrialSensitivityAmount;
+        currentAtrialValue -= atrialSensitivityAmount;
+        ECG_Reference.GetComponent<EcgVisualiser>().CheckCancelNoise();
     }
 
-    public float GetTargetAtrial()
+    public float GetTargetAtrialValue()
     {
-        return targetAtrial;
+        return targetAtrialValue;
     }
 
-    public void SetTargetAtrial(float newValue)
+    public void SetTargetAtrialValue(float newValue)
     {
-        targetAtrial = newValue;
+        targetAtrialValue = newValue;
         textTargetAtrial.text = newValue.ToString();
     }
 
@@ -127,12 +171,12 @@ public class AtrialDetails : MonoBehaviour
 
     public float GetAtrialMinimum()
     {
-        return atrialMinimum;
+        return minimumAtrialValue;
     }
 
     public float GetAtrialMaximum()
     {
-        return atrialMaximum;
+        return maximumAtrialValue;
     }
 
 }
