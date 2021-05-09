@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class atrialDetails : MonoBehaviour
+public class AtrialDetails : MonoBehaviour
 {
-    public float min, max;
-    private float current, target;
-    private List<float> sensitivityArray;
-    private int sensitivityIndex;
-    private float sensitivityAmount;
+    public float atrialMinimum, atrialMaximum;
+    private float currentAtrial, targetAtrial;
+    private List<float> atrialSensitivityArray;
+    private int atrialSensitivityIndex;
+    private float atrialSensitivityAmount;
 
-    public Text textCurrent;
-    public Text textTarget;
+    public Text textCurrentAtrial;
+    public Text textTargetAtrial;
 
     // Start is called before the first frame update
     void Start()
     {
-        min = 0;
-        max = 180;
+        atrialMinimum = 0;
+        atrialMaximum = 180;
         //current = NEED CODE TO PRODUCE WAVEFORM
         //target = INVERSE OF WAVEFORM TO CANCEL NOISE
 
-        sensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
-        sensitivityIndex = 0;
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        atrialSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+        atrialSensitivityIndex = 0;
+        atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
     }
 
     // Update is called once per frame
@@ -34,105 +34,105 @@ public class atrialDetails : MonoBehaviour
 
     public void updateCVTText()
     {
-        GetComponent<hudDisplay>().setActiveTask("atrial");
+        GetComponent<HudDisplay>().SetActiveTask("atrial");
 
-        if (current == target)
+        if (currentAtrial == targetAtrial)
         {
-            textCurrent.color = new Color32(0, 255, 0, 255);
-            textTarget.color = new Color32(0, 255, 0, 255);
+            textCurrentAtrial.color = new Color32(0, 255, 0, 255);
+            textTargetAtrial.color = new Color32(0, 255, 0, 255);
         }
         else
         {
-            textCurrent.color = new Color32(255, 255, 0, 255);
-            textTarget.color = new Color32(255, 255, 0, 255);
+            textCurrentAtrial.color = new Color32(255, 255, 0, 255);
+            textTargetAtrial.color = new Color32(255, 255, 0, 255);
         }
     }
 
 
-    public float getCurrent()
+    public float GetCurrentAtrial()
     {
-        return current;
+        return currentAtrial;
     }
-    public void setCurrent(float newValue)
+    public void SetCurrentAtrial(float newValue)
     {
-        current = newValue;
-        textCurrent.text = newValue.ToString();
-    }
-
-    public void increaseCurrent()
-    {
-        current += sensitivityAmount;
+        currentAtrial = newValue;
+        textCurrentAtrial.text = newValue.ToString();
     }
 
-    public void decreaseCurrent()
+    public void IncreaseCurrentAtrial()
     {
-        current -= sensitivityAmount;
+        currentAtrial += atrialSensitivityAmount;
     }
 
-    public float getTarget()
+    public void DecreaseCurrentAtrial()
     {
-        return target;
+        currentAtrial -= atrialSensitivityAmount;
     }
 
-    public void setTarget(float newValue)
+    public float GetTargetAtrial()
     {
-        target = newValue;
-        textTarget.text = newValue.ToString();
+        return targetAtrial;
     }
 
-
-    public int getSensitivityIndex()
+    public void SetTargetAtrial(float newValue)
     {
-        return sensitivityIndex;
-    }
-
-    public void setSensitivityIndex(int newValue)
-    {
-        sensitivityIndex = newValue;
-        setSensitivity(newValue);
-    }
-
-    public float getSensitivity()
-    {
-        return sensitivityAmount;
-    }
-
-    public void setSensitivity(int newIndex)
-    {
-        sensitivityAmount = sensitivityArray[newIndex];
+        targetAtrial = newValue;
+        textTargetAtrial.text = newValue.ToString();
     }
 
 
-    public void raiseSensitivity()
+    public int GetAtrialSensitivityIndex()
     {
-        sensitivityIndex += 1;
-        if (sensitivityIndex > 9)
+        return atrialSensitivityIndex;
+    }
+
+    public void SetAtrialSensitivityIndex(int newValue)
+    {
+        atrialSensitivityIndex = newValue;
+        SetAtrialSensitivityAmount(newValue);
+    }
+
+    public float GetAtrialSensitivityAmount()
+    {
+        return atrialSensitivityAmount;
+    }
+
+    public void SetAtrialSensitivityAmount(int newIndex)
+    {
+        atrialSensitivityAmount = atrialSensitivityArray[newIndex];
+    }
+
+
+    public void IncreaseAtrialSensitivityIndex()
+    {
+        atrialSensitivityIndex += 1;
+        if (atrialSensitivityIndex > 9)
         {
-            sensitivityIndex = 9;
+            atrialSensitivityIndex = 9;
         }
 
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
     }
 
-    public void lowerSensitivity()
+    public void DecreaseAtrialSensitivityIndex()
     {
-        sensitivityIndex -= 1;
-        if (sensitivityIndex < 9)
+        atrialSensitivityIndex -= 1;
+        if (atrialSensitivityIndex < 9)
         {
-            sensitivityIndex = 0;
+            atrialSensitivityIndex = 0;
         }
 
-        sensitivityAmount = sensitivityArray[sensitivityIndex];
+        atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
     }
 
-    public float getMin()
+    public float GetAtrialMinimum()
     {
-        return min;
+        return atrialMinimum;
     }
 
-    public float getMax()
+    public float GetAtrialMaximum()
     {
-        return max;
+        return atrialMaximum;
     }
 
 }

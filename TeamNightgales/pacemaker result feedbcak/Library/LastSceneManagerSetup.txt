@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Cardiac Pacemaker Traini.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
