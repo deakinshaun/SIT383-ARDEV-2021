@@ -69,7 +69,11 @@ public class EcgVisualiser : MonoBehaviour
 
     public void GameReset()
     {
+        heartSync = false;
+        atrialSync = false;
+        ventricleSync = false;
         heart.GetComponent<HeartDetails>().Restart();
+
     }
     public void CheckCancelBreathing()
     {
