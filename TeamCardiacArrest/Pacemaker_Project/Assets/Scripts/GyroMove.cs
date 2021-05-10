@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+
+
 
 public class GyroMove : MonoBehaviour
 {
@@ -8,7 +11,7 @@ public class GyroMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SystemInfo.supportsGyroscope)
+        if (SystemInfo.supportsGyroscope && GetComponent <PhotonView> ().IsMine == true || PhotonNetwork.IsConnected == false)
         {
             Input.gyro.enabled = true;
             transform.rotation = 

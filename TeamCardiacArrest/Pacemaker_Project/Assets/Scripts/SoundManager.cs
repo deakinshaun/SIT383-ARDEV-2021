@@ -20,6 +20,8 @@ public class SoundManager : MonoBehaviour
     private AudioSource ss_flatline;
     
     public GameObject listener;
+    public GameObject student;
+    public GameObject mentor;
 
     public GameObject ss_trolleyObject;
     public GameObject ss_ivMachineObject;
@@ -49,18 +51,28 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float ivDistance = (ss_ivMachine.transform.position - listener.transform.position).x;
-        ss_ivMachine.volume = 1.0f / Mathf.Pow (ivDistance * dropoff, decayFactor);
-        float trolleyDistance = (ss_trolley.transform.position - listener.transform.position).x;
-        ss_trolley.volume = 1.0f / Mathf.Pow (trolleyDistance * dropoff, decayFactor);
-        float manInPainDistance = (ss_manInPain.transform.position - listener.transform.position).x;
-        ss_manInPain.volume = 1.0f / Mathf.Pow (manInPainDistance * dropoff, decayFactor);
-        float hospitalLoudDistance = (ss_hospitalLoud.transform.position - listener.transform.position).x;
-        ss_hospitalLoud.volume = 1.0f / Mathf.Pow (hospitalLoudDistance * dropoff, decayFactor);
-        float hospitalQuietDistance = (ss_hospitalQuiet.transform.position - listener.transform.position).x;
-        ss_hospitalQuiet.volume = 1.0f / Mathf.Pow (hospitalQuietDistance * dropoff, decayFactor);
-        float beepDistance = (ss_beep.transform.position - listener.transform.position).x;
-        ss_beep.volume = 1.0f / Mathf.Pow (beepDistance * dropoff, decayFactor);
+        GameObject[] gameObjects;
+        gameObjects = GameObject.FindGameObjectsWithTag("Spawned");
+
+        if (gameObjects.Length == 0)
+            {
+                Debug.Log("Waiting for a listener");
+            }        
+        else
+        {
+            float ivDistance = (ss_ivMachine.transform.position - listener.transform.position).x;
+            ss_ivMachine.volume = 1.0f / Mathf.Pow (ivDistance * dropoff, decayFactor);
+            float trolleyDistance = (ss_trolley.transform.position - listener.transform.position).x;
+            ss_trolley.volume = 1.0f / Mathf.Pow (trolleyDistance * dropoff, decayFactor);
+            float manInPainDistance = (ss_manInPain.transform.position - listener.transform.position).x;
+            ss_manInPain.volume = 1.0f / Mathf.Pow (manInPainDistance * dropoff, decayFactor);
+            float hospitalLoudDistance = (ss_hospitalLoud.transform.position - listener.transform.position).x;
+            ss_hospitalLoud.volume = 1.0f / Mathf.Pow (hospitalLoudDistance * dropoff, decayFactor);
+            float hospitalQuietDistance = (ss_hospitalQuiet.transform.position - listener.transform.position).x;
+            ss_hospitalQuiet.volume = 1.0f / Mathf.Pow (hospitalQuietDistance * dropoff, decayFactor);
+            float beepDistance = (ss_beep.transform.position - listener.transform.position).x;
+            ss_beep.volume = 1.0f / Mathf.Pow (beepDistance * dropoff, decayFactor);
+        }
     }
 
     public void ivMachine()
