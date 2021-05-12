@@ -8,6 +8,7 @@ public class GyroControl : MonoBehaviour
     private float maxRotation;
     private float minRotation;
 
+
     void Start()
     {
         transform.rotation = Quaternion.identity;
