@@ -13,6 +13,7 @@ public class NetworkScript : MonoBehaviourPunCallbacks
     public GameObject Portal1;
     public GameObject Portal2;
     public GameObject Portal3;
+    public GameObject SoundManager;
 
     public GameObject vrAvatar;
 
@@ -49,6 +50,7 @@ public class NetworkScript : MonoBehaviourPunCallbacks
         avatarPlayer.GetComponent<ChangeUniverse>().portal = Portal1; //Portals are unassigned at spawn for some reason, assigning them.
         avatarPlayer.GetComponent<ChangeUniverse>().portal2 = Portal2;
         avatarPlayer.GetComponent<ChangeUniverse>().portal3 = Portal3;
+        avatarPlayer.GetComponent<ChangeUniverse>().soundManager = SoundManager;
 
     }
 
