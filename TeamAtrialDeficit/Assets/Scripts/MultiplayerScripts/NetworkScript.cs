@@ -8,10 +8,15 @@ using Photon.Realtime;
 public class NetworkScript : MonoBehaviourPunCallbacks
 {
     public bool ConnectToOnline;
+    public bool usingVR;
     public GameObject Avatar;
     public GameObject Portal1;
     public GameObject Portal2;
     public GameObject Portal3;
+
+    public GameObject vrAvatar;
+
+    private GameObject avatarPlayer; //The user
 
     //For the Flexible Controller: Variables
     public GameObject ControlPointer;
@@ -36,12 +41,20 @@ public class NetworkScript : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room with " + PhotonNetwork.CurrentRoom.PlayerCount + " others");
-
-        GameObject avatarPlayer = PhotonNetwork.Instantiate(Avatar.name, new Vector3(), Quaternion.identity, 0);
+        if (usingVR)
+        {
+            avatarPlayer = PhotonNetwork.Instantiate(vrAvatar.name, new Vector3(), Quaternion.identity, 0);
+        }
+        avatarPlayer = PhotonNetwork.Instantiate(Avatar.name, new Vector3(), Quaternion.identity, 0);
         avatarPlayer.GetComponent<ChangeUniverse>().portal = Portal1; //Portals are unassigned at spawn for some reason, assigning them.
         avatarPlayer.GetComponent<ChangeUniverse>().portal2 = Portal2;
         avatarPlayer.GetComponent<ChangeUniverse>().portal3 = Portal3;
 
+    }
+
+    private void OnApplicationQuit()
+    {
+        PhotonNetwork.Destroy(avatarPlayer); //So their model doesn't stay around on server after they dc.
     }
 
     //The Following sections of code is used for the Flexible Controller, if it Causing issues Uncomment the /* */ given above and below the section of code.

@@ -20,6 +20,8 @@ public class ChangeUniverse : MonoBehaviour
     //public bool inPhysical2 = true;
     //public bool inPhysical3 = true;
 
+    public GameObject soundManager; //Brendan: Added so portal sound can be played when user enters.
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,7 @@ public class ChangeUniverse : MonoBehaviour
             inPhysical = !inPhysical;
             //inPhysical2 = !inPhysical2;
             //inPhysical3 = !inPhysical3;
+            soundManager.GetComponent<SoundManager>().advancedPortalSoundPlay(); //Brendan: Plays portal sound
         }
         if (other.gameObject == portal2)
         {
@@ -82,6 +85,7 @@ public class ChangeUniverse : MonoBehaviour
             //inPhysical2 = !inPhysical2;
             inPhysical = !inPhysical;
             //inPhysical3 = !inPhysical3;
+            soundManager.GetComponent<SoundManager>().intermediatePortalSoundPlay(); //Brendan: Plays portal sound
         }
         if (other.gameObject == portal3)
         {
@@ -89,6 +93,7 @@ public class ChangeUniverse : MonoBehaviour
             //inPhysical3 = !inPhysical3;
             //inPhysical2 = !inPhysical2;
             inPhysical = !inPhysical;
+            soundManager.GetComponent<SoundManager>().beginnerPortalSoundPlay(); //Brendan: Plays portal sound
         }
     }
 }
