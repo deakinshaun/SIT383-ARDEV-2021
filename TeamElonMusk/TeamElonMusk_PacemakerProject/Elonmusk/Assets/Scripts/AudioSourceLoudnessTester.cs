@@ -43,4 +43,9 @@ public class AudioSourceLoudnessTester : MonoBehaviour
 			cube.transform.localScale = new Vector3(clipLoudness, clipLoudness, clipLoudness);
 		}
 	}
+
+	public void Test()
+    {
+
+    }
 }
