@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    //private List<AudioSource> soundList = new List<AudioSource>();
+    //Module 2
+    private List<AudioSource> soundList = new List<AudioSource>();
+    public float dropoffDistanceConstant = 0.9f;
+    public float attenuationFactor = 1.5f;
+    public float speedOfSound = 330.0f;
 
+
+    public GameObject avatarListener;
+    public GameObject vrListener;
     public GameObject listener;
 
     public GameObject beginnerPortal;
@@ -27,21 +34,30 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         soundBeginnerPortal = beginnerPortal.GetComponent<AudioSource>();
-        //soundList.Add(soundBeginnerPortal);
+        soundList.Add(soundBeginnerPortal);
 
         soundIntermediatePortal = intermediatePortal.GetComponent<AudioSource>();
-        //soundList.Add(soundIntermediatePortal);
+        soundList.Add(soundIntermediatePortal);
 
         soundAdvancedPortal = advancedPortal.GetComponent<AudioSource>();
-        //soundList.Add(soundAdvancedPortal);
+        soundList.Add(soundAdvancedPortal);
 
         soundMonitor = soundMonitor.GetComponent<AudioSource>();
-        //soundList.Add(soundMonitor);
+        soundList.Add(soundMonitor);
 
         //soundButton = button.GetComponent<AudioSource>();
         //soundList.Add(soundButton);
 
         Debug.Log("Sounds have been added!");
+
+        if(avatarListener.gameObject != null)
+        {
+            listener = avatarListener;
+        }
+        else if(vrListener.gameObject != null)
+        {
+            listener = vrListener;
+        }
     }
 
     // Update is called once per frame
@@ -49,24 +65,17 @@ public class SoundManager : MonoBehaviour
     {
         if(listener != null)
         {
-            float beginnerPortalDistance = Vector3.Distance(beginnerPortal.transform.position, listener.transform.position);
-            soundBeginnerPortal.volume = 1.0f / beginnerPortalDistance;
-
-            float intermediatePortalDistance = Vector3.Distance(intermediatePortal.transform.position, listener.transform.position);
-            soundIntermediatePortal.volume = 1.0f / intermediatePortalDistance;
-
-            float advancedPortalDistance = Vector3.Distance(beginnerPortal.transform.position, listener.transform.position);
-            soundAdvancedPortal.volume = 1.0f / advancedPortalDistance;
-
-            float monitorDistance = Vector3.Distance(monitor.transform.position, listener.transform.position);
-            soundMonitor.volume = 1.0f / monitorDistance;
-
-            //float buttonDistance = Vector3.Distance(button.transform.position, listener.transform.position);
-            //soundButton.volume = 1.0f / buttonDistance;
+            foreach (AudioSource audio in soundList)
+            {
+                //Module 2
+                GameObject audioObject = audio.gameObject;
+                float distance = Vector3.Distance(audioObject.transform.position, listener.transform.position);
+                audio.volume = 1.0f / Mathf.Pow(dropoffDistanceConstant * distance, attenuationFactor);
+            }
         }
     }
 
-    public void beginnerPortalSoundPlay() //So it can be called by other objects.
+    public void beginnerPortalSoundPlay() //So it can be called by other functions when needed.
     {
         soundBeginnerPortal.Play();
     }
@@ -90,13 +99,4 @@ public class SoundManager : MonoBehaviour
     {
         soundButton.Play();
     }
-    /*
-    public void EndSimulation()
-    {
-        for (int i = 0; i < sounds.Count; i++)
-        {
-            sounds[i].Stop();
-        }
-    }
-    */
 }
