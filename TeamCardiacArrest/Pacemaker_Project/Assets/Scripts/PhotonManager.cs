@@ -10,6 +10,9 @@ using Photon.Realtime;
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     public Text message;
+    public int roomtype;
+    public GameObject SetupPrefab;
+    public GameObject TeacherPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,15 +29,32 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     public override void OnJoinedRoom()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        switch (roomtype)
         {
-            message.text = "Just you on this run";
-            Debug.Log("Just you on this run");
-        }
-        else
-        {
-            message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people";
-            Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people");
+            case 1:
+                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
+                message.text = "Just you on this run";
+                Debug.Log("Just you on this run");
+                break;            
+
+            case 2:
+                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
+                message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
+                Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");
+                break;            
+
+            case 3:
+                PhotonNetwork.Instantiate(TeacherPrefab.name, new Vector3(), Quaternion.identity, 0);
+                message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor";
+                Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor");
+                break;            
+
+
+            default:
+                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
+                message.text = "Just you on this run";
+                Debug.Log("Just you on this run");
+                break;
         }
     }
     void Update()

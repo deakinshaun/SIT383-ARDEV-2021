@@ -1362,6 +1362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9898b7415e61b94cbdc15d12b7b9b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  nurse: {fileID: 5743533360606125185}
+  teacher: {fileID: 5440534683385512899, guid: 23fc5792c95c2364fb3fbdfebeaba69b, type: 3}
 --- !u!1 &6956865666551313720
 GameObject:
   m_ObjectHideFlags: 0

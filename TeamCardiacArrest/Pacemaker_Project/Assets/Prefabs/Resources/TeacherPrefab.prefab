@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 1521605475710848255}
   - component: {fileID: 7703231494290137403}
   m_Layer: 0
-  m_Name: TeacherCam
+  m_Name: UserCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,3 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9898b7415e61b94cbdc15d12b7b9b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
