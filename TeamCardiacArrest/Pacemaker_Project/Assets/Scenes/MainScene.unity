@@ -121,6 +121,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &160599556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160599558}
+  - component: {fileID: 160599557}
+  m_Layer: 0
+  m_Name: PhotonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &160599557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160599556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47dc6098d287c0940ae9694dd1edad7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: {fileID: 0}
+--- !u!4 &160599558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160599556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.4853504, y: -0.02795744, z: -3.3572202}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &268683720
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,8 +199,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.2999878, y: 15}
-  m_SizeDelta: {x: -90, y: -255}
+  m_AnchoredPosition: {x: 0, y: -11.25}
+  m_SizeDelta: {x: -80, y: -202.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &268683722
 MonoBehaviour:
@@ -190,16 +234,42 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Follow the below steps to be able to start using your pacemaker:\n\nIf
-    you're pacing alone today:\n3. After the pacemaker has appeared, use your phone
-    to interact with the pacemaker and get familiarised with the environment, by
-    moving around your phone.\n1. When ready, tap the start button and pick the difficulty
-    of simulation you want.\n2. The app will generate a challenge for you to stabilize
-    the patient.\n3. At the end of the challenge you will be presented with your
-    statistics. \n\nIf you have a buddy or a mentor\n1. Tap \"Connect\" to load to
-    others using this app\n2. Point your phone's camera to the provided QR code\n3.
-    Continue like solo!\n\nThe teacher may intervene through their app to cause further
-    complications."
+  m_Text: 'Follow the below steps to be able to start using your pacemaker:
+
+
+    If
+    you''re pacing alone today:
+
+    1. After the pacemaker has appeared, use your
+    phone to interact with the pacemaker and get familiarised with the environment,
+    by moving around your phone
+
+    2. When ready, tap the start button and pick
+    the difficulty of simulation you want
+
+    3. The app will generate a challenge
+    for you to stabilize the patient
+
+    4. At the end of the challenge you will
+    be presented with how well you went (your statistics)
+
+
+    If you have a buddy
+    or a mentor
+
+    1. Tap "Connect" to load to others using this app
+
+    2. Point
+    your phone''s camera to the provided QR code
+
+    3. Continue like solo
+
+    4.
+    Compete with said buddy to be the best pacer around!
+
+
+    The teacher may intervene
+    through their app to cause further complications.'
 --- !u!222 &268683723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -733,6 +803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listener: {fileID: 2140585453}
+  student: {fileID: 0}
+  mentor: {fileID: 0}
   ss_trolleyObject: {fileID: 2000415529}
   ss_ivMachineObject: {fileID: 0}
   ss_manInPainObject: {fileID: 0}
@@ -1420,7 +1492,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 285}
-  m_SizeDelta: {x: 830, y: 730}
+  m_SizeDelta: {x: 830, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309542321
 MonoBehaviour:
