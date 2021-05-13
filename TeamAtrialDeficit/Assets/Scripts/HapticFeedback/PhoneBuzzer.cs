@@ -29,7 +29,7 @@ public class PhoneBuzzer : MonoBehaviour
     public void SetBPM(float input)
     {
         currentBPM = input;
-        Debug.Log("Set BPM = " + input + "New BPM is " + currentBPM);
+ //       Debug.Log("Set BPM = " + input + "New BPM is " + currentBPM);
     }
 
     public void Buzz(int miliseconds, int intensity)
