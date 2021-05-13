@@ -19,6 +19,7 @@ public class GestureDetector : MonoBehaviour
     public bool debugMode = true;
     private List<OVRBone> fingerBones;
     private Gesture previousGesture;
+    public Gesture currentGesture; //Brendan: Was changed so I could grab it for button pressing.
     //Passes tracked bone data including bone index, parent relation and index and transform which can give position of bone.
 
     // Start is called before the first frame update
@@ -37,7 +38,7 @@ public class GestureDetector : MonoBehaviour
             Save();
         }
 
-        Gesture currentGesture = Recognize();
+        currentGesture = Recognize();
         //Debug.Log("RecognisingGesture");
         bool hasRecognized = !currentGesture.Equals(new Gesture());
         if (hasRecognized && !currentGesture.Equals(previousGesture))

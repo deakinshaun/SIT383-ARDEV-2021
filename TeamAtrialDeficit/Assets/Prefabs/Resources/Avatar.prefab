@@ -418,14 +418,13 @@ GameObject:
   - component: {fileID: 2821717221131395407}
   - component: {fileID: 1445896845473766036}
   - component: {fileID: 4038983878607863266}
-  - component: {fileID: 3637464592128247316}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2821717221131395404
 Transform:
   m_ObjectHideFlags: 0
@@ -552,14 +551,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!81 &3637464592128247316
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2821717221131395402}
-  m_Enabled: 1
 --- !u!1 &2821717221200529271
 GameObject:
   m_ObjectHideFlags: 0
