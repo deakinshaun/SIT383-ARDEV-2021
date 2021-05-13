@@ -13,6 +13,8 @@ public class ChangeUniverse : MonoBehaviour
     public GameObject virtualview1;
     public GameObject virtualview2;
     public GameObject virtualview3;
+    public GameObject monitor;
+    public GameObject bed;
 
     public bool inPhysical = true;
 
@@ -47,18 +49,36 @@ public class ChangeUniverse : MonoBehaviour
             Debug.Log("Changing Universe");
             inPhysical = !inPhysical;
             soundManager.GetComponent<SoundManager>().advancedPortalSoundPlay(); //Brendan: Plays portal sound
+            monitor.layer = 12;
+            foreach (GameObject child in monitor.transform)
+                child.gameObject.layer = 12;
+            bed.layer = 12;
+            foreach (GameObject child in bed.transform)
+                child.gameObject.layer = 12;
         }
         if (other.gameObject == portal2)
         {
             Debug.Log("Changing Universe2");
             inPhysical = !inPhysical;
             soundManager.GetComponent<SoundManager>().intermediatePortalSoundPlay(); //Brendan: Plays portal sound
+            monitor.layer = 11;
+            foreach (GameObject child in monitor.transform)
+                child.gameObject.layer = 11;
+            bed.layer = 11;
+            foreach (GameObject child in bed.transform)
+                child.gameObject.layer = 11;
         }
         if (other.gameObject == portal3)
         {
             Debug.Log("Changing Universe3");
             inPhysical = !inPhysical;
             soundManager.GetComponent<SoundManager>().beginnerPortalSoundPlay(); //Brendan: Plays portal sound
+            monitor.layer = 10;
+            foreach (GameObject child in monitor.transform)
+                child.gameObject.layer = 10;
+            bed.layer = 10;
+            foreach (GameObject child in bed.transform)
+                child.gameObject.layer = 10;
         }
     }
 }

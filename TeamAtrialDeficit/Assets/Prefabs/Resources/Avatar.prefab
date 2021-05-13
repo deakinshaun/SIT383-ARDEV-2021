@@ -418,7 +418,6 @@ GameObject:
   - component: {fileID: 2821717221131395407}
   - component: {fileID: 1445896845473766036}
   - component: {fileID: 4038983878607863266}
-  - component: {fileID: 3637464592128247316}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -500,17 +499,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1c62cc23c6b8f49b60d91b234c0fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phyCamMaterial: {fileID: 2100000, guid: 34984b015e1d8f64bbda34af02378573, type: 2}
   virCamMaterial: {fileID: 2100000, guid: 8d7609a17a3407a478ce44dac1783168, type: 2}
   virCamMaterial2: {fileID: 2100000, guid: db71dcf10b8a12349a4ccab6721f1778, type: 2}
   virCamMaterial3: {fileID: 2100000, guid: a7f18849995f0ed44a6c473788ef6c97, type: 2}
-  virCamMaterial4: {fileID: 0}
   portal: {fileID: 0}
   portal2: {fileID: 0}
   portal3: {fileID: 0}
   virtualview1: {fileID: 2821717221324080249}
   virtualview2: {fileID: 2821717221302367857}
   virtualview3: {fileID: 2821717220634321249}
+  monitor: {fileID: 0}
+  bed: {fileID: 0}
   inPhysical: 1
   soundManager: {fileID: 0}
 --- !u!114 &1445896845473766036
@@ -552,14 +551,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!81 &3637464592128247316
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2821717221131395402}
-  m_Enabled: 1
 --- !u!1 &2821717221200529271
 GameObject:
   m_ObjectHideFlags: 0
