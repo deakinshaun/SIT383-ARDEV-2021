@@ -52,6 +52,17 @@ public class MonitorScript : MonoBehaviour
                     pulseCounter--;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            BPM += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            BPM -= 1;
+        }
+
+        this.GetComponent<PhoneBuzzer>().SetBPM(BPM);
     }
 
     void pulseGraph()

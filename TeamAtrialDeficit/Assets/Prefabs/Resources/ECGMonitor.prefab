@@ -161,13 +161,14 @@ GameObject:
   - component: {fileID: 1598893360259643155}
   - component: {fileID: 140170878783231409}
   - component: {fileID: 6232355212775406511}
+  - component: {fileID: 6205268896563054961}
   m_Layer: 0
   m_Name: ECGMonitor
   m_TagString: Monitor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &467043774340418684
 Transform:
   m_ObjectHideFlags: 0
@@ -252,6 +253,8 @@ MonoBehaviour:
   SoundManager: {fileID: 0}
   spawnLocation: {fileID: 140170878534803429}
   BPMText: {fileID: 140170877925826537}
+  VibrationManager: {fileID: 3442218919582520162, guid: c53327197085a423c9c17864db80bb6a,
+    type: 3}
 --- !u!114 &6232355212775406511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +277,20 @@ MonoBehaviour:
   sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6205268896563054961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950423872638686918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea12d19dd8e946f993232bee8895a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimumBPM: 60
+  maximumBPM: 100
 --- !u!114 &5546913240808003399
 MonoBehaviour:
   m_ObjectHideFlags: 0

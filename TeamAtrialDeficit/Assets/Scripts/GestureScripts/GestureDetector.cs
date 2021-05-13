@@ -32,7 +32,12 @@ public class GestureDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (skeleton.Bones != null)
+        {
         fingerBones = new List<OVRBone>(skeleton.Bones);
+        }
+        
+        
         if ( Input.GetKeyDown(KeyCode.Space))
         {
             Save();
@@ -75,16 +80,19 @@ public class GestureDetector : MonoBehaviour
         {
             float sumDistance = 0;
             bool isDiscarded = false;
-            for (int i = 0; i <fingerBones.Count; i++)
+            if (fingerBones != null) 
             {
-                Vector3 currentData = skeleton.transform.InverseTransformPoint(fingerBones[i].Transform.position);
-                float distance = Vector3.Distance(currentData, gesture.fingerData[i]);
-                if(distance>threshold)
+                for (int i = 0; i <fingerBones.Count; i++)
                 {
-                    isDiscarded = true;
-                    break;
+                    Vector3 currentData = skeleton.transform.InverseTransformPoint(fingerBones[i].Transform.position);
+                    float distance = Vector3.Distance(currentData, gesture.fingerData[i]);
+                    if(distance>threshold)
+                    {
+                        isDiscarded = true;
+                        break;
+                    }
+                    sumDistance += distance;
                 }
-                sumDistance += distance;
             }
 
             if (!isDiscarded && sumDistance < currentMin)
