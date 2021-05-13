@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Room 1
+  m_Name: Room 3
   m_Shader: {fileID: 4800000, guid: 7c44e05235ec24f1794a2b4aa32844db, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 797a1b888235e4117983e62944654712, type: 3}
+        m_Texture: {fileID: 2800000, guid: 23aa4bd0dc3884b6cb4c82085595933a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -70,6 +70,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil_Level: 3
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
