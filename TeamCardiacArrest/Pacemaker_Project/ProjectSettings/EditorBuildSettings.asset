@@ -5,10 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PhotonVoiceTest.unity
     guid: 8c27026017cc59a4fad8013eb3e7d8a6
   - enabled: 0
     path: Assets/Scenes/DialARTest.unity
     guid: a5169bdfa980cab4086004522b26eea2
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  m_configObjects:
+    com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: b0eb9621690019540b098416048d6562,
+      type: 2}
+    com.unity.xr.management.arcore_loader: {fileID: 11400000, guid: 118c1b1540ada44418873e285b0896be,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f886ee042917e9646a47886c37a5b6da,
+      type: 2}
