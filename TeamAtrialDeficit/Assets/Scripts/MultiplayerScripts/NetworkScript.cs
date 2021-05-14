@@ -64,6 +64,9 @@ public class NetworkScript : MonoBehaviourPunCallbacks
         {
             Monitor = PhotonNetwork.Instantiate(Monitor.name, new Vector3(-0.72f, 0.16f, 21.51f), Quaternion.Euler(-90, -180, 0), 0);
             Monitor.GetComponent<MonitorScript>().SoundManager = SoundManager;
+
+           // SoundManager.GetComponent<SoundManager>().monitor = Monitor;
+
             avatarPlayer.GetComponent<ChangeUniverse>().monitor = Monitor;
             Debug.Log("Spawned a Monitor");
         }

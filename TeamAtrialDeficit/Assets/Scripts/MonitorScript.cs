@@ -20,6 +20,7 @@ public class MonitorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pulseList = new List<GameObject>();
         photonView = GetComponent<PhotonView>();
         if (photonView.IsMine == true)
         {
