@@ -80,7 +80,7 @@ public class ChangeUniverse : MonoBehaviour
     {
         if (other.gameObject == portal)
         {
-            Debug.Log("Changing Universe");
+            Debug.Log("Entering Advanced Practice");
             inPhysical = !inPhysical;
             inVirtual3 = true;
             soundManager.GetComponent<SoundManager>().advancedPortalSoundPlay(); //Brendan: Plays portal sound
@@ -95,7 +95,7 @@ public class ChangeUniverse : MonoBehaviour
         {
             inPhysical = !inPhysical;
             inVirtual2 = true;
-            Debug.Log("Changing Universe2");
+            Debug.Log("Entering Intermediate Practice");
             soundManager.GetComponent<SoundManager>().intermediatePortalSoundPlay(); //Brendan: Plays portal sound
             monitor.layer = 11;
             foreach (GameObject child in monitor.transform)
@@ -108,7 +108,7 @@ public class ChangeUniverse : MonoBehaviour
         {
             inPhysical = !inPhysical;
             inVirtual = true;
-            Debug.Log("Changing Universe3");
+            Debug.Log("Entering Basic Practice");
             soundManager.GetComponent<SoundManager>().beginnerPortalSoundPlay(); //Brendan: Plays portal sound
             monitor.layer = 10;
             foreach (GameObject child in monitor.transform)
