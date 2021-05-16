@@ -928,6 +928,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
+        type: 3}
+      propertyPath: SoundManager
+      value: 
+      objectReference: {fileID: 2129800554}
+    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
+        type: 3}
+      propertyPath: PaceMakerBPMText
+      value: 
+      objectReference: {fileID: 246286317}
     - target: {fileID: 467043774340418684, guid: ec79337ca630713489de8f3f2dd67445,
         type: 3}
       propertyPath: m_RootOrder
@@ -1260,6 +1270,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
+        type: 3}
+      propertyPath: SoundManager
+      value: 
+      objectReference: {fileID: 2129800554}
+    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
+        type: 3}
+      propertyPath: PaceMakerBPMText
+      value: 
+      objectReference: {fileID: 246286317}
     - target: {fileID: 467043774340418684, guid: ec79337ca630713489de8f3f2dd67445,
         type: 3}
       propertyPath: m_RootOrder
@@ -2430,7 +2450,7 @@ Canvas:
   m_GameObject: {fileID: 679399786}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -4643,6 +4663,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
+        type: 3}
+      propertyPath: SoundManager
+      value: 
+      objectReference: {fileID: 2129800554}
+    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
+        type: 3}
+      propertyPath: PaceMakerBPMText
+      value: 
+      objectReference: {fileID: 246286317}
     - target: {fileID: 467043774340418684, guid: ec79337ca630713489de8f3f2dd67445,
         type: 3}
       propertyPath: m_RootOrder

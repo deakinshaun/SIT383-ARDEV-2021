@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 public class MonitorScript : MonoBehaviour
@@ -10,6 +11,10 @@ public class MonitorScript : MonoBehaviour
     public GameObject SoundManager;
     public GameObject spawnLocation;
     public GameObject BPMText;
+    
+    //Rahul: Added to include Mobile UI
+    public GameObject PaceMakerBPMText;
+
     private List<GameObject> pulseList;
     private float BPM = 90;
     private float timeSinceNextPulse = 0.0f;
@@ -39,6 +44,14 @@ public class MonitorScript : MonoBehaviour
         {
             BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BMP";
             float BeatsPerSecond = BPM / 60;
+
+            //Rahul: Added to include Mobile UI
+            if (PaceMakerBPMText.activeSelf)
+            {
+                PaceMakerBPMText.GetComponent<Text>().text = BPM.ToString() + " BMP";
+            }
+            
+
 
             if (timeSinceNextPulse > BeatsPerSecond)
             {
