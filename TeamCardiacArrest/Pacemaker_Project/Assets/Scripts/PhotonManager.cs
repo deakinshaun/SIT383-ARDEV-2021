@@ -7,27 +7,6 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-public class PhotonManager : MonoBehaviourPunCallbacks
-{
-    public Text message;
-    public int roomtype;
-    public GameObject SetupPrefab;
-    public GameObject TeacherPrefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log ("Photon manager starting.");
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
-
-    public override void OnConnectedToMaster()
-    {
-        RoomOptions roomopt = new RoomOptions();
-        PhotonNetwork.JoinOrCreateRoom("ApplicationRoom", roomopt, new TypedLobby("ApplicationLobby", LobbyType.Default));
-    }
-    // Update is called once per frame
-
 
     // AR core card on the floor create environment, simulation
     // !Surface based generation
@@ -40,8 +19,143 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //Room a or b
     // Solo run
     // mentor and nurses
+
+
+
+
+public class PhotonManager : MonoBehaviourPunCallbacks
+{
+    public Text message;
+    public int roomtype;
+    public GameObject SetupPrefab;
+    public GameObject TeacherPrefab;
+    public Canvas TeacherUI;
+    public GameObject RoomPrefab;
+
+    private bool allowJoin = false;
+    List <GameObject> displayRooms = new List<GameObject>(); 
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log ("Photon manager starting.");
+        PhotonNetwork.ConnectUsingSettings();
+    }
+
+    public static string getName (GameObject o)
+    {
+        if (o.GetComponent<PhotonView>() != null)
+        {
+            if ((o.GetComponent<PhotonView>().Owner.NickName != null) && (o.GetComponent<PhotonView>().Owner.NickName.Equals ("")))
+            {
+                return o.GetComponent<PhotonView>().Owner.NickName;
+            }
+            else
+            {
+                return o.GetComponent<PhotonView>().Owner.UserId;
+            }
+        }
+        else
+        {
+            return "X" + PhotonNetwork.AuthValues.UserId;
+        }
+        
+    }
+
+    private GameObject getRoomObject (string name)
+    {
+        foreach (GameObject g in displayRooms)
+        {
+            DisplayRoom tr = g.displayRoom <DisplayRoom>();
+            if (dr.getName().Equals(name))
+            {
+                return g;
+            }
+        }
+        GameObject room = Instantiate(RoomPrefab);
+        room.transform.SetParent(roomCanvas.transform);
+        room.GetComponent<DisplayRoom>().setName(name);
+        room.GetComponent<localRoomBehaviour>().SetManager(this);
+        displayRoom.Add (room);
+        return room;
+    }
+
+    private void removeRoomObject (GameObject room)
+    {
+        displayRooms.Remove (room);
+        Destroy(room);
+    }
+
+    private void UpdateRooms()
+    {
+        int row = 0;
+        int col = 0;
+        int coumnLimit = 2;
+        foreach(GameObject room in displayRooms)
+        {
+            room.transform.localPosition = new Vector3 (col * 20 - 5, role * 20, 0);
+            col +=1 ;
+            if (col >= columnLimit)
+            {
+                col = 0;
+
+            }
+        }
+    }
+
+    public void JoinRoom(string roomName)
+    {
+        allowJoin = true;
+        PhotonNetwork.JoinRoom(roomName);
+    }
+
+    public override void OnRoomListUpdate (List<RoomInfo> roomList)
+    {
+        foreach (RoomInfo ri in roomList)
+        {
+            GameObject room = getRoomObject(ri.Name);
+            if (ri.RemovedFromList)
+            {
+                removeRoomObject(room);
+            }
+            else
+            {
+                room.GetComponent<DisplayRoom>().display (ri.Name + "\n\nwith " +
+                                                          ri.PlayerCount + " other people\n" +
+                                                          ri.CustomProperties["notices"]);
+            }
+        }
+        UpdateRooms();
+    }
+
+    public override void OnJoinedLobby ()
+    {
+        Debug.Log("You made to the lobby!");
+    }
+
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinLobby;
+        
+    }
+    // Update is called once per frame
+
+
     public override void OnJoinedRoom()
     {
+        Room r = PhotonNetwork.CurrentRoom;
+        ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
+        p["notices"] = RoomManager(this.gameObject) + " : " + Time.time + ":joined\n";
+        r.SetCustomProperties(p);
+
+        if (!allowJoin)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+    }
+
+/*
         switch (roomtype)
         {
             case 1:
@@ -75,6 +189,20 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 break;
         }
     }
+*/
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room Created");
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Failed to create room " + returnCode + " " + message);
+    }
+
+//    public void AddRoo
+
     void Update()
     {
         

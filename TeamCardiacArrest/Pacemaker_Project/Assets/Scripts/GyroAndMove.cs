@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -35,9 +35,7 @@ public class GyroAndMove : MonoBehaviour
             {
                 float v = Input.GetAxis("Vertical");
                 transform.position += v * speed * Time.deltaTime * camera.transform.forward;
-            }
-
-            
+            }  
 
         }        
 
