@@ -42,7 +42,8 @@ public class SoundManager : MonoBehaviour
         soundAdvancedPortal = advancedPortal.GetComponent<AudioSource>();
         soundList.Add(soundAdvancedPortal);
 
-        soundMonitor = soundMonitor.GetComponent<AudioSource>();
+        //soundMonitor = soundMonitor.GetComponent<AudioSource>();
+        soundMonitor = monitor.GetComponent<AudioSource>();
         soundList.Add(soundMonitor);
 
         //soundButton = button.GetComponent<AudioSource>();

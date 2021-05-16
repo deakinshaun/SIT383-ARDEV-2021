@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4c78a0097ce92b94d9eece98fc5eda71
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spectograph: {instanceID: 0}
+  - barTemplate: {fileID: 5781175596717040706, guid: 22dd07c3bbbf1c44f944ef14e234c088, type: 3}
+  - message: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - prefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
