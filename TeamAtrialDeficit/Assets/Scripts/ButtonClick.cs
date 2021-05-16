@@ -8,7 +8,9 @@ public class ButtonClick : MonoBehaviour
     public GameObject handRight;
     public GameObject GestureDetector;
     public float buttonPressingDistance = 0.3f;
-    public GameObject Monitor;
+    public GameObject Monitor1;
+    public GameObject Monitor2;
+    public GameObject Monitor3;
     public string Direction; //up or down
     private float buttonPressCD = 0;
 
@@ -28,6 +30,8 @@ public class ButtonClick : MonoBehaviour
 
     void buttonPressed()
     {
-        Monitor.GetComponent<MonitorScript>().buttonPress(Direction);
+        Monitor1.GetComponent<MonitorScript>().buttonPress(Direction);
+        Monitor2.GetComponent<MonitorScript>().buttonPress(Direction);
+        Monitor3.GetComponent<MonitorScript>().buttonPress(Direction);
     }
 }

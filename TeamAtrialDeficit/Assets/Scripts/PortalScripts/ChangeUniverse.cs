@@ -10,8 +10,9 @@ public class ChangeUniverse : MonoBehaviour
     public GameObject portal;
     public GameObject portal2;
     public GameObject portal3;
-    public GameObject monitor;
-    public GameObject bed;
+    public GameObject monitor1;
+    public GameObject monitor2;
+    public GameObject monitor3;
     public GameObject VirtualCameraView;
     public GameObject VirtualCameraView2;
     public GameObject VirtualCameraView3;
@@ -84,12 +85,9 @@ public class ChangeUniverse : MonoBehaviour
             inPhysical = !inPhysical;
             inVirtual3 = true;
             soundManager.GetComponent<SoundManager>().advancedPortalSoundPlay(); //Brendan: Plays portal sound
-            monitor.layer = 12;
-            foreach (GameObject child in monitor.transform)
-                child.gameObject.layer = 12;
-            bed.layer = 12;
-            foreach (GameObject child in bed.transform)
-                child.gameObject.layer = 12;
+            monitor1.GetComponent<MonitorScript>().Run = false; //Brendan, turns off monitor in outside player area
+            monitor2.GetComponent<MonitorScript>().Run = false; //Brendan, turns off monitor in outside player area
+            monitor3.GetComponent<MonitorScript>().Run = true; //Brendan, runs monitor in player area
         }
         if (other.gameObject == portal2)
         {
@@ -97,12 +95,9 @@ public class ChangeUniverse : MonoBehaviour
             inVirtual2 = true;
             Debug.Log("Entering Intermediate Practice");
             soundManager.GetComponent<SoundManager>().intermediatePortalSoundPlay(); //Brendan: Plays portal sound
-            monitor.layer = 11;
-            foreach (GameObject child in monitor.transform)
-                child.gameObject.layer = 11;
-            bed.layer = 11;
-            foreach (GameObject child in bed.transform)
-                child.gameObject.layer = 11;
+            monitor1.GetComponent<MonitorScript>().Run = false; //Brendan, turns off monitor in outside player area
+            monitor2.GetComponent<MonitorScript>().Run = true; //Brendan, runs monitor in player area
+            monitor3.GetComponent<MonitorScript>().Run = false; //Brendan, turns off monitor in outside player area
         }
         if (other.gameObject == portal3)
         {
@@ -110,12 +105,9 @@ public class ChangeUniverse : MonoBehaviour
             inVirtual = true;
             Debug.Log("Entering Basic Practice");
             soundManager.GetComponent<SoundManager>().beginnerPortalSoundPlay(); //Brendan: Plays portal sound
-            monitor.layer = 10;
-            foreach (GameObject child in monitor.transform)
-                child.gameObject.layer = 10;
-            bed.layer = 10;
-            foreach (GameObject child in bed.transform)
-                child.gameObject.layer = 10;
+            monitor1.GetComponent<MonitorScript>().Run = true; //Brendan, turns off monitor in outside player area
+            monitor2.GetComponent<MonitorScript>().Run = false; //Brendan, turns off monitor in outside player area
+            monitor3.GetComponent<MonitorScript>().Run = false; //Brendan, runs monitor in player area
         }
     }
 }

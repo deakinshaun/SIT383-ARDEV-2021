@@ -18,7 +18,9 @@ public class SoundManager : MonoBehaviour
     public GameObject beginnerPortal;
     public GameObject intermediatePortal;
     public GameObject advancedPortal;
-    public GameObject monitor;
+    public GameObject monitor1;
+    public GameObject monitor2;
+    public GameObject monitor3;
     public GameObject button;
 
 
@@ -42,8 +44,13 @@ public class SoundManager : MonoBehaviour
         soundAdvancedPortal = advancedPortal.GetComponent<AudioSource>();
         soundList.Add(soundAdvancedPortal);
 
-        //soundMonitor = soundMonitor.GetComponent<AudioSource>();
-        soundMonitor = monitor.GetComponent<AudioSource>();
+        soundMonitor = monitor1.GetComponent<AudioSource>();
+        soundList.Add(soundMonitor);
+
+        soundMonitor = monitor2.GetComponent<AudioSource>();
+        soundList.Add(soundMonitor);
+
+        soundMonitor = monitor3.GetComponent<AudioSource>();
         soundList.Add(soundMonitor);
 
         //soundButton = button.GetComponent<AudioSource>();
@@ -93,7 +100,7 @@ public class SoundManager : MonoBehaviour
 
     public void monitorSoundPlay()
     {
-        soundBeginnerPortal.Play();
+        soundMonitor.Play();
     }
 
     public void buttonSoundPlay()

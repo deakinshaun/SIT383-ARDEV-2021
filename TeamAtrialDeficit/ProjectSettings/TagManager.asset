@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Monitor
   - Bed
+  - PulseLine
   layers:
   - Default
   - TransparentFX
