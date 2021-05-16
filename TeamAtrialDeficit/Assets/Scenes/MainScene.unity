@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999946, b: 0.99999946, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2681,7 +2681,7 @@ GameObject:
   - component: {fileID: 571149767}
   - component: {fileID: 571149766}
   m_Layer: 5
-  m_Name: ButtonBText
+  m_Name: ButtonUpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2738,7 +2738,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: B
+  m_Text: UP
 --- !u!222 &571149767
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3248,7 +3248,7 @@ GameObject:
   - component: {fileID: 718199069}
   - component: {fileID: 718199068}
   m_Layer: 5
-  m_Name: ButtonAText
+  m_Name: ButtonDownText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3305,7 +3305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A
+  m_Text: DOWN
 --- !u!222 &718199069
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5011,8 +5011,9 @@ GameObject:
   - component: {fileID: 1474530563}
   - component: {fileID: 1474530562}
   - component: {fileID: 1474530561}
+  - component: {fileID: 1474530564}
   m_Layer: 5
-  m_Name: InteractableButtonA
+  m_Name: InteractableButtonDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5080,7 +5081,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1474530562}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474530564}
+        m_MethodName: WhenPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1474530562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5118,6 +5130,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474530559}
   m_CullTransparentMesh: 0
+--- !u!114 &1474530564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474530559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8322cdcf9b7bfc4e90bbb563cb488a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Monitor1: {fileID: 1652091301}
+  Monitor2: {fileID: 1086558881}
+  Monitor3: {fileID: 862795353}
+  Direction: Down
 --- !u!1 &1533429672 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 566672381214095757, guid: 7f0f175fbcd203843ab10d17b6e24a30,
@@ -6780,8 +6808,9 @@ GameObject:
   - component: {fileID: 2101845978}
   - component: {fileID: 2101845977}
   - component: {fileID: 2101845976}
+  - component: {fileID: 2101845979}
   m_Layer: 5
-  m_Name: InteractableButtonB
+  m_Name: InteractableButtonUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6849,7 +6878,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2101845977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2101845979}
+        m_MethodName: WhenPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2101845977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6887,6 +6927,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101845974}
   m_CullTransparentMesh: 0
+--- !u!114 &2101845979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101845974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8322cdcf9b7bfc4e90bbb563cb488a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Monitor1: {fileID: 0}
+  Monitor2: {fileID: 0}
+  Monitor3: {fileID: 0}
+  Direction: Up
 --- !u!1 &2129800554
 GameObject:
   m_ObjectHideFlags: 0
