@@ -1527,9 +1527,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1933766563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 79cae6e9d290893419a34f973f8adca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 0}
+  smoothedPeak: 0
+  smoothingFactor: 0.98
+  BPM: 0
+  timeSeriesParent: {fileID: 812476105}
+  frequencySeriesParent: {fileID: 778834247}
+  barTemplate: {fileID: 4352171079658612257, guid: 21d6c40b7fce32547a890d730ecf5972,
+    type: 3}
+  debugText: {fileID: 779272553}
+  toggleText: {fileID: 975987295}
+  toggleButton: {fileID: 1065479388}
+  recordButton: {fileID: 1524569407}
 --- !u!4 &1933766565
 Transform:
   m_ObjectHideFlags: 0

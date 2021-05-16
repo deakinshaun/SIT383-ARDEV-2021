@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HeartMonitor : MonoBehaviour
 {
+    public SoundManager sound;    
     //List of spectrum values
     private List<double> timeSeries = new List<double>();
     private List<double> savedSeries = new List<double>();
@@ -57,6 +58,11 @@ public class HeartMonitor : MonoBehaviour
             g.transform.SetParent(parent.transform, false);
         }
     }
+
+    private void drawChart()
+	{
+        drawChart(savedSeries, timeSeriesParent);
+	}
 
     //Saves current view of the frequency for later use.
     public void RecordHeartbeat()
@@ -172,6 +178,12 @@ public class HeartMonitor : MonoBehaviour
                 smoothedPeak = smoothingFactor * smoothedPeak + (1.0f - smoothingFactor) * peakFreq;
              
                 drawChart(timeSeries, timeSeriesParent);
+
+                //Heartbeat Sound using Aya's sounds
+                if (peakFreq > 3.5f)
+				{
+                    sound.beep();
+				}
             }
 
             else
