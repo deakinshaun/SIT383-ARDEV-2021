@@ -38,6 +38,11 @@ public class EcgVisualiser : MonoBehaviour
     private float currentHeartRate = 60.0f;
     private float currentRespiratoryRate = 20.0f;
 
+    //Booleans for component synching - task complete when all = true
+    private bool heartSync = false;
+    private bool atrialSync = false;
+    private bool ventricleSync = false;
+
     //Rectangular ECG display option
     private Color ecgColor = Color.yellow;
     private EcgObjectScript [] ecgBars;
@@ -49,6 +54,27 @@ public class EcgVisualiser : MonoBehaviour
     private AudioSource cancelOutBreathing;
     private AudioSource cancelOutNoise;
 
+    public bool GetHeartSync()
+    {
+        return heartSync;
+    }
+    public bool GetAtrialSync()
+    {
+        return atrialSync;
+    }
+    public bool GetVentricleSync()
+    {
+        return ventricleSync;
+    }
+
+    public void GameReset()
+    {
+        heartSync = false;
+        atrialSync = false;
+        ventricleSync = false;
+        heart.GetComponent<HeartDetails>().Restart();
+
+    }
     public void CheckCancelBreathing()
     {
         float currentValueV = heart.GetComponent<VentricleDetails>().GetTargetVentricleValue();
@@ -60,7 +86,8 @@ public class EcgVisualiser : MonoBehaviour
 
         if (currentToTargetGap > 0.05)
         {
-            Debug.Log("Current breathing gap is " + currentToTargetGap);
+            ventricleSync = false;
+            //Debug.Log("Current breathing gap is " + currentToTargetGap);
 
             float delta = currentToTargetGap / startToTargetGap;
             if (delta > 1.0f) delta = 1.0f;
@@ -71,10 +98,60 @@ public class EcgVisualiser : MonoBehaviour
 
             //If currentToTargetGap = 0, play the cancel noise at 1 to negate base noise
             breathingSource.volume = delta;
-            Debug.Log("Cancel breathing volume is " + delta);
+            //Debug.Log("Cancel breathing volume is " + delta);
 
         }
-        else breathingSource.volume = 0;
+        else
+        {
+            breathingSource.volume = 0;
+            ventricleSync = true;
+        }
+    }
+
+    public void CheckForHeartSync()
+    {
+        float currentHeart = heart.GetComponent<HeartDetails>().GetCurrentHeartrate();
+        float targetHeart = heart.GetComponent<HeartDetails>().GetTargetHeartrate();
+
+        float heartGap = Mathf.Abs(targetHeart - currentHeart);
+
+        if (heartGap < 0.01)
+        {
+            heartSync = true;
+        }
+    }
+
+    public void CheckCancelNoise()
+    {
+        float currentValueV = heart.GetComponent<AtrialDetails>().GetTargetAtrialValue();
+        float targetValueV = heart.GetComponent<AtrialDetails>().GetCurrentAtrialValue();
+        float intitalValueV = heart.GetComponent<AtrialDetails>().GetInitialAtrialValue();
+
+        float startToTargetGap = Mathf.Abs(intitalValueV - targetValueV);
+        float currentToTargetGap = Mathf.Abs(currentValueV - targetValueV);
+
+        if (currentToTargetGap > 0.05)
+        {
+            atrialSync = false;
+            //Debug.Log("Current noise gap is " + currentToTargetGap);
+
+            float delta = currentToTargetGap / startToTargetGap;
+            if (delta > 1.0f) delta = 1.0f;
+
+            //delta = 1 - delta;
+
+            if (delta < 0.05f) delta = 0.0f;
+
+            //If currentToTargetGap = 0, play the cancel noise at 1 to negate base noise
+            noiseSource.volume = delta;
+            //Debug.Log("Cancel noise volume is " + delta);
+
+        }
+        else
+        {
+            noiseSource.volume = 0;
+            atrialSync = true;
+        }
     }
 
     // Start is called before the first frame update
@@ -116,11 +193,8 @@ public class EcgVisualiser : MonoBehaviour
     void Update()
     {
         currentHeartRate = heart.GetComponent<HeartDetails>().GetCurrentHeartrate();
-        //currentRespiratoryRate = currentHeartRate * RandomGaussian(20.0f, 40.0f) / 100.0f;
 
         ecgSource.pitch = currentHeartRate / 60.0f;
-        //breathingSource.pitch = currentRespiratoryRate/20.0f;
-        //cancelOutBreathing.pitch = currentRespiratoryRate / 20.0f;
 
         float[] heartData = new float[256];
         float[] breathData = new float[256];
@@ -129,7 +203,6 @@ public class EcgVisualiser : MonoBehaviour
 
         ecgSource.GetSpectrumData(heartData, 0, FFTWindow.Blackman);
         breathingSource.GetSpectrumData(breathData, 0, FFTWindow.Blackman);
-        //cancelOutBreathing.GetSpectrumData(cancelBreathData, 0, FFTWindow.Blackman);
 
         ecgSource.GetSpectrumData(combinedData, 0, FFTWindow.Blackman);
 

@@ -16,9 +16,8 @@ public class VentricleDetails : MonoBehaviour
     public Text textCurrent;
     [Tooltip("Connect this to Canvas element valueTargetValue")]
     public Text textTarget;
-    [Tooltip("Connect this to the Scene's Heart Object")]
-
-    public GameObject heart;
+    [Tooltip("Connect this to the newECGDisplay component in the Canvas")]
+    public GameObject ECG_Reference;
 
     private float minimumVentricleValue = 8.0f;
     private float maximumVentricleValue = 30.0f;
@@ -26,6 +25,7 @@ public class VentricleDetails : MonoBehaviour
     private float initialVentricleValue;
     private float currentVentricleValue;
     private float targetVentricleValue;
+
     private List<float> ventricleSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
     private int ventricleSensitivityIndex = 0;
     private float ventricleSensitivityAmount;
@@ -35,7 +35,7 @@ public class VentricleDetails : MonoBehaviour
     {
         currentVentricleValue = RandomGaussian(minimumVentricleValue, maximumVentricleValue);
         initialVentricleValue = currentVentricleValue;
-        targetVentricleValue = RandomGaussian(minimumVentricleValue, maximumVentricleValue);
+        targetVentricleValue = initialVentricleValue * RandomGaussian(1.2f, 1.8f);
 
         ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
     }
@@ -104,14 +104,14 @@ public class VentricleDetails : MonoBehaviour
     {
         Debug.Log("Increasing Current Ventricle Value");
         currentVentricleValue += ventricleSensitivityAmount;
-        heart.GetComponent<EcgVisualiser>().CheckCancelBreathing();
+        ECG_Reference.GetComponent<EcgVisualiser>().CheckCancelBreathing();
     }
 
     public void DecreaseCurrentVentricleValue()
     {
         Debug.Log("Decreasing Current Ventricle Value");
         currentVentricleValue -= ventricleSensitivityAmount;
-        heart.GetComponent<EcgVisualiser>().CheckCancelBreathing();
+        ECG_Reference.GetComponent<EcgVisualiser>().CheckCancelBreathing();
     }
 
     public float GetTargetVentricleValue()

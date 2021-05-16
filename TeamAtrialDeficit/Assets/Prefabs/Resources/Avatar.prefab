@@ -458,6 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f6c62525c349a4095ad19ab52d48d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 0.2
+  rotationSpeed: 0.2
 --- !u!54 &2821717221131395393
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -499,18 +501,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1c62cc23c6b8f49b60d91b234c0fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phyCamMaterial: {fileID: 2100000, guid: 34984b015e1d8f64bbda34af02378573, type: 2}
   virCamMaterial: {fileID: 2100000, guid: 8d7609a17a3407a478ce44dac1783168, type: 2}
   virCamMaterial2: {fileID: 2100000, guid: db71dcf10b8a12349a4ccab6721f1778, type: 2}
   virCamMaterial3: {fileID: 2100000, guid: a7f18849995f0ed44a6c473788ef6c97, type: 2}
-  virCamMaterial4: {fileID: 0}
   portal: {fileID: 0}
   portal2: {fileID: 0}
   portal3: {fileID: 0}
   virtualview1: {fileID: 2821717221324080249}
   virtualview2: {fileID: 2821717221302367857}
   virtualview3: {fileID: 2821717220634321249}
+  monitor: {fileID: 0}
+  bed: {fileID: 0}
   inPhysical: 1
+  soundManager: {fileID: 0}
 --- !u!114 &1445896845473766036
 MonoBehaviour:
   m_ObjectHideFlags: 0

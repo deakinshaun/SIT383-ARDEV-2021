@@ -8,10 +8,16 @@ using Photon.Realtime;
 public class NetworkScript : MonoBehaviourPunCallbacks
 {
     public bool ConnectToOnline;
+    public bool usingVR;
     public GameObject Avatar;
     public GameObject Portal1;
     public GameObject Portal2;
     public GameObject Portal3;
+    public GameObject SoundManager;
+    public GameObject vrAvatar;
+    private GameObject avatarPlayer; //The user
+    public GameObject Monitor;
+    public GameObject Bed;
 
     //For the Flexible Controller: Variables
     public GameObject ControlPointer;
@@ -36,12 +42,57 @@ public class NetworkScript : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room with " + PhotonNetwork.CurrentRoom.PlayerCount + " others");
+        if (usingVR)
+        {
+            avatarPlayer = PhotonNetwork.Instantiate(vrAvatar.name, new Vector3(), Quaternion.identity, 0);
+            SoundManager.GetComponent<SoundManager>().vrListener = vrAvatar;
+        }
+        else
+        {
+            avatarPlayer = PhotonNetwork.Instantiate(Avatar.name, new Vector3(), Quaternion.identity, 0);
+            avatarPlayer.GetComponent<ChangeUniverse>().portal = Portal1; //Portals are unassigned at spawn for some reason, assigning them.
+            avatarPlayer.GetComponent<ChangeUniverse>().portal2 = Portal2;
+            avatarPlayer.GetComponent<ChangeUniverse>().portal3 = Portal3;
+            avatarPlayer.GetComponent<ChangeUniverse>().soundManager = SoundManager;
+            SoundManager.GetComponent<SoundManager>().avatarListener = avatarPlayer;
+        }
 
-        GameObject avatarPlayer = PhotonNetwork.Instantiate(Avatar.name, new Vector3(), Quaternion.identity, 0);
-        avatarPlayer.GetComponent<ChangeUniverse>().portal = Portal1; //Portals are unassigned at spawn for some reason, assigning them.
-        avatarPlayer.GetComponent<ChangeUniverse>().portal2 = Portal2;
-        avatarPlayer.GetComponent<ChangeUniverse>().portal3 = Portal3;
 
+        GameObject[] ListOfMonitors = GameObject.FindGameObjectsWithTag("Monitor");
+        Debug.Log("List Of Monitors: " + ListOfMonitors.Length.ToString());
+        if (ListOfMonitors.Length == 0)
+        {   /*
+            Monitor = PhotonNetwork.Instantiate(Monitor.name, new Vector3(-0.72f, 0.16f, 21.51f), Quaternion.Euler(-90, -180, 0), 0);
+            Monitor.GetComponent<MonitorScript>().SoundManager = SoundManager;
+
+           // SoundManager.GetComponent<SoundManager>().monitor = Monitor;
+
+            avatarPlayer.GetComponent<ChangeUniverse>().monitor = Monitor;
+            Debug.Log("Spawned a Monitor");
+            */ //This is broken!!! due to multiple dimensions code, and not enough time to fix.
+        }
+
+
+        GameObject[] ListOfBeds = GameObject.FindGameObjectsWithTag("Bed");
+        Debug.Log("List Of Bed: " + ListOfMonitors.Length.ToString());
+        if (ListOfBeds.Length == 0)
+        {
+            /*
+            Bed = PhotonNetwork.Instantiate(Bed.name, new Vector3(0.27f, 0.16f, 17.03f), Quaternion.Euler(0, 90, 0), 0);
+            avatarPlayer.GetComponent<ChangeUniverse>().bed = Bed;
+            Debug.Log("Spawned a Bed");
+            */
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (ConnectToOnline)
+        {
+            PhotonNetwork.Destroy(avatarPlayer); //So their model doesn't stay around on server after they dc.
+            PhotonNetwork.Destroy(Bed);
+            PhotonNetwork.Destroy(Monitor);
+        }
     }
 
     //The Following sections of code is used for the Flexible Controller, if it Causing issues Uncomment the /* */ given above and below the section of code.

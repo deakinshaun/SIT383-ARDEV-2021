@@ -9,6 +9,8 @@ public class HeartDetails : MonoBehaviour
     public float minimumHeartrate = 0.0f;
     [Tooltip("Maximum Heartrate allowed, 180 is a very fit athlete")]
     public float maximumHeartrate = 180.0f;
+    [Tooltip("Connect this to the newECGDisplay component in the Canvas")]
+    public GameObject ECG_Reference;
 
     [Tooltip("Connect this to Canvas element valueCurrentValue")]
     public Text textCurrentHeartrate;
@@ -31,6 +33,18 @@ public class HeartDetails : MonoBehaviour
 
         //Force click Heartrate Actvity to get us started
         GetComponent<ActivitySelector>().OnClickHeartrate();
+    }
+
+    public void Restart()
+    {
+        currentHeartrate = RandomGaussian(30.0f, 180.0f);
+        targetHeartrate = RandomGaussian(60.0f, 90.0f);
+
+        heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
+
+        //Force click Heartrate Actvity to get us started
+        GetComponent<ActivitySelector>().OnClickHeartrate();
+
     }
 
     // Update is called once per frame
@@ -96,11 +110,13 @@ public class HeartDetails : MonoBehaviour
     public void IncreaseCurrentHeartrate()
     {
         currentHeartrate += heartSensitivityAmount;
+        ECG_Reference.GetComponent<EcgVisualiser>().CheckForHeartSync();
     }
 
     public void DecreaseCurrentHeartrate()
     {
         currentHeartrate -= heartSensitivityAmount;
+        ECG_Reference.GetComponent<EcgVisualiser>().CheckForHeartSync();
     }
 
     public float GetTargetHeartrate()

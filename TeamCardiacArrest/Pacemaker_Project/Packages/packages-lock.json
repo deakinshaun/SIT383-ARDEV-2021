@@ -30,13 +30,11 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.multiplayer-hlapi": {
-      "version": "1.0.8",
-      "depth": 0,
+    "com.unity.subsystemregistration": {
+      "version": "1.0.6",
+      "depth": 1,
       "source": "registry",
-      "dependencies": {
-        "nuget.mono-cecil": "0.1.6-preview"
-      },
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
@@ -80,9 +78,38 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.xr.arcore": {
+      "version": "3.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.arsubsystems": "3.0.0",
+        "com.unity.xr.management": "3.0.4",
+        "com.unity.modules.androidjni": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.xr.arfoundation": {
+      "version": "3.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.arsubsystems": "3.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.xr.arsubsystems": {
+      "version": "3.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.subsystemregistration": "1.0.6"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.xr.legacyinputhelpers": {
       "version": "2.1.7",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.vr": "1.0.0",
@@ -90,11 +117,17 @@
       },
       "url": "https://packages.unity.com"
     },
-    "nuget.mono-cecil": {
-      "version": "0.1.6-preview",
-      "depth": 1,
+    "com.unity.xr.management": {
+      "version": "4.0.5",
+      "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.modules.subsystems": "1.0.0",
+        "com.unity.modules.vr": "1.0.0",
+        "com.unity.modules.xr": "1.0.0",
+        "com.unity.xr.legacyinputhelpers": "2.1.7",
+        "com.unity.subsystemregistration": "1.0.6"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.modules.ai": {

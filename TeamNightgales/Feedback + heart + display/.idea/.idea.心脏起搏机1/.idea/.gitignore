@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/.idea.心脏起搏机1.iml
+/projectSettingsUpdater.xml
+/contentModel.xml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../:\unity project\心脏起搏机1\.idea\.idea.心脏起搏机1\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

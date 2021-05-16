@@ -25,11 +25,10 @@ public class SliderControl : MonoBehaviour
     {
         if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<AtrialDetails>().IncreaseCurrentAtrial();
+            GetComponent<AtrialDetails>().IncreaseCurrentAtrialValue();
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            Debug.Log("Calling Increase Ventricle Value");
             GetComponent<VentricleDetails>().IncreaseCurrentVentricleValue();
         }
         else
@@ -44,11 +43,10 @@ public class SliderControl : MonoBehaviour
     {
         if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<AtrialDetails>().DecreaseCurrentAtrial();
+            GetComponent<AtrialDetails>().DecreaseCurrentAtrialValue();
         }
         else if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            Debug.Log("Calling Decrease Ventricle Value");
             GetComponent<VentricleDetails>().DecreaseCurrentVentricleValue();
         }
         else
