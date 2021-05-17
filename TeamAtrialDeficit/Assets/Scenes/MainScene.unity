@@ -2024,123 +2024,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 566672380524248613}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &384559873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384559872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f7f754737ae1604e92834fb0bdd1165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handLeft: {fileID: 1866670888}
-  handRight: {fileID: 737239756}
-  GestureDetector: {fileID: 67909264}
-  buttonPressingDistance: 0.3
-  Monitor1: {fileID: 1652091301}
-  Monitor2: {fileID: 1086558881}
-  Monitor3: {fileID: 862795353}
-  Direction: Up
-  SoundManager: {fileID: 2129800554}
---- !u!82 &384559874
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384559872}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 91e24ff58fd813e4f8768d03822ee7e1, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &421102844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5259,123 +5142,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 566672380524248613}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1533429673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533429672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f7f754737ae1604e92834fb0bdd1165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handLeft: {fileID: 1866670888}
-  handRight: {fileID: 737239756}
-  GestureDetector: {fileID: 67909264}
-  buttonPressingDistance: 0.3
-  Monitor1: {fileID: 1652091301}
-  Monitor2: {fileID: 1086558881}
-  Monitor3: {fileID: 862795353}
-  Direction: Down
-  SoundManager: {fileID: 2129800554}
---- !u!82 &1533429674
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533429672}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 91e24ff58fd813e4f8768d03822ee7e1, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!43 &1567978730
 Mesh:
   m_ObjectHideFlags: 0
@@ -7311,6 +7077,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 384559873, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: Monitor1
+      value: 
+      objectReference: {fileID: 1652091301}
+    - target: {fileID: 384559873, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: Monitor2
+      value: 
+      objectReference: {fileID: 1086558881}
+    - target: {fileID: 384559873, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: Monitor3
+      value: 
+      objectReference: {fileID: 862795353}
+    - target: {fileID: 384559873, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: handLeft
+      value: 
+      objectReference: {fileID: 1866670888}
+    - target: {fileID: 384559873, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: handRight
+      value: 
+      objectReference: {fileID: 737239756}
+    - target: {fileID: 384559873, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: SoundManager
+      value: 
+      objectReference: {fileID: 2129800554}
+    - target: {fileID: 384559873, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: GestureDetector
+      value: 
+      objectReference: {fileID: 67909264}
+    - target: {fileID: 1533429673, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: Monitor1
+      value: 
+      objectReference: {fileID: 1652091301}
+    - target: {fileID: 1533429673, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: Monitor2
+      value: 
+      objectReference: {fileID: 1086558881}
+    - target: {fileID: 1533429673, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: Monitor3
+      value: 
+      objectReference: {fileID: 862795353}
+    - target: {fileID: 1533429673, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: handLeft
+      value: 
+      objectReference: {fileID: 1866670888}
+    - target: {fileID: 1533429673, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: handRight
+      value: 
+      objectReference: {fileID: 737239756}
+    - target: {fileID: 1533429673, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: SoundManager
+      value: 
+      objectReference: {fileID: 2129800554}
+    - target: {fileID: 1533429673, guid: 7f0f175fbcd203843ab10d17b6e24a30, type: 3}
+      propertyPath: GestureDetector
+      value: 
+      objectReference: {fileID: 67909264}
     - target: {fileID: 566672380933020298, guid: 7f0f175fbcd203843ab10d17b6e24a30,
         type: 3}
       propertyPath: m_RootOrder
