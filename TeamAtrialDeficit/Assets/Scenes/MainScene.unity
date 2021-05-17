@@ -1921,16 +1921,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
         type: 3}
-      propertyPath: Run
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
-        type: 3}
-      propertyPath: difficulty
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 140170878783231409, guid: ec79337ca630713489de8f3f2dd67445,
-        type: 3}
       propertyPath: SoundManager
       value: 
       objectReference: {fileID: 2129800554}
@@ -1998,11 +1988,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ECGMonitor
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052243169264226931, guid: ec79337ca630713489de8f3f2dd67445,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.517
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec79337ca630713489de8f3f2dd67445, type: 3}
@@ -2136,7 +2121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771c7cd7078920e4cb2d20d7f1df4104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectToOnline: 0
+  ConnectToOnline: 1
   usingVR: 0
   Avatar: {fileID: 2821717221131395402, guid: d2b1abf2c76d2e641bbcf85ac233ddd9, type: 3}
   Portal1: {fileID: 323099812}
@@ -2146,6 +2131,12 @@ MonoBehaviour:
   vrAvatar: {fileID: 421102847}
   Monitor: {fileID: 950423872638686918, guid: ec79337ca630713489de8f3f2dd67445, type: 3}
   Bed: {fileID: 121328611657520644, guid: 13c16a8e2ce1fd944b2dfa3d328b2325, type: 3}
+  Monitor1: {fileID: 1652091301}
+  Monitor2: {fileID: 1086558881}
+  Monitor3: {fileID: 862795353}
+  InformationText1: {fileID: 246286317}
+  UpButton: {fileID: 384559872}
+  DownButton: {fileID: 1533429672}
   ControlPointer: {fileID: 1247763637}
 --- !u!4 &447934573
 Transform:
@@ -6947,6 +6938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d9393bee1a9ca4a9e8eca0cf370ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundList: []
   dropoffDistanceConstant: 0.9
   attenuationFactor: 1.5
   speedOfSound: 330
@@ -6961,6 +6953,12 @@ MonoBehaviour:
   monitor3: {fileID: 862795353}
   button1: {fileID: 384559872}
   button2: {fileID: 1533429672}
+  soundMonitorBeep1: {fileID: 0}
+  soundMonitorBeep2: {fileID: 0}
+  soundMonitorBeep3: {fileID: 0}
+  soundMonitorFlatLine1: {fileID: 0}
+  soundMonitorFlatLine2: {fileID: 0}
+  soundMonitorFlatLine3: {fileID: 0}
   FlatLine: {fileID: 8300000, guid: aedbfaf1e6424b64391ca13bd253314a, type: 3}
 --- !u!4 &2129800556
 Transform:
@@ -7220,7 +7218,7 @@ PrefabInstance:
     - target: {fileID: 2821717221131395402, guid: d2b1abf2c76d2e641bbcf85ac233ddd9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2821717221131395404, guid: d2b1abf2c76d2e641bbcf85ac233ddd9,
         type: 3}

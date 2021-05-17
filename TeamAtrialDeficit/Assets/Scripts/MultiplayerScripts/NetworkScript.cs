@@ -18,6 +18,15 @@ public class NetworkScript : MonoBehaviourPunCallbacks
     private GameObject avatarPlayer; //The user
     public GameObject Monitor;
     public GameObject Bed;
+    public GameObject Monitor1;
+    private GameObject networkedMonitor1;
+    public GameObject Monitor2;
+    private GameObject networkedMonitor2;
+    public GameObject Monitor3;
+    private GameObject networkedMonitor3;
+    public GameObject InformationText1; //mobile UI BPM
+    public GameObject UpButton;
+    public GameObject DownButton;
 
     //For the Flexible Controller: Variables
     public GameObject ControlPointer;
@@ -55,34 +64,109 @@ public class NetworkScript : MonoBehaviourPunCallbacks
             avatarPlayer.GetComponent<ChangeUniverse>().portal3 = Portal3;
             avatarPlayer.GetComponent<ChangeUniverse>().soundManager = SoundManager;
             SoundManager.GetComponent<SoundManager>().avatarListener = avatarPlayer;
+            avatarPlayer.GetComponent<ChangeUniverse>().VirtualCameraView = avatarPlayer.transform.GetChild(6).gameObject.transform.GetChild(1).gameObject;
+            avatarPlayer.GetComponent<ChangeUniverse>().VirtualCameraView2 = avatarPlayer.transform.GetChild(6).gameObject.transform.GetChild(2).gameObject;
+            avatarPlayer.GetComponent<ChangeUniverse>().VirtualCameraView3 = avatarPlayer.transform.GetChild(6).gameObject.transform.GetChild(3).gameObject;
+            avatarPlayer.GetComponent<ChangeUniverse>().monitor1 = Monitor1;
+            avatarPlayer.GetComponent<ChangeUniverse>().monitor2 = Monitor2;
+            avatarPlayer.GetComponent<ChangeUniverse>().monitor3 = Monitor3;
+
         }
-
-
+        
         GameObject[] ListOfMonitors = GameObject.FindGameObjectsWithTag("Monitor");
         Debug.Log("List Of Monitors: " + ListOfMonitors.Length.ToString());
-        if (ListOfMonitors.Length == 0)
-        {   /*
-            Monitor = PhotonNetwork.Instantiate(Monitor.name, new Vector3(-0.72f, 0.16f, 21.51f), Quaternion.Euler(-90, -180, 0), 0);
-            Monitor.GetComponent<MonitorScript>().SoundManager = SoundManager;
+        if (ListOfMonitors.Length == 3)
+        {
+            networkedMonitor1 = PhotonNetwork.Instantiate(Monitor1.name, Monitor1.transform.position, Monitor1.transform.rotation, 0);
+            networkedMonitor1.layer = Monitor1.layer;
+            SoundManager.GetComponent<SoundManager>().monitor1 = networkedMonitor1;
+            networkedMonitor1.GetComponent<MonitorScript>().SoundManager = SoundManager;
+            networkedMonitor1.GetComponent<MonitorScript>().BPMText = networkedMonitor1.transform.GetChild(0).gameObject;
+            //--------------------
+            SoundManager.GetComponent<SoundManager>().soundMonitorBeep1 = networkedMonitor1.GetComponent<AudioSource>();
+            SoundManager.GetComponent<SoundManager>().soundList.RemoveAt(3); //remove old audio object.
+            SoundManager.GetComponent<SoundManager>().soundList.Insert(3, networkedMonitor1.GetComponent<AudioSource>());
+            //--------------------
+            SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine1 = networkedMonitor1.AddComponent<AudioSource>();
+            SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine1.clip = SoundManager.GetComponent<SoundManager>().FlatLine;
+            SoundManager.GetComponent<SoundManager>().soundList.RemoveAt(6); //remove old audio object.
+            SoundManager.GetComponent<SoundManager>().soundList.Insert(6, SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine1);
+            GameObject.Destroy(Monitor1);
+            foreach(Transform child in networkedMonitor1.transform)
+                child.gameObject.layer = networkedMonitor1.layer;
 
-           // SoundManager.GetComponent<SoundManager>().monitor = Monitor;
+            networkedMonitor2 = PhotonNetwork.Instantiate(Monitor2.name, Monitor2.transform.position, Monitor2.transform.rotation, 0);
+            networkedMonitor2.layer = Monitor2.layer;
+            SoundManager.GetComponent<SoundManager>().monitor2 = networkedMonitor2;
+            networkedMonitor2.GetComponent<MonitorScript>().SoundManager = SoundManager;
+            networkedMonitor2.GetComponent<MonitorScript>().BPMText = networkedMonitor2.transform.GetChild(0).gameObject;
+            //--------------------
+            SoundManager.GetComponent<SoundManager>().soundMonitorBeep2 = networkedMonitor2.GetComponent<AudioSource>();
+            SoundManager.GetComponent<SoundManager>().soundList.RemoveAt(4); //remove old audio object.
+            SoundManager.GetComponent<SoundManager>().soundList.Insert(4, networkedMonitor2.GetComponent<AudioSource>());
+            //--------------------
+            SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine2 = networkedMonitor2.AddComponent<AudioSource>();
+            SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine2.clip = SoundManager.GetComponent<SoundManager>().FlatLine;
+            SoundManager.GetComponent<SoundManager>().soundList.RemoveAt(7); //remove old audio object.
+            SoundManager.GetComponent<SoundManager>().soundList.Insert(7, SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine2);
+            GameObject.Destroy(Monitor2);
+            foreach (Transform child in networkedMonitor2.transform)
+                child.gameObject.layer = networkedMonitor2.layer;
 
-            avatarPlayer.GetComponent<ChangeUniverse>().monitor = Monitor;
-            Debug.Log("Spawned a Monitor");
-            */ //This is broken!!! due to multiple dimensions code, and not enough time to fix.
+            networkedMonitor3 = PhotonNetwork.Instantiate(Monitor3.name, Monitor3.transform.position, Monitor3.transform.rotation, 0);
+            networkedMonitor3.layer = Monitor3.layer;
+            SoundManager.GetComponent<SoundManager>().monitor3 = networkedMonitor3;
+            networkedMonitor3.GetComponent<MonitorScript>().SoundManager = SoundManager;
+            networkedMonitor3.GetComponent<MonitorScript>().BPMText = networkedMonitor3.transform.GetChild(0).gameObject;
+            //--------------------
+            SoundManager.GetComponent<SoundManager>().soundMonitorBeep3 = networkedMonitor3.GetComponent<AudioSource>();
+            SoundManager.GetComponent<SoundManager>().soundList.RemoveAt(5); //remove old audio object.
+            SoundManager.GetComponent<SoundManager>().soundList.Insert(5, networkedMonitor3.GetComponent<AudioSource>());
+            //--------------------
+            SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine3 = networkedMonitor3.AddComponent<AudioSource>();
+            SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine3.clip = SoundManager.GetComponent<SoundManager>().FlatLine;
+            SoundManager.GetComponent<SoundManager>().soundList.RemoveAt(8); //remove old audio object.
+            SoundManager.GetComponent<SoundManager>().soundList.Insert(8, SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine3);
+            GameObject.Destroy(Monitor3);
+            foreach (Transform child in networkedMonitor3.transform)
+                child.gameObject.layer = networkedMonitor3.layer;
+
+
+            avatarPlayer.GetComponent<ChangeUniverse>().monitor1 = networkedMonitor1;
+            avatarPlayer.GetComponent<ChangeUniverse>().monitor2 = networkedMonitor2;
+            avatarPlayer.GetComponent<ChangeUniverse>().monitor3 = networkedMonitor3;
+
+            networkedMonitor1.GetComponent<MonitorScript>().PaceMakerBPMText = InformationText1;
+            networkedMonitor2.GetComponent<MonitorScript>().PaceMakerBPMText = InformationText1;
+            networkedMonitor3.GetComponent<MonitorScript>().PaceMakerBPMText = InformationText1;
+
+            UpButton.GetComponent<ButtonClick>().Monitor1 = networkedMonitor1;
+            UpButton.GetComponent<ButtonClick>().Monitor2 = networkedMonitor2;
+            UpButton.GetComponent<ButtonClick>().Monitor3 = networkedMonitor3;
+
+            DownButton.GetComponent<ButtonClick>().Monitor1 = networkedMonitor1;
+            DownButton.GetComponent<ButtonClick>().Monitor2 = networkedMonitor2;
+            DownButton.GetComponent<ButtonClick>().Monitor3 = networkedMonitor3;
         }
-
-
+        else if (ListOfMonitors.Length > 3)
+        {
+            GameObject.Destroy(Monitor1);
+            GameObject.Destroy(Monitor2);
+            GameObject.Destroy(Monitor3);
+        }
+        
+        /*
         GameObject[] ListOfBeds = GameObject.FindGameObjectsWithTag("Bed");
         Debug.Log("List Of Bed: " + ListOfMonitors.Length.ToString());
         if (ListOfBeds.Length == 0)
         {
-            /*
+            
             Bed = PhotonNetwork.Instantiate(Bed.name, new Vector3(0.27f, 0.16f, 17.03f), Quaternion.Euler(0, 90, 0), 0);
-            avatarPlayer.GetComponent<ChangeUniverse>().bed = Bed;
+            //vatarPlayer.GetComponent<ChangeUniverse>().bed = Bed;
             Debug.Log("Spawned a Bed");
-            */
+            
         }
+        */
     }
 
     private void OnApplicationQuit()
@@ -90,8 +174,8 @@ public class NetworkScript : MonoBehaviourPunCallbacks
         if (ConnectToOnline)
         {
             PhotonNetwork.Destroy(avatarPlayer); //So their model doesn't stay around on server after they dc.
-            PhotonNetwork.Destroy(Bed);
-            PhotonNetwork.Destroy(Monitor);
+            //PhotonNetwork.Destroy(Bed);
+            //PhotonNetwork.Destroy(Monitor);
         }
     }
 

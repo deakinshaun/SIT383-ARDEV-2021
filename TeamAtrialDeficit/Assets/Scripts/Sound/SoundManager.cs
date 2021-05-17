@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     //Module 2
-    private List<AudioSource> soundList = new List<AudioSource>();
+    public List<AudioSource> soundList = new List<AudioSource>();
     public float dropoffDistanceConstant = 0.9f;
     public float attenuationFactor = 1.5f;
     public float speedOfSound = 330.0f;
@@ -28,12 +28,12 @@ public class SoundManager : MonoBehaviour
     private AudioSource soundBeginnerPortal;
     private AudioSource soundIntermediatePortal;
     private AudioSource soundAdvancedPortal;
-    private AudioSource soundMonitorBeep1;
-    private AudioSource soundMonitorBeep2;
-    private AudioSource soundMonitorBeep3;
-    private AudioSource soundMonitorFlatLine1;
-    private AudioSource soundMonitorFlatLine2;
-    private AudioSource soundMonitorFlatLine3;
+    public AudioSource soundMonitorBeep1;
+    public AudioSource soundMonitorBeep2;
+    public AudioSource soundMonitorBeep3;
+    public AudioSource soundMonitorFlatLine1;
+    public AudioSource soundMonitorFlatLine2;
+    public AudioSource soundMonitorFlatLine3;
     private AudioSource soundButton1;
     private AudioSource soundButton2;
 
@@ -94,7 +94,13 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(listener != null)
+        if (soundMonitorBeep1 == null || soundMonitorBeep2 == null || soundMonitorBeep3 == null) //issues caused with multiplayer spawning new monitors
+        {
+            soundList.Clear();
+            Start(); //try to re-gain sources.
+            return;
+        }
+        else if (listener != null)
         {
             foreach (AudioSource audio in soundList)
             {
