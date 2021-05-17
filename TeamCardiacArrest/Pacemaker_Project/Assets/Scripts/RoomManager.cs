@@ -7,11 +7,6 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-
-    // AR core card on the floor create environment, simulation
-    // !Surface based generation
-    // marker or placed plane
-
     //Lobby and room abstraction
     // !two boxes in one scene
     // !same photon room
@@ -23,13 +18,14 @@ using Photon.Realtime;
 
 
 
-public class PhotonManager : MonoBehaviourPunCallbacks
+public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Text message;
     public int roomtype;
     public GameObject SetupPrefab;
     public GameObject TeacherPrefab;
     public Canvas TeacherUI;
+    public Canvas RoomSelect;
     public GameObject RoomPrefab;
 
     private bool allowJoin = false;
@@ -42,6 +38,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
+    public void enterRoom()
+    {
+//        string roomName = GetComponent<DisplayRoom>().getName();
+//        Debug.Log =("Entering room: " + roomName);
+//        roomManager.JoinRoom(roomName);
+    }
+    
     public static string getName (GameObject o)
     {
         if (o.GetComponent<PhotonView>() != null)
@@ -66,17 +69,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         foreach (GameObject g in displayRooms)
         {
-            DisplayRoom tr = g.displayRoom <DisplayRoom>();
-            if (dr.getName().Equals(name))
+//            DisplayRoom tr = g.displayRoom<DisplayRoom>();
+//            if (dr.getName().Equals(name))
             {
                 return g;
             }
         }
         GameObject room = Instantiate(RoomPrefab);
-        room.transform.SetParent(roomCanvas.transform);
+//        room.transform.SetParent(roomCanvas.transform);
         room.GetComponent<DisplayRoom>().setName(name);
-        room.GetComponent<localRoomBehaviour>().SetManager(this);
-        displayRoom.Add (room);
+//        room.GetComponent<LocalRoomBehaviour>().SetManager(this);
+//        displayRoom.Add (room);
         return room;
     }
 
@@ -90,10 +93,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         int row = 0;
         int col = 0;
-        int coumnLimit = 2;
+        int columnLimit = 2;
         foreach(GameObject room in displayRooms)
         {
-            room.transform.localPosition = new Vector3 (col * 20 - 5, role * 20, 0);
+            room.transform.localPosition = new Vector3 (col * 20 - 5, row * 20, 0);
             col +=1 ;
             if (col >= columnLimit)
             {
@@ -136,8 +139,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinLobby;
-        
+        PhotonNetwork.JoinLobby();       
     }
     // Update is called once per frame
 
@@ -146,8 +148,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
-        p["notices"] = RoomManager(this.gameObject) + " : " + Time.time + ":joined\n";
-        r.SetCustomProperties(p);
+//        p["notices"] = RoomManager(this.gameObject) + " : " + Time.time + ":joined\n";
+//        r.SetCustomProperties(p);
 
         if (!allowJoin)
         {
@@ -200,6 +202,24 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Failed to create room " + returnCode + " " + message);
     }
+
+    public void addRoom(Text name)
+    {
+        Debug.Log("Adding new room: " + name.text);
+        RoomOptions ro = new RoomOptions();
+        ro.EmptyRoomTtl = 100000;
+
+
+        string[] roomPropsInLobby = {"notices"};
+        ro.CustomRoomPropertiesForLobby = roomPropsInLobby;
+        ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() 
+        {
+            {"notices", "RoomStart\n"}
+        };
+        ro.CustomRoomProperties = customRoomProperties;
+        PhotonNetwork.JoinOrCreateRoom (name.text, ro, null);
+    }
+
 
 //    public void AddRoo
 
