@@ -31,6 +31,10 @@ public class HudDisplay : MonoBehaviour
     private string activeTask;
     private string debugMessage;
 
+    private Color colorHeart = new Color32(234, 82, 211, 255);
+    private Color colorAtrial = new Color32(252, 175, 56, 255);
+    private Color colorVentricle = new Color32(249, 83, 53, 255);
+
     private float activeSensitivity, activeGap, minSliderValue, maxSliderValue, currentSliderValue;
 
     // Start is called before the first frame update
@@ -63,10 +67,10 @@ public class HudDisplay : MonoBehaviour
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString();
-        //activeItemIcon.GetComponent<Image>().color = new Color32(51, 0, 0, 255);
-        sensitivityValueText.text = GetComponent<HeartDetails>().GetHeartSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString();
+        targetValueText.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString("0.0");
+        activeItemIcon.GetComponent<Image>().color = colorHeart;
+        sensitivityValueText.text = GetComponent<HeartDetails>().GetHeartSensitivityAmount().ToString("0.0");
+        currentValueText.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString("0.0");
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
@@ -78,10 +82,10 @@ public class HudDisplay : MonoBehaviour
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString();
-        //activeItemIcon.GetComponent<Image>().color = new Color32(0, 13, 11, 255);
-        sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString();
+        targetValueText.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString("0.0");
+        activeItemIcon.GetComponent<Image>().color = colorAtrial;
+        sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString("0.0");
+        currentValueText.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString("0.0");
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
@@ -93,10 +97,10 @@ public class HudDisplay : MonoBehaviour
         debugMessageText.text = debugMessage;
         maximumSliderValueText.text = minSliderValue.ToString();
         minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString();
-        //activeItemIcon.GetComponent<Image>().color = new Color32(44, 51, 0, 255);
-        sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString();
+        targetValueText.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString("0.0");
+        activeItemIcon.GetComponent<Image>().color = colorVentricle;
+        sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString("0.0");
+        currentValueText.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString("0.0");
         trackingSlider.minValue = minSliderValue;
         trackingSlider.maxValue = maxSliderValue;
         trackingSlider.value = currentSliderValue;
