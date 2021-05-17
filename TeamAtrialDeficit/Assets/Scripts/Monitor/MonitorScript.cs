@@ -55,7 +55,7 @@ public class MonitorScript : MonoBehaviour
             //Rahul: Added to include Mobile UI
             if (PaceMakerBPMText.activeSelf)
             {
-                PaceMakerBPMText.GetComponent<Text>().text = BPM.ToString() + " BMP";
+                PaceMakerBPMText.GetComponent<Text>().text = "ECG Monitor:" + BPM.ToString() + " BMP";
             }
 
             if(BPM <= 0)
