@@ -2121,7 +2121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771c7cd7078920e4cb2d20d7f1df4104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectToOnline: 1
+  ConnectToOnline: 0
   usingVR: 0
   Avatar: {fileID: 2821717221131395402, guid: d2b1abf2c76d2e641bbcf85ac233ddd9, type: 3}
   Portal1: {fileID: 323099812}
@@ -7139,12 +7139,12 @@ PrefabInstance:
     - target: {fileID: 566672380933020298, guid: 7f0f175fbcd203843ab10d17b6e24a30,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.195
+      value: -2.19
       objectReference: {fileID: 0}
     - target: {fileID: 566672380933020298, guid: 7f0f175fbcd203843ab10d17b6e24a30,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.118
+      value: 1.1716
       objectReference: {fileID: 0}
     - target: {fileID: 566672380933020298, guid: 7f0f175fbcd203843ab10d17b6e24a30,
         type: 3}
@@ -7218,7 +7218,7 @@ PrefabInstance:
     - target: {fileID: 2821717221131395402, guid: d2b1abf2c76d2e641bbcf85ac233ddd9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2821717221131395404, guid: d2b1abf2c76d2e641bbcf85ac233ddd9,
         type: 3}
