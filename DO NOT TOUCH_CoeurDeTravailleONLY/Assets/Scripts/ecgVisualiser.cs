@@ -72,6 +72,11 @@ public class EcgVisualiser : MonoBehaviour
         heartSync = false;
         atrialSync = false;
         ventricleSync = false;
+        breathingSource.volume = 1.0f;
+        noiseSource.volume = 1.0f;
+
+        heart.GetComponent<AtrialDetails>().Restart();
+        heart.GetComponent<VentricleDetails>().Restart();
         heart.GetComponent<HeartDetails>().Restart();
 
     }
@@ -84,7 +89,7 @@ public class EcgVisualiser : MonoBehaviour
         float startToTargetGap = Mathf.Abs(intitalValueV - targetValueV);
         float currentToTargetGap = Mathf.Abs(currentValueV - targetValueV);
 
-        if (currentToTargetGap > 0.05)
+        if (currentToTargetGap > 0.1)
         {
             ventricleSync = false;
             //Debug.Log("Current breathing gap is " + currentToTargetGap);
@@ -115,7 +120,7 @@ public class EcgVisualiser : MonoBehaviour
 
         float heartGap = Mathf.Abs(targetHeart - currentHeart);
 
-        if (heartGap < 0.01)
+        if (heartGap < 0.1)
         {
             heartSync = true;
         }
@@ -130,7 +135,7 @@ public class EcgVisualiser : MonoBehaviour
         float startToTargetGap = Mathf.Abs(intitalValueV - targetValueV);
         float currentToTargetGap = Mathf.Abs(currentValueV - targetValueV);
 
-        if (currentToTargetGap > 0.05)
+        if (currentToTargetGap > 0.1)
         {
             atrialSync = false;
             //Debug.Log("Current noise gap is " + currentToTargetGap);
