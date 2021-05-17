@@ -13,6 +13,7 @@ public class ButtonClick : MonoBehaviour
     public GameObject Monitor3;
     public string Direction; //up or down
     private float buttonPressCD = 0;
+    public GameObject SoundManager;
 
     void onRecognized()
     {
@@ -30,6 +31,11 @@ public class ButtonClick : MonoBehaviour
 
     void buttonPressed()
     {
+        if (Direction == "Up" || Direction == "up")
+            SoundManager.GetComponent<SoundManager>().button1SoundPlay();
+        else
+            SoundManager.GetComponent<SoundManager>().button2SoundPlay();
+
         Monitor1.GetComponent<MonitorScript>().buttonPress(Direction);
         Monitor2.GetComponent<MonitorScript>().buttonPress(Direction);
         Monitor3.GetComponent<MonitorScript>().buttonPress(Direction);

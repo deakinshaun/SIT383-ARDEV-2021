@@ -61,7 +61,14 @@ public class MonitorScript : MonoBehaviour
             if (timeSinceLastPulse > BeatsPerSecond)
             {
                 //pulse
-                SoundManager.GetComponent<SoundManager>().monitorSoundPlay();
+                if(difficulty == 0)
+                    SoundManager.GetComponent<SoundManager>().monitor1SoundPlay();
+
+                else if (difficulty == 1)
+                    SoundManager.GetComponent<SoundManager>().monitor2SoundPlay();
+
+                else if (difficulty == 2)
+                    SoundManager.GetComponent<SoundManager>().monitor3SoundPlay();
                 timeSinceLastPulse = 0.0f;
                 pulseList[0].GetComponent<PulseLineHolder>().pulseHeightChangeValue = 10;
             }
@@ -157,5 +164,13 @@ public class MonitorScript : MonoBehaviour
     {
         currentFrameSinceStart++;
         //Change difficulty.
+        if(currentFrameSinceStart % (2000 - difficulty * 200) == 0) //if the frame is divisible by the other number (B:2000, I:1800, A:1600) with no remainders.
+        {
+            if(Random.Range(1, 4) <= difficulty + 1) // beginnger 25%, intermediate 50%, advanced 75%
+            {
+                BPM += Random.Range(-10, 10);
+            }
+            currentFrameSinceStart = 0; //stops it from going on too long. (potential to hit max int value)
+        }
     }
 }
