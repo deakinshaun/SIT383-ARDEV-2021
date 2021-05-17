@@ -11,10 +11,10 @@ public class DisplayRoom : MonoBehaviour
 
     private string roomName;
 
-//    public getName()
-//    {
-//        return roomName;
-//    }
+    public string getName()
+    {
+        return roomName;
+    }
 
     public void setName (string name)
     {

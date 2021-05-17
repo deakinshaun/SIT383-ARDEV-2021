@@ -387,6 +387,8 @@ GameObject:
   - component: {fileID: 9191052539962204060}
   - component: {fileID: 9191052539962204061}
   - component: {fileID: 9191052539962204050}
+  - component: {fileID: 3872191864670477584}
+  - component: {fileID: 3611928571486442091}
   m_Layer: 0
   m_Name: 360SceneLobby
   m_TagString: Untagged
@@ -469,3 +471,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3872191864670477584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191052539962204051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41c782cab7edac4db33f29b28377d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3611928571486442091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191052539962204051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913ad6b99c2b425428998288bf4f7625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

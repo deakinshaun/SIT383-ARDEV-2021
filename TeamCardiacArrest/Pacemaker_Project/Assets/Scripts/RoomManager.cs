@@ -25,6 +25,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject SetupPrefab;
     public GameObject TeacherPrefab;
     public Canvas TeacherUI;
+    public Canvas RoomCanvas;
     public Canvas RoomSelect;
     public GameObject RoomPrefab;
 
@@ -38,14 +39,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public void enterRoom()
-    {
-//        string roomName = GetComponent<DisplayRoom>().getName();
-//        Debug.Log =("Entering room: " + roomName);
-//        roomManager.JoinRoom(roomName);
-    }
-    
-    public static string getName (GameObject o)
+        public static string getName (GameObject o)
     {
         if (o.GetComponent<PhotonView>() != null)
         {
@@ -69,17 +63,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         foreach (GameObject g in displayRooms)
         {
-//            DisplayRoom tr = g.displayRoom<DisplayRoom>();
-//            if (dr.getName().Equals(name))
+            DisplayRoom dr = g.GetComponent<DisplayRoom>();
+            if (dr.getName().Equals(name))
             {
                 return g;
             }
         }
         GameObject room = Instantiate(RoomPrefab);
-//        room.transform.SetParent(roomCanvas.transform);
+        room.transform.SetParent(RoomCanvas.transform);
         room.GetComponent<DisplayRoom>().setName(name);
-//        room.GetComponent<LocalRoomBehaviour>().SetManager(this);
-//        displayRoom.Add (room);
+        room.GetComponent<LocalRoomBehaviour>().SetManager(this);
+        displayRooms.Add (room);
         return room;
     }
 
@@ -131,6 +125,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         UpdateRooms();
     }
 
+
     public override void OnJoinedLobby ()
     {
         Debug.Log("You made to the lobby!");
@@ -148,8 +143,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
-//        p["notices"] = RoomManager(this.gameObject) + " : " + Time.time + ":joined\n";
-//        r.SetCustomProperties(p);
+        p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
+        r.SetCustomProperties(p);
 
         if (!allowJoin)
         {

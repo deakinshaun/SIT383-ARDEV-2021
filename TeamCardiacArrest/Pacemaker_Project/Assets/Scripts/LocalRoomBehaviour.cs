@@ -7,18 +7,18 @@ using Photon.Realtime;
 
 public class LocalRoomBehaviour : MonoBehaviour
 {
-    private RoomManager RoomManager;
+    private RoomManager roomManager;
 
-    public void setManager(RoomManager manager)
+    public void SetManager(RoomManager manager)
     {
-//        roomManager = manager;
+        roomManager = manager;
     }
 
     public void enterRoom()
     {
- //       string roomName = GetComponent<DisplayRoom>().getName();
- //       Debug.Log = ("Entering room: " + roomName);
- //       roomManager.JoinRoom(roomName);
+        string roomName = GetComponent<DisplayRoom>().getName();
+        Debug.Log("Entering room: " + roomName);
+        roomManager.JoinRoom(roomName);
     }
     // Start is called before the first frame update
     void Start()
