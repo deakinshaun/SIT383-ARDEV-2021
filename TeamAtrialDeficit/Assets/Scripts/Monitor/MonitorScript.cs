@@ -58,12 +58,35 @@ public class MonitorScript : MonoBehaviour
                 PaceMakerBPMText.GetComponent<Text>().text = BPM.ToString() + " BMP";
             }
 
+            if(BPM <= 0)
+            {
+                BeatsPerSecond = 2; //flatline sound effect duration
+            }
+
             if (timeSinceLastPulse > BeatsPerSecond)
             {
-                //pulse
-                SoundManager.GetComponent<SoundManager>().monitorSoundPlay();
+                if (BPM > 0)
+                {
+                    //pulse
+                    if (difficulty == 0)
+                        SoundManager.GetComponent<SoundManager>().monitor1SoundPlay();
+                    else if (difficulty == 1)
+                        SoundManager.GetComponent<SoundManager>().monitor2SoundPlay();
+                    else if (difficulty == 2)
+                        SoundManager.GetComponent<SoundManager>().monitor3SoundPlay();
+                    pulseList[0].GetComponent<PulseLineHolder>().pulseHeightChangeValue = 10;
+                }
+                else
+                {
+                    //flatline
+                    if (difficulty == 0)
+                        SoundManager.GetComponent<SoundManager>().monitor1FlatLineSoundPlay();
+                    else if (difficulty == 1)
+                        SoundManager.GetComponent<SoundManager>().monitor2FlatLineSoundPlay();
+                    else if (difficulty == 2)
+                        SoundManager.GetComponent<SoundManager>().monitor3FlatLineSoundPlay();
+                }
                 timeSinceLastPulse = 0.0f;
-                pulseList[0].GetComponent<PulseLineHolder>().pulseHeightChangeValue = 10;
             }
             else
             {
@@ -157,5 +180,13 @@ public class MonitorScript : MonoBehaviour
     {
         currentFrameSinceStart++;
         //Change difficulty.
+        if(currentFrameSinceStart % (2000 - difficulty * 500) == 0) //if the frame is divisible by the other number (B:2000, I:1500, A:1000) with no remainders.
+        {
+            if(Random.Range(1, 4) <= difficulty + 1) // beginnger 25%, intermediate 50%, advanced 75%
+            {
+                BPM += Random.Range(-10, 10);
+            }
+            currentFrameSinceStart = 0; //stops it from going on too long. (potential to hit max int value)
+        }
     }
 }
