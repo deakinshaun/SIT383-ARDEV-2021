@@ -9,6 +9,8 @@ public class AudioSourceLoudnessTester : MonoBehaviour
 	private float currentUpdateTime = 0f;
 
 	public float clipLoudness;
+	private float rotationInput;
+	private float ClipLoudnessOutput;
 	private float[] clipSampleData;
 
 	public GameObject cube;
@@ -40,7 +42,10 @@ public class AudioSourceLoudnessTester : MonoBehaviour
 
 			clipLoudness *= sizeFactor;
 			clipLoudness = Mathf.Clamp(clipLoudness, minSize, maxSize);
-			cube.transform.localScale = new Vector3(clipLoudness, clipLoudness, clipLoudness);
+			rotationInput = GyroControl.rotationOutput * 0.0001f;
+			ClipLoudnessOutput = (clipLoudness + rotationInput) * 0.15f;
+			//cube.transform.localScale = new Vector3(clipLoudness, clipLoudness, clipLoudness);
+			cube.transform.localScale = new Vector3(ClipLoudnessOutput,ClipLoudnessOutput , ClipLoudnessOutput );
 		}
 	}
 

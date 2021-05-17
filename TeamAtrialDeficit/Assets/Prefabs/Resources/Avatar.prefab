@@ -507,12 +507,16 @@ MonoBehaviour:
   portal: {fileID: 0}
   portal2: {fileID: 0}
   portal3: {fileID: 0}
-  virtualview1: {fileID: 2821717221324080249}
-  virtualview2: {fileID: 2821717221302367857}
-  virtualview3: {fileID: 2821717220634321249}
-  monitor: {fileID: 0}
-  bed: {fileID: 0}
+  monitor1: {fileID: 0}
+  monitor2: {fileID: 0}
+  monitor3: {fileID: 0}
+  VirtualCameraView: {fileID: 0}
+  VirtualCameraView2: {fileID: 0}
+  VirtualCameraView3: {fileID: 0}
   inPhysical: 1
+  inVirtual: 0
+  inVirtual2: 0
+  inVirtual3: 0
   soundManager: {fileID: 0}
 --- !u!114 &1445896845473766036
 MonoBehaviour:
