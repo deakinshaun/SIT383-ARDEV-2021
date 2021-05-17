@@ -21,14 +21,18 @@ public class SoundManager : MonoBehaviour
     public GameObject monitor1;
     public GameObject monitor2;
     public GameObject monitor3;
-    public GameObject button;
+    public GameObject button1;
+    public GameObject button2;
 
 
     private AudioSource soundBeginnerPortal;
     private AudioSource soundIntermediatePortal;
     private AudioSource soundAdvancedPortal;
-    private AudioSource soundMonitor;
-    private AudioSource soundButton;
+    private AudioSource soundMonitor1;
+    private AudioSource soundMonitor2;
+    private AudioSource soundMonitor3;
+    private AudioSource soundButton1;
+    private AudioSource soundButton2;
 
 
     // Start is called before the first frame update
@@ -44,17 +48,20 @@ public class SoundManager : MonoBehaviour
         soundAdvancedPortal = advancedPortal.GetComponent<AudioSource>();
         soundList.Add(soundAdvancedPortal);
 
-        soundMonitor = monitor1.GetComponent<AudioSource>();
-        soundList.Add(soundMonitor);
+        soundMonitor1 = monitor1.GetComponent<AudioSource>();
+        soundList.Add(soundMonitor1);
 
-        soundMonitor = monitor2.GetComponent<AudioSource>();
-        soundList.Add(soundMonitor);
+        soundMonitor2 = monitor2.GetComponent<AudioSource>();
+        soundList.Add(soundMonitor2);
 
-        soundMonitor = monitor3.GetComponent<AudioSource>();
-        soundList.Add(soundMonitor);
+        soundMonitor3 = monitor3.GetComponent<AudioSource>();
+        soundList.Add(soundMonitor3);
 
-        //soundButton = button.GetComponent<AudioSource>();
-        //soundList.Add(soundButton);
+        soundButton1 = button1.GetComponent<AudioSource>();
+        soundList.Add(soundButton1);
+
+        soundButton2 = button2.GetComponent<AudioSource>();
+        soundList.Add(soundButton2);
 
         Debug.Log("Sounds have been added!");
 
@@ -98,13 +105,28 @@ public class SoundManager : MonoBehaviour
         soundAdvancedPortal.Play();
     }
 
-    public void monitorSoundPlay()
+    public void monitor1SoundPlay()
     {
-        soundMonitor.Play();
+        soundMonitor1.Play();
     }
 
-    public void buttonSoundPlay()
+    public void monitor2SoundPlay()
     {
-        soundButton.Play();
+        soundMonitor2.Play();
+    }
+
+    public void monitor3SoundPlay()
+    {
+        soundMonitor3.Play();
+    }
+
+    public void button1SoundPlay()
+    {
+        soundButton1.Play();
+    }
+
+    public void button2SoundPlay()
+    {
+        soundButton2.Play();
     }
 }
