@@ -29,6 +29,21 @@ public class ButtonClick : MonoBehaviour
             buttonPressCD -= Time.deltaTime;
     }
 
+    private void Update()
+    {
+        //Debug to make sure it works:
+        if (Input.GetKeyDown(KeyCode.O) && Direction == "Up")
+        {
+            buttonPressed();
+            buttonPressCD = 1.0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.P) && Direction == "Down")
+        {
+            buttonPressed();
+            buttonPressCD = 1.0f;
+        }
+    }
+
     void buttonPressed()
     {
         if (Direction == "Up" || Direction == "up")
