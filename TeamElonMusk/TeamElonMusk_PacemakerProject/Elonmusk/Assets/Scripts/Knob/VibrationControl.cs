@@ -6,7 +6,7 @@ public class VibrationControl : MonoBehaviour
 {
   void Start()
   {
-    Handheld.Vibrate(); // Force vibration permission.
+   // Handheld.Vibrate(); // Force vibration permission.
   }
 }
 
@@ -28,8 +28,8 @@ public static class Vibration
   {
     if (isAndroid())
       vibrator.Call("vibrate");
-    else
-      Handheld.Vibrate();
+    //else
+     // Handheld.Vibrate();
   }
   
   
@@ -37,16 +37,16 @@ public static class Vibration
   {
     if (isAndroid())
       vibrator.Call("vibrate", milliseconds);
-   else
-      Handheld.Vibrate();
+   //else
+     // Handheld.Vibrate();
   }
   
   public static void Vibrate(long[] pattern, int repeat)
   {
     if (isAndroid())
       vibrator.Call("vibrate", pattern, repeat);
-    else
-      Handheld.Vibrate();
+   // else
+      //Handheld.Vibrate();
   }
   
   public static bool HasVibrator()
@@ -120,8 +120,8 @@ public static class Vibration2
       AndroidJavaObject vibrationEffect = vibrationEffectClass.CallStatic<AndroidJavaObject>(function, args);
       vibrator.Call("vibrate", vibrationEffect);
     }
-    else
-      Handheld.Vibrate();
+    //else
+      //Handheld.Vibrate();
   }
   
   public static bool HasVibrator()
