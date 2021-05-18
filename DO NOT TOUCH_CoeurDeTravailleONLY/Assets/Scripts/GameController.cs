@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject goAgain;
     [Tooltip("Connect this to the SyncCompleteText component in the Canvas")]
     public GameObject endGameText;
+    public GameObject activityText;
 
     private bool b_Heart = false;
     private bool b_Atrial = false;
@@ -56,6 +57,7 @@ public class GameController : MonoBehaviour
 
     public void EndOfGame()
     {
+        activityText.SetActive(false);
         endGameText.SetActive(true);
         goAgain.SetActive(true);
     }
@@ -63,6 +65,8 @@ public class GameController : MonoBehaviour
     public void OnClickRestart()
     {
         ECG_Reference.GetComponent<EcgVisualiser>().GameReset();
+        activityText.SetActive(true);
+        endGameText.SetActive(false);
         goAgain.SetActive(false);
     }
 }
