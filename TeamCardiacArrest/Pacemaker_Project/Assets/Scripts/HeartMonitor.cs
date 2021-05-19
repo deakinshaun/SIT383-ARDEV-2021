@@ -22,7 +22,7 @@ public class HeartMonitor : MonoBehaviour
     private float minFreq = 0.50f;
     private float maxFreq = 3.90f;
 
-    public int BPM;
+    public float BPM = 60f;
 
     public GameObject timeSeriesParent;
     public GameObject frequencySeriesParent;
@@ -174,7 +174,7 @@ public class HeartMonitor : MonoBehaviour
 						}
                     }
                 }
-                BPM = (int)Mathf.RoundToInt(smoothedPeak * 60); // Calculate BPM (Beats per second * 60 seconds)
+                //BPM = (int)Mathf.RoundToInt(smoothedPeak * 60); // Calculate BPM (Beats per second * 60 seconds)
                 smoothedPeak = smoothingFactor * smoothedPeak + (1.0f - smoothingFactor) * peakFreq;
              
                 drawChart(timeSeries, timeSeriesParent);
@@ -182,7 +182,7 @@ public class HeartMonitor : MonoBehaviour
                 //Heartbeat Sound using Aya's sounds
                 if (peakFreq > 3.5f)
 				{
-                    sound.beep();
+                    //sound.beep();
 				}
             }
 
@@ -209,4 +209,88 @@ public class HeartMonitor : MonoBehaviour
         }
     }
 
+
+    /* ----------------------------------------------------------------------
+     * CODE BELOW WAS OBTAINED ONLINE
+     * IT IS NOT CODE DEVELOPED BY CARDIAC ARREST
+     * It was however edited by Phillip, original code can be found in the HCHeartbeat folder.
+     * Source: https://unitylist.com/p/j7f/Heartbeat-Open-Script-Unity
+     * 
+     * Its purpose is to count a precise, realistic intreval for a heartbeat to play
+     * ----------------------------------------------------------------------
+     */
+
+
+
+    //Frequency
+    [SerializeField] private float Hertz;
+    [SerializeField] private float PeriodT; //1/FrequencyHertz
+    [SerializeField] private float remainPeriod;
+    [SerializeField] private float remainPeriodMillisec;
+    public float returnTime = .01f;
+    [SerializeField] private float startReturnTime;
+    [SerializeField] private float startReturnTimeMillisec;
+
+    //State
+    public float[] GlobalTimer = { 0, 0 };
+    public float[] CatchGlobalTimer = { 0, 0 };
+    [SerializeField] private bool Lub;
+    public int stateIndex = 0;
+    public int isBeating;
+
+    //Limbs
+    public Toggle debugToggle;
+    
+    public void beat()
+	{
+        Hertz = BPM / 60f;
+        PeriodT = 1 / Hertz; //https://www.quora.com/How-do-you-convert-Hertz-to-seconds
+        if (!Lub)
+        {
+            remainPeriod -= Time.deltaTime;
+            remainPeriodMillisec -= Time.deltaTime * 1000;
+            startReturnTime = returnTime;
+            startReturnTimeMillisec = returnTime * 1000;
+            if (remainPeriodMillisec <= 0f)
+            {
+                stateIndex = 1;
+                if (debugToggle) debugToggle.isOn = true;
+                timeSeries.Add(3.9f);
+                sound.beep();
+                /*
+                if (Systole.Length > 0)
+                {
+                    for (int i = 0; i < Systole.Length; i++)
+                    {
+                        Speaker.PlayOneShot(Systole[i]);
+                    }
+                }
+                */
+                Lub = true;
+            }
+        }
+        else
+        {
+            remainPeriod = PeriodT;
+            remainPeriodMillisec = PeriodT * 1000;
+            startReturnTime -= Time.deltaTime;
+            startReturnTimeMillisec -= Time.deltaTime * 1000;
+            if (startReturnTimeMillisec <= 0f)
+            {
+                stateIndex = 0;
+                if (debugToggle) debugToggle.isOn = false;
+                
+                /*
+                if (Diastole.Length > 0)
+                {
+                    for (int i = 0; i < Diastole.Length; i++)
+                    {
+                        Speaker.PlayOneShot(Diastole[i]);
+                    }
+                }
+                */
+                Lub = false;
+            }
+        }
+    }
 }

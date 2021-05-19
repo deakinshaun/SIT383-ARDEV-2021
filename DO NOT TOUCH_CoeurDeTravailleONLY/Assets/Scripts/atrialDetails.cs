@@ -19,7 +19,7 @@ public class AtrialDetails : MonoBehaviour
     private float currentAtrialValue;
     private float targetAtrialValue;
 
-    private List<float> atrialSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+    private List<float> atrialSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f };
     private int atrialSensitivityIndex =0;
     private float atrialSensitivityAmount;
 
@@ -37,6 +37,18 @@ public class AtrialDetails : MonoBehaviour
     void Update()
     {
     }
+
+    public void Restart()
+    {
+        initialAtrialValue = RandomGaussian(30.0f, 180.0f);
+        targetAtrialValue = initialAtrialValue * RandomGaussian(1.2f, 1.8f);
+
+        atrialSensitivityIndex = 0;
+        atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
+
+    }
+
+
 
     public float RandomGaussian(float minValue, float maxValue)
     {
@@ -149,10 +161,10 @@ public class AtrialDetails : MonoBehaviour
 
     public void IncreaseAtrialSensitivityIndex()
     {
-        atrialSensitivityIndex += 1;
-        if (atrialSensitivityIndex > 9)
+        
+        if (atrialSensitivityIndex < atrialSensitivityArray.Count - 1)
         {
-            atrialSensitivityIndex = 9;
+            atrialSensitivityIndex += 1;
         }
 
         atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
@@ -160,10 +172,10 @@ public class AtrialDetails : MonoBehaviour
 
     public void DecreaseAtrialSensitivityIndex()
     {
-        atrialSensitivityIndex -= 1;
-        if (atrialSensitivityIndex < 9)
+        
+        if (atrialSensitivityIndex > 0)
         {
-            atrialSensitivityIndex = 0;
+            atrialSensitivityIndex -= 1;
         }
 
         atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];

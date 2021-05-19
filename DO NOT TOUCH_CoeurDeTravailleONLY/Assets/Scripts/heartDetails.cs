@@ -19,7 +19,7 @@ public class HeartDetails : MonoBehaviour
 
     private float currentHeartrate;
     private float targetHeartrate;
-    private List<float> heartSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+    private List<float> heartSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f};
     private int heartSensitivityIndex = 0;
     private float heartSensitivityAmount;
 
@@ -40,6 +40,7 @@ public class HeartDetails : MonoBehaviour
         currentHeartrate = RandomGaussian(30.0f, 180.0f);
         targetHeartrate = RandomGaussian(60.0f, 90.0f);
 
+        heartSensitivityIndex = 0;
         heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
 
         //Force click Heartrate Actvity to get us started
@@ -153,10 +154,10 @@ public class HeartDetails : MonoBehaviour
 
     public void RaiseHeartSensitivityAmount()
     {
-        heartSensitivityIndex += 1;
-        if (heartSensitivityIndex > 9)
+        
+        if (heartSensitivityIndex < heartSensitivityArray.Count - 1)
         {
-            heartSensitivityIndex = 9;
+            heartSensitivityIndex += 1;
         }
 
         heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
@@ -164,10 +165,10 @@ public class HeartDetails : MonoBehaviour
 
     public void LowerHeartSensitivityAmount()
     {
-        heartSensitivityIndex -= 1;
-        if (heartSensitivityIndex < 9)
+        
+        if (heartSensitivityIndex > 0)
         {
-            heartSensitivityIndex = 0;
+            heartSensitivityIndex -= 1;
         }
 
         heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];

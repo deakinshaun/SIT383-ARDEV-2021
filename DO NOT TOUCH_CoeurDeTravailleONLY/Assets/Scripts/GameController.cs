@@ -16,14 +16,15 @@ public class GameController : MonoBehaviour
     public GameObject goAgain;
     [Tooltip("Connect this to the SyncCompleteText component in the Canvas")]
     public GameObject endGameText;
+    public GameObject activityText;
 
     private bool b_Heart = false;
     private bool b_Atrial = false;
     private bool b_Ventricle = false;
 
-    private Color colorHeart = new Color32(51, 0, 0, 255);
-    private Color colorAtrial = new Color32(0, 13, 11, 255);
-    private Color colorVentricle = new Color32(44, 51, 0, 255);
+    private Color colorHeart = new Color32(234, 82, 211, 255);
+    private Color colorAtrial = new Color32(252, 175, 56, 255);
+    private Color colorVentricle = new Color32(249, 83, 53, 255);
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,7 @@ public class GameController : MonoBehaviour
 
     public void EndOfGame()
     {
+        activityText.SetActive(false);
         endGameText.SetActive(true);
         goAgain.SetActive(true);
     }
@@ -63,5 +65,8 @@ public class GameController : MonoBehaviour
     public void OnClickRestart()
     {
         ECG_Reference.GetComponent<EcgVisualiser>().GameReset();
+        activityText.SetActive(true);
+        endGameText.SetActive(false);
+        goAgain.SetActive(false);
     }
 }

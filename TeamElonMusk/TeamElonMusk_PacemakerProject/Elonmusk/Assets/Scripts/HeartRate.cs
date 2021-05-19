@@ -14,10 +14,10 @@ public class HeartRate : MonoBehaviour
     public GameObject[] musicCube;
 
     private int maxReadings = 256;
-
+   
     private List<double> accelerometerReadings = new List<double>();
-    private float spectroScale = 4.0f;
-    private float spectroOffset = -2.0f;
+    private float spectroScale = 1.0f;
+    private float spectroOffset = -3.0f;
     private int spectroStep = 4;
     private float smoothedPeak = 0.0f;
     private float smoothingFactor = 0.98f;
@@ -30,7 +30,7 @@ public class HeartRate : MonoBehaviour
         data = new float[512];
         for (int i = 0; i < 512; i++)
         {
-            musicCube[i] = Instantiate(prefab, Vector3.Slerp(transform.right * 3, -transform.right * 3, i / 512.0f), Quaternion.identity);
+            musicCube[i] = Instantiate(prefab, Vector3.Slerp(transform.right * 1, -transform.right * 1, i / 512.0f), Quaternion.identity);
         }
     }
 

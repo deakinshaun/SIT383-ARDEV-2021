@@ -26,7 +26,7 @@ public class VentricleDetails : MonoBehaviour
     private float currentVentricleValue;
     private float targetVentricleValue;
 
-    private List<float> ventricleSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f, 0.05f, 0.02f, 0.01f };
+    private List<float> ventricleSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f };
     private int ventricleSensitivityIndex = 0;
     private float ventricleSensitivityAmount;
 
@@ -43,6 +43,16 @@ public class VentricleDetails : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void Restart()
+    {
+        initialVentricleValue = RandomGaussian(30.0f, 180.0f);
+        targetVentricleValue = initialVentricleValue * RandomGaussian(1.2f, 1.8f);
+
+        ventricleSensitivityIndex = 0;
+        ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
+
     }
 
     public float RandomGaussian(float minValue, float maxValue)
@@ -148,11 +158,9 @@ public class VentricleDetails : MonoBehaviour
 
     public void RaiseVentricleSensitivityAmount()
     {
-        Debug.Log("Raising Ventrical Sensitivity");
-        ventricleSensitivityIndex += 1;
-        if (ventricleSensitivityIndex > 9)
+        if (ventricleSensitivityIndex < ventricleSensitivityArray.Count - 1)
         {
-            ventricleSensitivityIndex = 9;
+            ventricleSensitivityIndex += 1;
         }
 
         ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
@@ -161,10 +169,10 @@ public class VentricleDetails : MonoBehaviour
     public void LowerVentricleSensitivityAmount()
     {
         Debug.Log("Lowering Ventrical Sensitivity");
-        ventricleSensitivityIndex -= 1;
-        if (ventricleSensitivityIndex < 9)
+        
+        if (ventricleSensitivityIndex > 0)
         {
-            ventricleSensitivityIndex = 0;
+            ventricleSensitivityIndex -= 1;
         }
 
         ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];

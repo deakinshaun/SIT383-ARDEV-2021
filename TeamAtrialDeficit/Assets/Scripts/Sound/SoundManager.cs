@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     //Module 2
-    private List<AudioSource> soundList = new List<AudioSource>();
+    public List<AudioSource> soundList = new List<AudioSource>();
     public float dropoffDistanceConstant = 0.9f;
     public float attenuationFactor = 1.5f;
     public float speedOfSound = 330.0f;
@@ -21,15 +21,23 @@ public class SoundManager : MonoBehaviour
     public GameObject monitor1;
     public GameObject monitor2;
     public GameObject monitor3;
-    public GameObject button;
+    public GameObject button1;
+    public GameObject button2;
 
 
     private AudioSource soundBeginnerPortal;
     private AudioSource soundIntermediatePortal;
     private AudioSource soundAdvancedPortal;
-    private AudioSource soundMonitor;
-    private AudioSource soundButton;
+    public AudioSource soundMonitorBeep1;
+    public AudioSource soundMonitorBeep2;
+    public AudioSource soundMonitorBeep3;
+    public AudioSource soundMonitorFlatLine1;
+    public AudioSource soundMonitorFlatLine2;
+    public AudioSource soundMonitorFlatLine3;
+    private AudioSource soundButton1;
+    private AudioSource soundButton2;
 
+    public AudioClip FlatLine;
 
     // Start is called before the first frame update
 
@@ -44,17 +52,32 @@ public class SoundManager : MonoBehaviour
         soundAdvancedPortal = advancedPortal.GetComponent<AudioSource>();
         soundList.Add(soundAdvancedPortal);
 
-        soundMonitor = monitor1.GetComponent<AudioSource>();
-        soundList.Add(soundMonitor);
+        soundMonitorBeep1 = monitor1.GetComponent<AudioSource>();
+        soundList.Add(soundMonitorBeep1);
 
-        soundMonitor = monitor2.GetComponent<AudioSource>();
-        soundList.Add(soundMonitor);
+        soundMonitorBeep2 = monitor2.GetComponent<AudioSource>();
+        soundList.Add(soundMonitorBeep2);
 
-        soundMonitor = monitor3.GetComponent<AudioSource>();
-        soundList.Add(soundMonitor);
+        soundMonitorBeep3 = monitor3.GetComponent<AudioSource>();
+        soundList.Add(soundMonitorBeep3);
 
-        //soundButton = button.GetComponent<AudioSource>();
-        //soundList.Add(soundButton);
+        soundMonitorFlatLine1 = monitor1.AddComponent<AudioSource>();
+        soundMonitorFlatLine1.clip = FlatLine;
+        soundList.Add(soundMonitorFlatLine1);
+
+        soundMonitorFlatLine2 = monitor2.AddComponent<AudioSource>();
+        soundMonitorFlatLine2.clip = FlatLine;
+        soundList.Add(soundMonitorFlatLine2);
+
+        soundMonitorFlatLine3 = monitor3.AddComponent<AudioSource>();
+        soundMonitorFlatLine3.clip = FlatLine;
+        soundList.Add(soundMonitorFlatLine3);
+
+        soundButton1 = button1.GetComponent<AudioSource>();
+        soundList.Add(soundButton1);
+
+        soundButton2 = button2.GetComponent<AudioSource>();
+        soundList.Add(soundButton2);
 
         Debug.Log("Sounds have been added!");
 
@@ -71,7 +94,13 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(listener != null)
+        if (soundMonitorBeep1 == null || soundMonitorBeep2 == null || soundMonitorBeep3 == null) //issues caused with multiplayer spawning new monitors
+        {
+            soundList.Clear();
+            Start(); //try to re-gain sources.
+            return;
+        }
+        else if (listener != null)
         {
             foreach (AudioSource audio in soundList)
             {
@@ -98,13 +127,43 @@ public class SoundManager : MonoBehaviour
         soundAdvancedPortal.Play();
     }
 
-    public void monitorSoundPlay()
+    public void monitor1SoundPlay()
     {
-        soundMonitor.Play();
+        soundMonitorBeep1.Play();
     }
 
-    public void buttonSoundPlay()
+    public void monitor2SoundPlay()
     {
-        soundButton.Play();
+        soundMonitorBeep2.Play();
+    }
+
+    public void monitor3SoundPlay()
+    {
+        soundMonitorBeep3.Play();
+    }
+
+    public void monitor1FlatLineSoundPlay()
+    {
+        soundMonitorFlatLine1.Play();
+    }
+
+    public void monitor2FlatLineSoundPlay()
+    {
+        soundMonitorFlatLine2.Play();
+    }
+
+    public void monitor3FlatLineSoundPlay()
+    {
+        soundMonitorFlatLine3.Play();
+    }
+
+    public void button1SoundPlay()
+    {
+        soundButton1.Play();
+    }
+
+    public void button2SoundPlay()
+    {
+        soundButton2.Play();
     }
 }

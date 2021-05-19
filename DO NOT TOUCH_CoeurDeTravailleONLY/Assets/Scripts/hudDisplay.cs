@@ -17,26 +17,42 @@ public class HudDisplay : MonoBehaviour
 
     public Text TimerDisplay;
     private float countDownValue = 60.0f * 1.0f;
+
     public Text activeActivityText;
-    public Text debugMessageText;
-    public Text maximumSliderValueText;
-    public Text minumumSliderValueText;
-    public Text targetValueText;
     public GameObject activeItemIcon;
     public Text sensitivityValueText;
-    public Text currentValueText;
-
-    public Slider trackingSlider;
+    public Text debugMessageText;
 
     private string activeTask;
     private string debugMessage;
 
+    private Color colorHeart = new Color32(234, 82, 211, 255);
+    private Color colorAtrial = new Color32(252, 175, 56, 255);
+    private Color colorVentricle = new Color32(249, 83, 53, 255);
+
     private float activeSensitivity, activeGap, minSliderValue, maxSliderValue, currentSliderValue;
+
+    public Text valueTop;
+    public Text valueBottom;
+    public Text labelTop;
+    public Text labelBottom;
+
+    private Vector3 topLabelPos;
+    private Vector3 topValuePos;
+    private Vector3 bottomLabelPos;
+    private Vector3 bottomValuePos;
+
+    private Color32 targetColour = new Color32(0, 255, 0, 255);
+    private Color32 currentColour = new Color32(0, 0, 255, 255);
 
     // Start is called before the first frame update
     void Start()
     {
         activeTask = "heartrate";
+        topLabelPos = labelTop.transform.localPosition;
+        topValuePos = valueTop.transform.localPosition;
+        bottomLabelPos = labelBottom.transform.localPosition;
+        bottomValuePos = valueBottom.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -49,7 +65,8 @@ public class HudDisplay : MonoBehaviour
 
     public void UpdateHUD()
     {
-        GetSliderValues();
+        //Slider moved off screen after UX testing
+        //GetSliderValues();
 
         if (activeTask == "heartrate") displayForHeart();
         else if (activeTask == "atrial") DisplayForAtrial();
@@ -59,47 +76,107 @@ public class HudDisplay : MonoBehaviour
 
     public void displayForHeart()
     {
-        activeActivityText.text = "Adjusting Heartrate";
+        activeActivityText.text = "Adjusting Heartrate (R)";
+        activeItemIcon.GetComponent<Image>().color = colorHeart;
         debugMessageText.text = debugMessage;
-        maximumSliderValueText.text = minSliderValue.ToString();
-        minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString();
-        //activeItemIcon.GetComponent<Image>().color = new Color32(51, 0, 0, 255);
-        sensitivityValueText.text = GetComponent<HeartDetails>().GetHeartSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString();
-        trackingSlider.minValue = minSliderValue;
-        trackingSlider.maxValue = maxSliderValue;
-        trackingSlider.value = currentSliderValue;
+        sensitivityValueText.text = GetComponent<HeartDetails>().GetHeartSensitivityAmount().ToString("0.0");
+
+        if(GetComponent<HeartDetails>().GetTargetHeartrate() > GetComponent<HeartDetails>().GetCurrentHeartrate())
+        {
+            //Target is higher than current so is placed on top next to the up button
+            labelTop.text = "Target:";
+            valueTop.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString("0.0");
+            labelTop.color = targetColour;
+            valueTop.color = targetColour;
+
+            labelBottom.text = "Current:";
+            valueBottom.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString("0.0");
+            labelBottom.color = currentColour;
+            valueBottom.color = currentColour;
+        }
+        else
+        {
+            //Target is higher than current so is placed on top next to the up button
+            labelTop.text = "Current:";
+            valueTop.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString("0.0");
+            labelTop.color = currentColour;
+            valueTop.color = currentColour;
+
+            labelBottom.text = "target:";
+            valueBottom.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString("0.0");
+            labelBottom.color = targetColour;
+            valueBottom.color = targetColour;
+        }
     }
 
     public void DisplayForAtrial()
     {
-        activeActivityText.text = "Dampening Atrial Vascular Rhythm";
+        activeActivityText.text = "Dampening Atrial Vascular Rhythm (A)";
+        activeItemIcon.GetComponent<Image>().color = colorAtrial;
         debugMessageText.text = debugMessage;
-        maximumSliderValueText.text = minSliderValue.ToString();
-        minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString();
-        //activeItemIcon.GetComponent<Image>().color = new Color32(0, 13, 11, 255);
-        sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString();
-        trackingSlider.minValue = minSliderValue;
-        trackingSlider.maxValue = maxSliderValue;
-        trackingSlider.value = currentSliderValue;
+        sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString("0.0");
+
+        if (GetComponent<AtrialDetails>().GetTargetAtrialValue() > GetComponent<AtrialDetails>().GetCurrentAtrialValue())
+        {
+            //Target is higher than current so is placed on top next to the up button
+            labelTop.text = "Target:";
+            valueTop.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString("0.0");
+            labelTop.color = targetColour;
+            valueTop.color = targetColour;
+
+            labelBottom.text = "Current:";
+            valueBottom.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString("0.0");
+            labelBottom.color = currentColour;
+            valueBottom.color = currentColour;
+        }
+        else
+        {
+            //Target is higher than current so is placed on top next to the up button
+            labelTop.text = "Current:";
+            valueTop.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString("0.0");
+            labelTop.color = currentColour;
+            valueTop.color = currentColour;
+
+            labelBottom.text = "target:";
+            valueBottom.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString("0.0");
+            labelBottom.color = targetColour;
+            valueBottom.color = targetColour;
+        }
     }
 
     public void DisplayForVentricle()
     {
-        activeActivityText.text = "Dampening Ventrical Vascular Rhythm";
+        activeActivityText.text = "Dampening Ventrical Vascular Rhythm (V)";
         debugMessageText.text = debugMessage;
-        maximumSliderValueText.text = minSliderValue.ToString();
-        minumumSliderValueText.text = maxSliderValue.ToString();
-        targetValueText.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString();
-        //activeItemIcon.GetComponent<Image>().color = new Color32(44, 51, 0, 255);
-        sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString();
-        currentValueText.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString();
-        trackingSlider.minValue = minSliderValue;
-        trackingSlider.maxValue = maxSliderValue;
-        trackingSlider.value = currentSliderValue;
+        activeItemIcon.GetComponent<Image>().color = colorVentricle;
+        sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString("0.0");
+
+        if (GetComponent<VentricleDetails>().GetTargetVentricleValue() > GetComponent<VentricleDetails>().GetCurrentVentricleValue())
+        {
+            //Target is higher than current so is placed on top next to the up button
+            labelTop.text = "Target:";
+            valueTop.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString("0.0");
+            labelTop.color = targetColour;
+            valueTop.color = targetColour;
+
+            labelBottom.text = "Current:";
+            valueBottom.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString("0.0");
+            labelBottom.color = currentColour;
+            valueBottom.color = currentColour;
+        }
+        else
+        {
+            //Target is higher than current so is placed on top next to the up button
+            labelTop.text = "Current:";
+            valueTop.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString("0.0");
+            labelTop.color = currentColour;
+            valueTop.color = currentColour;
+
+            labelBottom.text = "target:";
+            valueBottom.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString("0.0");
+            labelBottom.color = targetColour;
+            valueBottom.color = targetColour;
+        }
     }
 
     public void GetSliderValues()
