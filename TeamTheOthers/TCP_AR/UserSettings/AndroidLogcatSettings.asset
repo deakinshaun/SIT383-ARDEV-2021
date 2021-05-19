@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "RFCM906Y2CB",
     "m_SelectedPackage": {
-        "deviceId": "RFCM906Y2CB",
-        "name": "com.DefaultCompany.ObjectManipulationU3D",
-        "processId": 7873,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -22,36 +22,6 @@
         },
         {
             "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 14394,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 15554,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 17126,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 17993,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 20057,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
             "name": "com.facebook.orca",
             "processId": 26931,
             "exited": false
@@ -59,38 +29,32 @@
         {
             "deviceId": "RFCM906Y2CB",
             "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 23326,
-            "exited": false
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 25072,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "RFCM906Y2CB",
             "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 2427,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "RFCM906Y2CB",
             "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 5156,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "RFCM906Y2CB",
             "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 6834,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "RFCM906Y2CB",
             "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 7873,
-            "exited": false
+            "exited": true
         }
     ],
     "m_Tags": {

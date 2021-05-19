@@ -121,6 +121,20 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &327517113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1637996540812124, guid: c10877f7cd5764de18d46d7b777d1faa,
+    type: 3}
+  m_PrefabInstance: {fileID: 646831370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &327517117
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327517113}
+  m_Enabled: 1
 --- !u!1 &451530820 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1049131573482648, guid: c0107a62880924f8cb2526c6800a70ab,
