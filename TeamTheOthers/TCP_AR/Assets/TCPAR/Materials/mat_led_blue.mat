@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_screen
+  m_Name: mat_led_blue
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
@@ -79,5 +79,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.2, g: 0.48235294, b: 0.5, a: 1}
+    - _Color: {r: 0, g: 0.32201338, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0.6330502, b: 1, a: 1}

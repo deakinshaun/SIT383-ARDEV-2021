@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ManipulationSystem
   - ar_btn
+  - pulse_generator
   layers:
   - Default
   - TransparentFX

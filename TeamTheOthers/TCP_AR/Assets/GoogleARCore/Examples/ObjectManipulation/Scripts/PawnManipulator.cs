@@ -44,6 +44,10 @@ namespace GoogleARCore.Examples.ObjectManipulation
         /// </summary>
         public GameObject ManipulatorPrefab;
 
+        private GameObject pawnEntity = null;
+        private GameObject manipulator = null;
+        private Anchor anchor = null;
+
         /// <summary>
         /// Returns true if the manipulation can be started for the given gesture.
         /// </summary>
@@ -73,6 +77,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
             // If gesture is targeting an existing object we are done.
             if (gesture.TargetObject != null)
             {
+                Debug.Log("Object hit: " + gesture.TargetObject);
                 return;
             }
 
@@ -93,27 +98,49 @@ namespace GoogleARCore.Examples.ObjectManipulation
                 }
                 else
                 {
-                    // Instantiate game object at the hit pose.
-                    var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
+                    Vector3 usefulLocation = new Vector3(hit.Pose.position.x, FirstPersonCamera.transform.position.y - 0.5f, hit.Pose.position.z);
 
-                    // Instantiate manipulator.
-                    var manipulator =
-                        Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
+                    if (pawnEntity == null)
+                    {
+                        // Instantiate game object at the hit pose.
+                        pawnEntity = Instantiate(PawnPrefab, usefulLocation, hit.Pose.rotation);
 
-                    // Make game object a child of the manipulator.
-                    gameObject.transform.parent = manipulator.transform;
+                        // Instantiate manipulator.
+                        manipulator =
+                            Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
 
-                    // Create an anchor to allow ARCore to track the hitpoint as understanding of
-                    // the physical world evolves.
-                    var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                        // Make game object a child of the manipulator.
+                        pawnEntity.transform.parent = manipulator.transform;
 
-                    // Make manipulator a child of the anchor.
-                    manipulator.transform.parent = anchor.transform;
+                        // Create an anchor to allow ARCore to track the hitpoint as understanding of
+                        // the physical world evolves.
+                        anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
-                    // Select the placed object.
-                    manipulator.GetComponent<Manipulator>().Select();
+                        // Make manipulator a child of the anchor.
+                        manipulator.transform.parent = anchor.transform;
+
+                        // Select the placed object.
+                        manipulator.GetComponent<Manipulator>().Select();
+                    } else {
+                        Anchor newAnchor = hit.Trackable.CreateAnchor(hit.Pose);
+                        manipulator.transform.SetPositionAndRotation(hit.Pose.position, hit.Pose.rotation);
+                        manipulator.transform.parent = newAnchor.transform;
+                        GameObject.Destroy(anchor);
+                    }
                 }
             }
+
+            // RaycastHit hit;
+            // Vector3 rayStartPosition = new Vector3(gesture.position.x, gesture.position.y, gesture.position.z);
+            // Debug.Log("Raycasting to button from " + rayStartPosition);
+            // if (Physics.Raycast(rayStartPosition, -Vector3.up, out hit))
+            // {
+               
+            //     if (hit.transform.gameObject.tag == "ar_btn") {
+            //         hit.transform.SendMessage ("HitByRay");
+            //         Debug.Log("Button hit by ray.");
+            //     }
+            // }
         }
     }
 }
