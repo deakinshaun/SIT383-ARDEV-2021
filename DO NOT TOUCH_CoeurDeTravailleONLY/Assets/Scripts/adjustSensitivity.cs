@@ -23,37 +23,39 @@ public class AdjustSensitivity : MonoBehaviour
     {
     }
 
-    public void OnPlusSensitivity()
+    public void OnPlusPressed()
     {
+        //Increase the step change of the adjustment buttons
         if (GetComponent<ActivitySelector>().GetHeartrateIsActive())
         {
-            GetComponent<HeartDetails>().RaiseHeartSensitivityAmount();
+            GetComponent<HeartDetails>().RaiseHeartStepAmount();
         }
         if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<AtrialDetails>().IncreaseAtrialSensitivityIndex();
+            GetComponent<AtrialDetails>().RaiseAtrialStepAmount();
         }
         if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<VentricleDetails>().RaiseVentricleSensitivityAmount();
+            GetComponent<VentricleDetails>().RaiseVentricleStepAmount();
         }
 
         GetComponent<HudDisplay>().UpdateHUD();
     }
 
-    public void OnMinusSensitivity()
+    public void OnMinusPressed()
     {
+        //Decrease the step change of the adjustment buttons
         if (GetComponent<ActivitySelector>().GetHeartrateIsActive())
         {
-            GetComponent<HeartDetails>().LowerHeartSensitivityAmount();
+            GetComponent<HeartDetails>().LowerHeartStepAmount();
         }
         if (GetComponent<ActivitySelector>().GetAtrialIsActive())
         {
-            GetComponent<AtrialDetails>().DecreaseAtrialSensitivityIndex();
+            GetComponent<AtrialDetails>().LowerAtrialStepAmount();
         }
         if (GetComponent<ActivitySelector>().GetVentricalIsActive())
         {
-            GetComponent<VentricleDetails>().LowerVentricleSensitivityAmount();
+            GetComponent<VentricleDetails>().LowerVentricleStepAmount();
         }
 
         GetComponent<HudDisplay>().UpdateHUD();

@@ -3,24 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
     public TMP_InputField SessionID;
-    public string SessionName;
+    public TMP_Text t;
+    private string SessionName;
+
     public void StartSim()
     {
         int RandomID;
-        if (SessionID == null)
+        SessionName = SessionID.text;
+        if (SessionID.text == "")
         {
-            RandomID = Random.Range(1000, 9999);
+            RandomID = UnityEngine.Random.Range(1000, 9999);
             SessionName = RandomID.ToString();
+            Debug.Log("New Session");
+        }
+
+        SetSessionName();
+        SceneManager.LoadScene("SampleScene"); // change when we get a better name for this scene.
+    }
+
+    public void SetSessionName()
+    {
+        string path = "";
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            path = Application.persistentDataPath;// + "SessionName.txt";
         }
         else
         {
-            SessionName = SessionID.ToString();
+            path = Application.dataPath;
+            //path = path + "/Saves/SessionName.txt";
         }
-
-        SceneManager.LoadScene("SampleScene"); // change when we get a better name for this scene.
+        
+        path = path + "SessionName.txt";
+        File.WriteAllText(path, string.Empty);
+        StreamWriter writer = new StreamWriter(path,true);
+        writer.WriteLine(SessionName);
+        writer.Close();
     }
 }

@@ -43,7 +43,7 @@ public class AudioSourceLoudnessTester : MonoBehaviour
 			clipLoudness *= sizeFactor;
 			clipLoudness = Mathf.Clamp(clipLoudness, minSize, maxSize);
 			rotationInput = GyroControl.rotationOutput * 0.0001f;
-			ClipLoudnessOutput = (clipLoudness + rotationInput) * 0.15f;
+			ClipLoudnessOutput = (clipLoudness + rotationInput) * 0.05f;
 			//cube.transform.localScale = new Vector3(clipLoudness, clipLoudness, clipLoudness);
 			cube.transform.localScale = new Vector3(ClipLoudnessOutput,ClipLoudnessOutput , ClipLoudnessOutput );
 		}

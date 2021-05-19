@@ -18,6 +18,9 @@ public class HudDisplay : MonoBehaviour
     public Text TimerDisplay;
     private float countDownValue = 60.0f * 1.0f;
 
+    public Button adjustUpButton;
+    public Button adjustDownButton;
+
     public Text activeActivityText;
     public GameObject activeItemIcon;
     public Text sensitivityValueText;
@@ -29,30 +32,28 @@ public class HudDisplay : MonoBehaviour
     private Color colorHeart = new Color32(234, 82, 211, 255);
     private Color colorAtrial = new Color32(252, 175, 56, 255);
     private Color colorVentricle = new Color32(249, 83, 53, 255);
+    private Color32 colorGreen = new Color32(0, 255, 0, 255);
+    private Color32 colorYellow = new Color32(255, 255, 0, 255);
 
     private float activeSensitivity, activeGap, minSliderValue, maxSliderValue, currentSliderValue;
 
-    public Text valueTop;
-    public Text valueBottom;
-    public Text labelTop;
-    public Text labelBottom;
+    public Text valueTarget;
+    public Text valueCurrent;
+    //public Text labelTarget;
+    //public Text labelCurrent;
 
-    private Vector3 topLabelPos;
-    private Vector3 topValuePos;
-    private Vector3 bottomLabelPos;
-    private Vector3 bottomValuePos;
+    public Sprite greenUp;
+    public Sprite greenDown;
+    public Sprite yellowUp;
+    public Sprite yellowDown;
 
-    private Color32 targetColour = new Color32(0, 255, 0, 255);
-    private Color32 currentColour = new Color32(0, 0, 255, 255);
+    private float gap = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         activeTask = "heartrate";
-        topLabelPos = labelTop.transform.localPosition;
-        topValuePos = valueTop.transform.localPosition;
-        bottomLabelPos = labelBottom.transform.localPosition;
-        bottomValuePos = valueBottom.transform.localPosition;
+
     }
 
     // Update is called once per frame
@@ -80,32 +81,30 @@ public class HudDisplay : MonoBehaviour
         activeItemIcon.GetComponent<Image>().color = colorHeart;
         debugMessageText.text = debugMessage;
         sensitivityValueText.text = GetComponent<HeartDetails>().GetHeartSensitivityAmount().ToString("0.0");
+        valueTarget.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString("0.0");
+        valueCurrent.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString("0.0");
 
-        if(GetComponent<HeartDetails>().GetTargetHeartrate() > GetComponent<HeartDetails>().GetCurrentHeartrate())
+        gap = Mathf.Abs(GetComponent<HeartDetails>().GetTargetHeartrate() - GetComponent<HeartDetails>().GetCurrentHeartrate());
+        gap = Mathf.Round(gap * 10) / 10;
+        debugMessage = "Heart gap is " + gap;
+        debugMessageText.text = debugMessage;
+        if (GetComponent<HeartDetails>().GetTargetHeartrate() > GetComponent<HeartDetails>().GetCurrentHeartrate())
         {
-            //Target is higher than current so is placed on top next to the up button
-            labelTop.text = "Target:";
-            valueTop.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString("0.0");
-            labelTop.color = targetColour;
-            valueTop.color = targetColour;
-
-            labelBottom.text = "Current:";
-            valueBottom.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString("0.0");
-            labelBottom.color = currentColour;
-            valueBottom.color = currentColour;
+            //up button green
+            adjustUpButton.GetComponent<Image>().sprite = greenUp;
+            adjustDownButton.GetComponent<Image>().sprite = yellowDown;
+        }
+        else if (gap == 0.0f)
+        {
+            //we have a match so both to green
+            adjustUpButton.GetComponent<Image>().sprite = greenUp;
+            adjustDownButton.GetComponent<Image>().sprite = greenDown;
         }
         else
         {
-            //Target is higher than current so is placed on top next to the up button
-            labelTop.text = "Current:";
-            valueTop.text = GetComponent<HeartDetails>().GetCurrentHeartrate().ToString("0.0");
-            labelTop.color = currentColour;
-            valueTop.color = currentColour;
-
-            labelBottom.text = "target:";
-            valueBottom.text = GetComponent<HeartDetails>().GetTargetHeartrate().ToString("0.0");
-            labelBottom.color = targetColour;
-            valueBottom.color = targetColour;
+            //down button green
+            adjustUpButton.GetComponent<Image>().sprite = yellowUp;
+            adjustDownButton.GetComponent<Image>().sprite = greenDown;
         }
     }
 
@@ -115,67 +114,65 @@ public class HudDisplay : MonoBehaviour
         activeItemIcon.GetComponent<Image>().color = colorAtrial;
         debugMessageText.text = debugMessage;
         sensitivityValueText.text = GetComponent<AtrialDetails>().GetAtrialSensitivityAmount().ToString("0.0");
+        valueTarget.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString("0.0");
+        valueCurrent.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString("0.0");
+
+        gap = Mathf.Abs(GetComponent<AtrialDetails>().GetTargetAtrialValue() - GetComponent<AtrialDetails>().GetCurrentAtrialValue());
+        gap = Mathf.Round(gap * 10) / 10;
+        debugMessage = "Atrial gap is " + gap;
+        debugMessageText.text = debugMessage;
 
         if (GetComponent<AtrialDetails>().GetTargetAtrialValue() > GetComponent<AtrialDetails>().GetCurrentAtrialValue())
         {
-            //Target is higher than current so is placed on top next to the up button
-            labelTop.text = "Target:";
-            valueTop.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString("0.0");
-            labelTop.color = targetColour;
-            valueTop.color = targetColour;
-
-            labelBottom.text = "Current:";
-            valueBottom.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString("0.0");
-            labelBottom.color = currentColour;
-            valueBottom.color = currentColour;
+            //up button green
+            adjustUpButton.GetComponent<Image>().sprite = greenUp;
+            adjustDownButton.GetComponent<Image>().sprite = yellowDown;
+        }
+        else if (gap == 0.0f)
+        {
+            //we have a match so both to green
+            adjustUpButton.GetComponent<Image>().sprite = greenUp;
+            adjustDownButton.GetComponent<Image>().sprite = greenDown;
         }
         else
         {
-            //Target is higher than current so is placed on top next to the up button
-            labelTop.text = "Current:";
-            valueTop.text = GetComponent<AtrialDetails>().GetCurrentAtrialValue().ToString("0.0");
-            labelTop.color = currentColour;
-            valueTop.color = currentColour;
-
-            labelBottom.text = "target:";
-            valueBottom.text = GetComponent<AtrialDetails>().GetTargetAtrialValue().ToString("0.0");
-            labelBottom.color = targetColour;
-            valueBottom.color = targetColour;
+            //down button green
+            adjustUpButton.GetComponent<Image>().sprite = yellowUp;
+            adjustDownButton.GetComponent<Image>().sprite = greenDown;
         }
     }
 
     public void DisplayForVentricle()
     {
-        activeActivityText.text = "Dampening Ventrical Vascular Rhythm (V)";
+        activeActivityText.text = "Dampening Ventricle Vascular Rhythm (V)";
         debugMessageText.text = debugMessage;
         activeItemIcon.GetComponent<Image>().color = colorVentricle;
         sensitivityValueText.text = GetComponent<VentricleDetails>().GetVentricleSensitivityAmount().ToString("0.0");
+        valueTarget.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString("0.0");
+        valueCurrent.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString("0.0");
+
+        gap = Mathf.Abs(GetComponent<VentricleDetails>().GetTargetVentricleValue() - GetComponent<VentricleDetails>().GetCurrentVentricleValue());
+        gap = Mathf.Round(gap * 10) / 10;
+        debugMessage = "Ventricle gap is " + gap;
+        debugMessageText.text = debugMessage;
 
         if (GetComponent<VentricleDetails>().GetTargetVentricleValue() > GetComponent<VentricleDetails>().GetCurrentVentricleValue())
         {
-            //Target is higher than current so is placed on top next to the up button
-            labelTop.text = "Target:";
-            valueTop.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString("0.0");
-            labelTop.color = targetColour;
-            valueTop.color = targetColour;
-
-            labelBottom.text = "Current:";
-            valueBottom.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString("0.0");
-            labelBottom.color = currentColour;
-            valueBottom.color = currentColour;
+            //up button green
+            adjustUpButton.GetComponent<Image>().sprite = greenUp;
+            adjustDownButton.GetComponent<Image>().sprite = yellowDown;
+        }
+        else if (gap == 0.0f)
+        {
+            //we have a match so both to green
+            adjustUpButton.GetComponent<Image>().sprite = greenUp;
+            adjustDownButton.GetComponent<Image>().sprite = greenDown;
         }
         else
         {
-            //Target is higher than current so is placed on top next to the up button
-            labelTop.text = "Current:";
-            valueTop.text = GetComponent<VentricleDetails>().GetCurrentVentricleValue().ToString("0.0");
-            labelTop.color = currentColour;
-            valueTop.color = currentColour;
-
-            labelBottom.text = "target:";
-            valueBottom.text = GetComponent<VentricleDetails>().GetTargetVentricleValue().ToString("0.0");
-            labelBottom.color = targetColour;
-            valueBottom.color = targetColour;
+            //down button green
+            adjustUpButton.GetComponent<Image>().sprite = yellowUp;
+            adjustDownButton.GetComponent<Image>().sprite = greenDown;
         }
     }
 

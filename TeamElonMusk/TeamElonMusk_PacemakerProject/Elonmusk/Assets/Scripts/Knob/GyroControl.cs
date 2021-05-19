@@ -6,6 +6,7 @@ public class GyroControl : MonoBehaviour
 {
     public Text RotationMessage;
     public static float rotationOutput;
+    public AudioSource SoundPlay;
     //private float maxRotation;
     //private float firstClick1;
     // private float firstClick2;
@@ -89,10 +90,28 @@ public class GyroControl : MonoBehaviour
             Vibration.Cancel();
         }
         #endregion
-        while (deviceRotation.eulerAngles.z == 10.0f)
+        if (deviceRotation.eulerAngles.z == 20.0f)
         {
-            AudioSource Turn = GameObject.Find("Turn").GetComponent<AudioSource>();
-            Turn.Play();
+            if (!SoundPlay.isPlaying)
+            {
+                SoundPlay.Play();
+            }
+        }
+
+        if (deviceRotation.eulerAngles.z == 40.0f)
+        {
+            if (!SoundPlay.isPlaying)
+            {
+                SoundPlay.Play();
+            }
+        }
+
+        if (deviceRotation.eulerAngles.z == 60.0f)
+        {
+            if (!SoundPlay.isPlaying)
+            {
+                SoundPlay.Play();
+            }
         }
     }
 

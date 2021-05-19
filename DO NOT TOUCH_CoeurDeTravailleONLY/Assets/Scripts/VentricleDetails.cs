@@ -26,8 +26,8 @@ public class VentricleDetails : MonoBehaviour
     private float currentVentricleValue;
     private float targetVentricleValue;
 
-    private List<float> ventricleSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f };
-    private int ventricleSensitivityIndex = 0;
+    private List<float> ventricleSensitivityArray = new List<float> { 0.1f, 0.2f, 0.5f, 1.0f, 2.0f, 5.0f, 10.0f };
+    private int ventricleSensitivityIndex = 6;
     private float ventricleSensitivityAmount;
 
     // Start is called before the first frame update
@@ -48,9 +48,9 @@ public class VentricleDetails : MonoBehaviour
     public void Restart()
     {
         initialVentricleValue = RandomGaussian(30.0f, 180.0f);
-        targetVentricleValue = initialVentricleValue * RandomGaussian(1.2f, 1.8f);
+        targetVentricleValue = initialVentricleValue * RandomGaussian(1.2f, 1.5f);
 
-        ventricleSensitivityIndex = 0;
+        ventricleSensitivityIndex = 6;
         ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
 
     }
@@ -80,7 +80,8 @@ public class VentricleDetails : MonoBehaviour
 
         temp = Mathf.Clamp(std * sigma + mean, minValue, maxValue);
 
-        return temp;
+        //Return it with only one decimal place
+        return Mathf.Round(temp * 10) / 10;
     }
 
     public void UpdateCurrentValueText()
@@ -156,9 +157,10 @@ public class VentricleDetails : MonoBehaviour
         ventricleSensitivityAmount = ventricleSensitivityArray[newIndex];
     }
 
-    public void RaiseVentricleSensitivityAmount()
+    public void RaiseVentricleStepAmount()
     {
-        if (ventricleSensitivityIndex < ventricleSensitivityArray.Count - 1)
+
+        if (ventricleSensitivityIndex < ventricleSensitivityArray.Count -1)
         {
             ventricleSensitivityIndex += 1;
         }
@@ -166,10 +168,8 @@ public class VentricleDetails : MonoBehaviour
         ventricleSensitivityAmount = ventricleSensitivityArray[ventricleSensitivityIndex];
     }
 
-    public void LowerVentricleSensitivityAmount()
+    public void LowerVentricleStepAmount()
     {
-        Debug.Log("Lowering Ventrical Sensitivity");
-        
         if (ventricleSensitivityIndex > 0)
         {
             ventricleSensitivityIndex -= 1;
