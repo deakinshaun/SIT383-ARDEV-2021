@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "RFCM906Y2CB",
         "name": "com.DefaultCompany.ObjectManipulationU3D",
-        "processId": 23326,
+        "processId": 7873,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -60,6 +60,36 @@
             "deviceId": "RFCM906Y2CB",
             "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 23326,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.ObjectManipulationU3D",
+            "processId": 25072,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.ObjectManipulationU3D",
+            "processId": 2427,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.ObjectManipulationU3D",
+            "processId": 5156,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.ObjectManipulationU3D",
+            "processId": 6834,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.ObjectManipulationU3D",
+            "processId": 7873,
             "exited": false
         }
     ],
