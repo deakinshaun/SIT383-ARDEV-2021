@@ -19,8 +19,8 @@ public class AtrialDetails : MonoBehaviour
     private float currentAtrialValue;
     private float targetAtrialValue;
 
-    private List<float> atrialSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f };
-    private int atrialSensitivityIndex =0;
+    private List<float> atrialSensitivityArray = new List<float> { 0.1f, 0.2f, 0.5f, 1.0f, 2.0f, 5.0f, 10.0f };
+    private int atrialSensitivityIndex = 6;
     private float atrialSensitivityAmount;
 
     // Start is called before the first frame update
@@ -41,9 +41,9 @@ public class AtrialDetails : MonoBehaviour
     public void Restart()
     {
         initialAtrialValue = RandomGaussian(30.0f, 180.0f);
-        targetAtrialValue = initialAtrialValue * RandomGaussian(1.2f, 1.8f);
+        targetAtrialValue = initialAtrialValue * RandomGaussian(1.2f, 1.5f);
 
-        atrialSensitivityIndex = 0;
+        atrialSensitivityIndex = 6;
         atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
 
     }
@@ -75,7 +75,8 @@ public class AtrialDetails : MonoBehaviour
 
         temp = Mathf.Clamp(std * sigma + mean, minValue, maxValue);
 
-        return temp;
+        //Return it with only one decimal place
+        return Mathf.Round(temp * 10) / 10;
     }
 
     public void UpdateCurrentValueText()
@@ -159,10 +160,10 @@ public class AtrialDetails : MonoBehaviour
     }
 
 
-    public void IncreaseAtrialSensitivityIndex()
+    public void RaiseAtrialStepAmount()
     {
-        
-        if (atrialSensitivityIndex < atrialSensitivityArray.Count - 1)
+
+        if (atrialSensitivityIndex < atrialSensitivityArray.Count -1)
         {
             atrialSensitivityIndex += 1;
         }
@@ -170,9 +171,9 @@ public class AtrialDetails : MonoBehaviour
         atrialSensitivityAmount = atrialSensitivityArray[atrialSensitivityIndex];
     }
 
-    public void DecreaseAtrialSensitivityIndex()
+    public void LowerAtrialStepAmount()
     {
-        
+
         if (atrialSensitivityIndex > 0)
         {
             atrialSensitivityIndex -= 1;
