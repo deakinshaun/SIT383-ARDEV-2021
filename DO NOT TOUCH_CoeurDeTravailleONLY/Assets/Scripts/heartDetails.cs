@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HeartDetails : MonoBehaviour
 {
-    [Tooltip ("Minimum Heartrate allowed, zero means stopped")]
+    [Tooltip("Minimum Heartrate allowed, zero means stopped")]
     public float minimumHeartrate = 0.0f;
     [Tooltip("Maximum Heartrate allowed, 180 is a very fit athlete")]
     public float maximumHeartrate = 180.0f;
@@ -19,8 +19,8 @@ public class HeartDetails : MonoBehaviour
 
     private float currentHeartrate;
     private float targetHeartrate;
-    private List<float> heartSensitivityArray = new List<float> { 10.0f, 5.0f, 2.0f, 1.0f, 0.5f, 0.2f, 0.1f};
-    private int heartSensitivityIndex = 0;
+    private List<float> heartSensitivityArray = new List<float> { 0.1f, 0.2f, 0.5f, 1.0f, 2.0f, 5.0f, 10.0f }; 
+    private int heartSensitivityIndex = 6;
     private float heartSensitivityAmount;
 
     // Start is called before the first frame update
@@ -40,7 +40,7 @@ public class HeartDetails : MonoBehaviour
         currentHeartrate = RandomGaussian(30.0f, 180.0f);
         targetHeartrate = RandomGaussian(60.0f, 90.0f);
 
-        heartSensitivityIndex = 0;
+        heartSensitivityIndex = 6;
         heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
 
         //Force click Heartrate Actvity to get us started
@@ -95,7 +95,8 @@ public class HeartDetails : MonoBehaviour
 
         temp = Mathf.Clamp(std * sigma + mean, minValue, maxValue);
 
-        return temp;
+        //Return it with only one decimal place
+        return Mathf.Round(temp * 10) / 10;
     }
 
     public float GetCurrentHeartrate()
@@ -152,10 +153,9 @@ public class HeartDetails : MonoBehaviour
         heartSensitivityAmount = heartSensitivityArray[newIndex];
     }
 
-    public void RaiseHeartSensitivityAmount()
+    public void RaiseHeartStepAmount()
     {
-        
-        if (heartSensitivityIndex < heartSensitivityArray.Count - 1)
+        if (heartSensitivityIndex < heartSensitivityArray.Count -1)
         {
             heartSensitivityIndex += 1;
         }
@@ -163,7 +163,7 @@ public class HeartDetails : MonoBehaviour
         heartSensitivityAmount = heartSensitivityArray[heartSensitivityIndex];
     }
 
-    public void LowerHeartSensitivityAmount()
+    public void LowerHeartStepAmount()
     {
         
         if (heartSensitivityIndex > 0)
