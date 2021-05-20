@@ -48,14 +48,14 @@ public class MonitorScript : MonoBehaviour
     {
         if (Run)
         {
-            //BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BMP\nDifficulty:" + difficulty.ToString();            //This is debug text, if you want to see the difficulty for each monitor.
-            BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BMP";
+            //BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BPM\nDifficulty:" + difficulty.ToString();            //This is debug text, if you want to see the difficulty for each monitor.
+            BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BPM";
             float BeatsPerSecond = 60/BPM;
 
             //Rahul: Added to include Mobile UI
             if (PaceMakerBPMText.activeSelf)
             {
-                PaceMakerBPMText.GetComponent<Text>().text = "ECG Monitor:" + BPM.ToString() + " BMP";
+                PaceMakerBPMText.GetComponent<Text>().text = "ECG Monitor:" + BPM.ToString() + " BPM";
             }
 
             if(BPM <= 0)
