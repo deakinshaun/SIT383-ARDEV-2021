@@ -48,14 +48,14 @@ public class MonitorScript : MonoBehaviour
     {
         if (Run)
         {
-            //BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BMP\nDifficulty:" + difficulty.ToString();            //This is debug text, if you want to see the difficulty for each monitor.
-            BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BMP";
-            float BeatsPerSecond = 3 - (BPM / 60);
+            //BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BPM\nDifficulty:" + difficulty.ToString();            //This is debug text, if you want to see the difficulty for each monitor.
+            BPMText.GetComponent<TextMesh>().text = BPM.ToString() + " BPM";
+            float BeatsPerSecond = 60/BPM;
 
             //Rahul: Added to include Mobile UI
             if (PaceMakerBPMText.activeSelf)
             {
-                PaceMakerBPMText.GetComponent<Text>().text = "ECG Monitor:" + BPM.ToString() + " BMP";
+                PaceMakerBPMText.GetComponent<Text>().text = "ECG Monitor:" + BPM.ToString() + " BPM";
             }
 
             if(BPM <= 0)
@@ -65,7 +65,7 @@ public class MonitorScript : MonoBehaviour
 
             if (timeSinceLastPulse > BeatsPerSecond)
             {
-                if (BPM > 0)
+                if (BPM > 0) // there is atleast a beat per minute.
                 {
                     //pulse
                     if (difficulty == 0)
@@ -74,7 +74,7 @@ public class MonitorScript : MonoBehaviour
                         SoundManager.GetComponent<SoundManager>().monitor2SoundPlay();
                     else if (difficulty == 2)
                         SoundManager.GetComponent<SoundManager>().monitor3SoundPlay();
-                    pulseList[0].GetComponent<PulseLineHolder>().pulseHeightChangeValue = 10;
+                    pulseList[0].GetComponent<PulseLineHolder>().pulseHeightChangeValue = 10; // pulse visual line
                 }
                 else
                 {
@@ -103,11 +103,11 @@ public class MonitorScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.I))
             {
-                BPM += 1;
+                buttonPress("Up");
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                BPM -= 1;
+                buttonPress("Down");
             }
 
             this.GetComponent<PhoneBuzzer>().SetBPM(BPM);
@@ -165,12 +165,12 @@ public class MonitorScript : MonoBehaviour
         //{
             if (direction == "Up" || direction == "up")
             {
-                BPM++;
+                BPM += Random.Range(1, 5);
                 //bpm increase
             }
             else
             {
-                BPM--;
+                BPM -= Random.Range(1, 5);
                 //bpm decrease
             }
         //}

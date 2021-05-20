@@ -7,27 +7,23 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-    //Lobby and room abstraction
-    // !two boxes in one scene
-    // !same photon room
-
-    //Room a or b
-    // Solo run
-    // mentor and nurses
-
-
-
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Text message;
-    public int roomtype;
     public GameObject SetupPrefab;
     public GameObject TeacherPrefab;
     public Canvas TeacherUI;
     public Canvas RoomCanvas;
     public Canvas RoomSelect;
     public GameObject RoomPrefab;
+
+    public Dropdown ddType;
+    public Dropdown ddGroup;
+
+    private int type;
+    private int diff;
+    private int group;
 
     private bool allowJoin = false;
     List <GameObject> displayRooms = new List<GameObject>(); 
@@ -145,48 +141,34 @@ public class RoomManager : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
         p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
         r.SetCustomProperties(p);
-
         if (!allowJoin)
         {
             PhotonNetwork.LeaveRoom();
-        }
-    }
-
-/*
-        switch (roomtype)
+        }        
+        else if (ddGroup.value == 0)
         {
-            case 1:
-                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
-                //get camera componenet, look though
-                message.text = "Just you on this run";
-                Debug.Log("Just you on this run");
-                break;            
-
-            case 2:
-                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
-                //get camera componenet, look though
-                //camera inactive on later intances
+            PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
+            message.text = "Just you on this run";
+            Debug.Log("Just you on this run");
+            allowJoin = false;
+        }
+        else
+        {
+            if (ddType.value == 0)
+            {
+                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
                 message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
                 Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");
-                break;            
-
-            case 3:
-                PhotonNetwork.Instantiate(TeacherPrefab.name, new Vector3(), Quaternion.identity, 0);
-                //get camera componenet, look though
-                //camera inactive on later intances
+            }
+            else
+            {
+                PhotonNetwork.Instantiate(TeacherPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
                 message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor";
-                Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor");
-                break;            
-
-
-            default:
-                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
-                message.text = "Just you on this run";
-                Debug.Log("Just you on this run");
-                break;
+                Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor");                
+            }
         }
+
     }
-*/
 
     public override void OnCreatedRoom()
     {
@@ -214,9 +196,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         ro.CustomRoomProperties = customRoomProperties;
         PhotonNetwork.JoinOrCreateRoom (name.text, ro, null);
     }
-
-
-//    public void AddRoo
 
     void Update()
     {

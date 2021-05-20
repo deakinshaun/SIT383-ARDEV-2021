@@ -34,7 +34,7 @@ public class NetworkScript : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        if(ConnectToOnline)
+        if (ConnectToOnline)
         {
             Debug.Log("Starting network");
             PhotonNetwork.ConnectUsingSettings();
@@ -72,11 +72,14 @@ public class NetworkScript : MonoBehaviourPunCallbacks
             avatarPlayer.GetComponent<ChangeUniverse>().monitor3 = Monitor3;
 
         }
-        
+
+
+
         GameObject[] ListOfMonitors = GameObject.FindGameObjectsWithTag("Monitor");
         Debug.Log("List Of Monitors: " + ListOfMonitors.Length.ToString());
         if (ListOfMonitors.Length == 3)
         {
+            // ------------------------------------------SETS UP NEW MONITOR1----------------------------------//
             networkedMonitor1 = PhotonNetwork.Instantiate(Monitor1.name, Monitor1.transform.position, Monitor1.transform.rotation, 0);
             networkedMonitor1.layer = Monitor1.layer;
             SoundManager.GetComponent<SoundManager>().monitor1 = networkedMonitor1;
@@ -92,9 +95,10 @@ public class NetworkScript : MonoBehaviourPunCallbacks
             SoundManager.GetComponent<SoundManager>().soundList.RemoveAt(6); //remove old audio object.
             SoundManager.GetComponent<SoundManager>().soundList.Insert(6, SoundManager.GetComponent<SoundManager>().soundMonitorFlatLine1);
             GameObject.Destroy(Monitor1);
-            foreach(Transform child in networkedMonitor1.transform)
+            foreach (Transform child in networkedMonitor1.transform)
                 child.gameObject.layer = networkedMonitor1.layer;
 
+            // ------------------------------------------SETS UP NEW MONITOR2----------------------------------//
             networkedMonitor2 = PhotonNetwork.Instantiate(Monitor2.name, Monitor2.transform.position, Monitor2.transform.rotation, 0);
             networkedMonitor2.layer = Monitor2.layer;
             SoundManager.GetComponent<SoundManager>().monitor2 = networkedMonitor2;
@@ -113,6 +117,7 @@ public class NetworkScript : MonoBehaviourPunCallbacks
             foreach (Transform child in networkedMonitor2.transform)
                 child.gameObject.layer = networkedMonitor2.layer;
 
+            // ------------------------------------------SETS UP NEW MONITOR3----------------------------------//
             networkedMonitor3 = PhotonNetwork.Instantiate(Monitor3.name, Monitor3.transform.position, Monitor3.transform.rotation, 0);
             networkedMonitor3.layer = Monitor3.layer;
             SoundManager.GetComponent<SoundManager>().monitor3 = networkedMonitor3;
@@ -148,13 +153,13 @@ public class NetworkScript : MonoBehaviourPunCallbacks
             DownButton.GetComponent<ButtonClick>().Monitor2 = networkedMonitor2;
             DownButton.GetComponent<ButtonClick>().Monitor3 = networkedMonitor3;
         }
-        else if (ListOfMonitors.Length > 3)
+        else
         {
             GameObject.Destroy(Monitor1);
             GameObject.Destroy(Monitor2);
             GameObject.Destroy(Monitor3);
         }
-        
+
         /*
         GameObject[] ListOfBeds = GameObject.FindGameObjectsWithTag("Bed");
         Debug.Log("List Of Bed: " + ListOfMonitors.Length.ToString());
