@@ -7,29 +7,23 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-    //Lobby and room abstraction
-    // !two boxes in one scene
-    // !same photon room
-
-    //Room a or b
-    // Solo run
-    // mentor and nurses
-
-
-
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Text message;
     public GameObject SetupPrefab;
     public GameObject TeacherPrefab;
-//    public Canvas TeacherUI;
+    public Canvas TeacherUI;
     public Canvas RoomCanvas;
     public Canvas RoomSelect;
     public GameObject RoomPrefab;
-    public bool Nurse;
-    public bool Hard;
-    public bool Solo;
+
+    public Dropdown ddType;
+    public Dropdown ddGroup;
+
+    private int type;
+    private int diff;
+    private int group;
 
     private bool allowJoin = false;
     List <GameObject> displayRooms = new List<GameObject>(); 
@@ -147,56 +141,33 @@ public class RoomManager : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
         p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
         r.SetCustomProperties(p);
-
-        
-        if (Nurse == true && Solo == true)
+        if (!allowJoin)
         {
-            PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
-//          cam Camera
+            PhotonNetwork.LeaveRoom();
+        }        
+        else if (ddGroup.value == 0)
+        {
+            PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
             message.text = "Just you on this run";
             Debug.Log("Just you on this run");
             allowJoin = false;
         }
-        else if (Nurse == true && Solo == false)
+        else
         {
-            PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(), Quaternion.identity, 0);
-// get camera componenet, look though
-// camera inactive on later intances
-            message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
-            Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");
-        }
-        else if (Nurse == false && Solo == false)
-        {
-            PhotonNetwork.Instantiate(TeacherPrefab.name, new Vector3(), Quaternion.identity, 0);
-            //get camera componenet, look though
-            //camera inactive on later intances
-            message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor";
-            Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor");
-
-        }
-        else if (!allowJoin)
-        {
-            PhotonNetwork.LeaveRoom();
+            if (ddType.value == 0)
+            {
+                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
+                message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
+                Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");
+            }
+            else
+            {
+                PhotonNetwork.Instantiate(TeacherPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
+                message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor";
+                Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a mentor");                
+            }
         }
 
-    }
-
-    private GameObject SetNurse()
-    {
-        return true;
-    }
-
-    public GameObject SetMentor()
-    {
-        return false;
-    }
-    public GameObject SetSolo()
-    {
-        return true;
-    }
-    public GameObject SetGroup()
-    {
-        return false;
     }
 
     public override void OnCreatedRoom()
