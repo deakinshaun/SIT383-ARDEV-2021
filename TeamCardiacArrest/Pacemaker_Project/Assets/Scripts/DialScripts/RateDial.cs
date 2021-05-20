@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class RateDial: MonoBehaviour
+public class RateDial : MonoBehaviour
 {
     //this is public so that it can be easily checked in the editor, number and name is arbitrary at the moment
     // Once the pacemaker simulation comes together more they will be used to affect the patients heaart.
-    public float rate;
+    public float rate = 30.00f;
 
     public CapsuleCollider rateBox;
 
     //public GameObject dial;
 
+    private bool forward = true;
     private Ray ray;
     private RaycastHit hit;
+    public TextMeshPro text3D;
+    public TextMeshPro reverse;
 
     // Start is called before the first frame update
     void Start()
@@ -32,20 +36,48 @@ public class RateDial: MonoBehaviour
             //this if loop is to make sure only this dial rotates
             if (hit.collider.name == rateBox.name)
             {
-                print("rate hit");
+                if (forward == true)
+                {
+                    if (rate < 200.00)
+                    {
+                        rate++;
+                        transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, 0.5f, 0.0f));
+                        text3D.text = rate.ToString("0.00") + " ppm";
+                        if ((rate % 50) == 0)
+                        {
+                            Vibration2.CreateOneShot(3, 255);
+                        }
+                    }
 
-                transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, 0.5f, 0.0f));
-                if (rate < 50.00) { rate++; }
-                print("rate hit2");
-
-
-                //THis is meant to feel like a pulse, CreateWavefrom SHOULD be more effective here, but it has not been so far (im probs doing something wrong)
-                Vibration2.CreateOneShot(10, 500);
-                Vibration2.CreateOneShot(2, 255);
+                }
+                else
+                {
+                    if (rate > 0)
+                    {
+                        rate--;
+                        transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, -0.5f, 0.0f));
+                        text3D.text = rate.ToString("0.00") + " ppm";
+                        if ((rate % 50) == 0)
+                        {
+                            Vibration2.CreateOneShot(3, 255);
+                        }
+                    }
+                }
             }
 
+            if (hit.collider.name == reverse.name)
+            {
+                if (forward == true)
+                {
+                    forward = false;
+                    reverse.text = "Swap direcition: Currently reverse";
+                }
+                else
+                {
+                    forward = true;
+                    reverse.text = "Swap direcition: Currently forward";
+                }   
+            }
         }
-
     }
 }
-    
