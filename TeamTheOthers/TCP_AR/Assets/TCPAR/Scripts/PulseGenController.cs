@@ -18,7 +18,6 @@ public class PulseGenController : MonoBehaviour
     public AudioClip soundClick;
     public AudioClip soundSoftButton;
 
-
     /* Device State */
     private bool deviceRunning = true;
     
