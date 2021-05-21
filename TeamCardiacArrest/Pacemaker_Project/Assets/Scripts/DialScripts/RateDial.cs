@@ -18,12 +18,33 @@ public class RateDial : MonoBehaviour
     private RaycastHit hit;
     public TextMeshPro text3D;
     public TextMeshPro reverse;
+    
+    
+    // gives access to required floats for heartbeat manager, set in the editor
+    public HeartMonitor heartMonitorReference;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rate = heartMonitorReference.getBPM();
+        Debug.Log(rate);
     }
+
+
+    //This is not being used, but will be used if i manage to get a button working within the prefab properly
+   /*
+    public void reverseRate()
+    {
+        if (forward == true)
+        {
+            forward = false;
+        }
+        else
+        {
+            forward = true;
+        }
+    }
+   */
 
 
     // Update is called once per frame
@@ -41,6 +62,8 @@ public class RateDial : MonoBehaviour
                     if (rate < 200.00)
                     {
                         rate++;
+                        //updating BPM in heart monitor
+                        heartMonitorReference.setBPM(rate);
                         transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, 0.5f, 0.0f));
                         text3D.text = rate.ToString("0.00") + " ppm";
                         if ((rate % 50) == 0)
@@ -55,6 +78,8 @@ public class RateDial : MonoBehaviour
                     if (rate > 0)
                     {
                         rate--;
+                        //updating BPM in heart monitor
+                        heartMonitorReference.setBPM(rate);
                         transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, -0.5f, 0.0f));
                         text3D.text = rate.ToString("0.00") + " ppm";
                         if ((rate % 50) == 0)

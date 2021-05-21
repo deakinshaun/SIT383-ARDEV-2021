@@ -19,6 +19,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     public bool micOn = true;
 
     //Commented out for prefab, however we might want to bring these back in tandem with the mute button
+    
     //public GameObject microphoneIndicator;
     //public Material microphoneOn;
     //public Material microphoneOff;
@@ -60,7 +61,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         //this is causing an error, but im not sure why tbh
-        status.text = " ";
+        //status.text = " ";
         setStatusText("Photon Voice Started");
 
         PhotonNetwork.ConnectUsingSettings();

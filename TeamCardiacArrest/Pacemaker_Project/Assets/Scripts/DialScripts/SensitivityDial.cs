@@ -23,20 +23,6 @@ public class SensitivityDial : MonoBehaviour
 
     }
 
-    public void muteButton()
-    {
-        if (forward == true)
-        {
-            forward = false;
-            reverse.text = "Swap direcition: Currently reverse";
-        }
-        else
-        {
-            forward = true;
-            reverse.text = "Swap direcition: Currently forward";
-        }
-    }
-
 
     // Update is called once per frame
     private void Update()

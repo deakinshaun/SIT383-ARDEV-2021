@@ -25,6 +25,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
     private int diff;
     private int group;
 
+    //This Game Object should be the Voice manager prefab, used for photon voice - Chris
+    public GameObject voiceManager;
+
     private bool allowJoin = false;
     List <GameObject> displayRooms = new List<GameObject>(); 
 
@@ -33,9 +36,25 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
+        
+        // this is an attempt to instantiate the voice manager prefab, it is returning a null reference exception when i try to instantiate it,
+        // Despite voiceManager.name returning the correct value, i have no idea why. Also this should be taking place in onJoinedRoom for the final product. -Chris
+        
+        Debug.Log(voiceManager.name);
+        GameObject PV = GameObject.Find(voiceManager.name);
+        if (PV)
+        {
+            Debug.Log("found " + PV.name);
+            PhotonNetwork.Instantiate(PV.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount * 0.1f), 0.0f), Quaternion.identity, 0);
+        }
+        else
+        {
+            Debug.Log("Voice Manager was not found");
+        }
+        
     }
 
-        public static string getName (GameObject o)
+    public static string getName (GameObject o)
     {
         if (o.GetComponent<PhotonView>() != null)
         {

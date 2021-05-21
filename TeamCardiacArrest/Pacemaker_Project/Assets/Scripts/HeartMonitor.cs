@@ -25,8 +25,11 @@ public class HeartMonitor : MonoBehaviour
     private float maxFreq = 3.90f;
 
     //editable
+    //Linked to rate dial - Chris
     public float BPM = 60f;
+    //Linked to output dial - Chris
     public float Apower = 3.9f;
+    //Linked to sensitivity dial - Chris
     public float Vpower = 2.1f;
     public string difficulty;
 
@@ -46,6 +49,43 @@ public class HeartMonitor : MonoBehaviour
 
     private bool enter;
     private bool playRecording;
+
+    //Getter and Setter methods for variables dials
+    public float getBPM()
+    {
+        Debug.Log("sending " + BPM);
+        return BPM;
+    }
+
+    public void setBPM(float newBPM)
+    {
+        BPM = newBPM;
+        Debug.Log("setting BPM as " + BPM);
+    }
+
+    public float getApower()
+    {
+        Debug.Log("sending " + Apower);
+        return Apower;     
+    }
+
+    public void setApower(float newApower)
+    {
+        Apower = newApower;
+        Debug.Log("setting Apower as " + Apower);
+    }
+
+    public float getVpower()
+    {
+        Debug.Log("sending " + Vpower);
+        return Vpower;
+    }
+
+    public void setVpower(float newVpower)
+    {
+        Vpower = newVpower;
+        Debug.Log("setting Vpower as " + Vpower);
+    }
 
     private void drawChart(List<double> values, GameObject parent)
     {
@@ -122,6 +162,7 @@ public class HeartMonitor : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(Display(2.0f));
+        Debug.Log("WODHFBOEWFBOFWQB");
     }
 
     void FixedUpdate()
