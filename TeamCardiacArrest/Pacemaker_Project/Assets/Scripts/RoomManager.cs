@@ -35,6 +35,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     private SoundManager soundsMan;
     public GameObject ARcontainer;
 
+    private GameObject voiceTest;
     
 
     //This Game Object should be the Voice manager prefab, used for photon voice - Chris
@@ -55,21 +56,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // this is an attempt to instantiate the voice manager prefab, it is returning a null reference exception when i try to instantiate it,
         // Despite voiceManager.name returning the correct value, i have no idea why. Also this should be taking place in onJoinedRoom for the final product. -Chris
 
-        Debug.Log(voiceManager.name);
-        GameObject PV = GameObject.Find(voiceManager.name);
-        Debug.Log(PV);
-        if (PV != null)
-        {
-            GameObject voiceTest = PhotonNetwork.Instantiate(PV.name, new Vector3(), Quaternion.identity, 0);
-            if (voiceTest != null)
-            {
-            DebugText.text = "You found me!";
-            }
-        }
-        else
-        {
-            Debug.Log("PV was not found");
-        }
     }
 
 /*
@@ -92,6 +78,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby ()
     {
         Debug.Log("You made to the lobby!");
+        Debug.Log(voiceManager.name);
+        voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
+        if (voiceTest != null)
+        {
+        DebugText.text = "You found me!";
+        }
+
     }
 
 
@@ -233,6 +226,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        RoomCanvas.SetActive(true);
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
         p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
@@ -243,8 +237,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         } 
         else if (ddGroup.value == 0)
         {
-            PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
-            ARcontainer.transform.position = new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f);
+            GameObject avatar = new GameObject(); 
+            avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
+            ARcontainer.transform.SetParent(avatar.transform);
+            voiceTest.transform.SetParent(avatar.transform);
             DebugText.text = "Just you on this run";
             Debug.Log("Just you on this run");
             allowJoin = false;
