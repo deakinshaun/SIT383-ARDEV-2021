@@ -598,6 +598,10 @@ MonoBehaviour:
   RoomSelect: {fileID: 0}
   RoomPrefab: {fileID: 9191052539962204051, guid: 5217519fdc1726541871171047e8c465,
     type: 3}
+  LeaveButton: {fileID: 0}
+  LobbyRoom: {fileID: 2800000, guid: 1f0f21f146aae5840a107ab5e250c449, type: 3}
+  GroupRoom: {fileID: 2800000, guid: bf4e5ba7e86f14d4c9787d5ed49e9de0, type: 3}
+  SoloRoom: {fileID: 2800000, guid: 40d8d695ca0c2f04dbf199bde79e74ed, type: 3}
   ddType: {fileID: 597040241}
   ddGroup: {fileID: 943618109}
   voiceManager: {fileID: 3733106226152980412, guid: 6f79de63606b63445b36c108296a1931,
