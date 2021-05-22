@@ -26,14 +26,4 @@ public class TextureChange : MonoBehaviour
         //Make room selection panel visible
         RoomSelection.SetActive(true);
     }
-
-    public void Room1Selection()
-    {
-        //Attach room 1 texture
-    }
-    public void Room2Selection()
-    {
-        //Attach room 2 texture
-    }
-
 }

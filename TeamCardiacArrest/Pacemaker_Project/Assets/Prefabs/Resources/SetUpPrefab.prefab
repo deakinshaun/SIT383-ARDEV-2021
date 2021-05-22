@@ -1019,6 +1019,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 515453526497190451}
+  - component: {fileID: 7960588844649636591}
   m_Layer: 0
   m_Name: HeartMonitorContainer
   m_TagString: Untagged
@@ -1041,6 +1042,31 @@ Transform:
   m_Father: {fileID: 5897996785531684571}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7960588844649636591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554584630046149881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d90a02e23b8014ca92a04d5d70efbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothedPeak: 0
+  smoothingFactor: 0.98
+  BPM: 60
+  Apower: 3.9
+  Vpower: 2.1
+  difficulty: 
+  timeSeriesParent: {fileID: 5554584630046149881}
+  barTemplate: {fileID: 4352171079658612257, guid: 21d6c40b7fce32547a890d730ecf5972,
+    type: 3}
+  returnTime: 0.01
+  stateIndex: 0
+  isBeating: 0
+  lubShow: {fileID: 1707258547463084524}
 --- !u!1 &5743533360606125185
 GameObject:
   m_ObjectHideFlags: 0

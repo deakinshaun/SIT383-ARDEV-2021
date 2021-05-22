@@ -9,7 +9,7 @@ public class HeartMonitor : MonoBehaviour
     
     //List of spectrum values
     private List<double> timeSeries = new List<double>();
-    private List<double> savedSeries = new List<double>();
+
     //Number of sensor readings
     private int numReading = 128;
 
@@ -32,21 +32,26 @@ public class HeartMonitor : MonoBehaviour
     public float Vpower = 2.1f;
     public string difficulty;
 
-    //saved
+    //saved (Not Implemented)
+    /*
     public float savedBPM;
     public float savedApower;
     public float savedVpower;
+    private List<double> savedSeries = new List<double>(); //List of saved spectrum values
+    public GameObject frequencySeriesParent;  //Saved heartbeat container
+    */
 
     //GameObject Links
     public GameObject timeSeriesParent;
-    public GameObject frequencySeriesParent;
     public GameObject barTemplate;
 
-    //UI Connection
+    //UI Connection (Only used for the save functions)
+    /*
     public Text debugText;
     public Text toggleText;
     public Button toggleButton;
     public Button recordButton;
+    */
 
     //State
     private bool enter;
@@ -109,12 +114,16 @@ public class HeartMonitor : MonoBehaviour
         beat();
     }
 
+
+
+    //Saves current view of the frequency for later use. (Old and unused for final solution, can alter the code in the future so that BPM, Apower and Vpower are saved)
+    /*
+    //overload for drawchart when it is called without values
     private void drawChart()
 	{
     drawChart(savedSeries, timeSeriesParent);
 	}
 
-    //Saves current view of the frequency for later use.
     public void RecordHeartbeat()
     {
         debugText.text = "Current heartrate view saved";
@@ -160,11 +169,11 @@ public class HeartMonitor : MonoBehaviour
         enter = true;
         toggleButton.interactable = false;
     }
+    */
 
     private void Awake()
     {
         StartCoroutine(Display(2.0f));
-        Debug.Log("WODHFBOEWFBOFWQB");
     }
 
     void FixedUpdate()
@@ -195,7 +204,7 @@ public class HeartMonitor : MonoBehaviour
         }
         if (timeSeries.Count == numReading)
         {
-            if (!playRecording)
+            //if (!playRecording)
             {
                 double[] seriesReal = new double[numReading];
                 double[] seriesComplex = new double[numReading];
@@ -242,8 +251,8 @@ public class HeartMonitor : MonoBehaviour
              
                 drawChart(timeSeries, timeSeriesParent);
             }
-
-            else
+            //Deprecated save code
+            //else
 			{
                 //Play recording that's saved
                 InvokeRepeating("drawChart", 1.0f, 0.5f);
@@ -252,7 +261,7 @@ public class HeartMonitor : MonoBehaviour
         }
         else
 		{
-            debugText.text = "Starting: " + (100.0f * timeSeries.Count / numReading) + "%";
+            //debugText.text = "Starting: " + (100.0f * timeSeries.Count / numReading) + "%";     //This
         }
     }
 
@@ -261,7 +270,7 @@ public class HeartMonitor : MonoBehaviour
     {
         while (true)
         {
-            if (!enter) debugText.text = BPM.ToString() + " bpm";
+            //if (!enter) debugText.text = BPM.ToString() + " bpm";       //This
             yield return new WaitForSeconds(time);
             enter = false;
         }
