@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.XR.ARFoundations
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -10,6 +10,7 @@ using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
+    public Text DebugText;
     public Text message;
     public GameObject SetupPrefab;
     public GameObject TeacherPrefab;
@@ -32,6 +33,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     private int diff;
     private int group;
     private SoundManager soundsMan;
+    public GameObject ARcontainer;
 
     
 
@@ -50,8 +52,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
 
-//        DropdownItemSelected(ddType);
-
         // this is an attempt to instantiate the voice manager prefab, it is returning a null reference exception when i try to instantiate it,
         // Despite voiceManager.name returning the correct value, i have no idea why. Also this should be taking place in onJoinedRoom for the final product. -Chris
 
@@ -63,7 +63,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             GameObject voiceTest = PhotonNetwork.Instantiate(PV.name, new Vector3(), Quaternion.identity, 0);
             if (voiceTest != null)
             {
-            Debug.Log("You found me!");
+            DebugText.Text = "You found me!";
             }
         }
         else
@@ -244,8 +244,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         else if (ddGroup.value == 0)
         {
             PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
-            // Arsession origin.transform position = point;
-            message.text = "Just you on this run";
+            ARcontainer.transform.position = new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f);
+            DebugText.text = "Just you on this run";
             Debug.Log("Just you on this run");
             allowJoin = false;
         }
