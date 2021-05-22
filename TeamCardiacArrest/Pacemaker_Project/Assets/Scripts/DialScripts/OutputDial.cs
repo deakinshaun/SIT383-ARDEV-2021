@@ -22,13 +22,26 @@ public class OutputDial : MonoBehaviour
 
 
     void Start()
- {
+    {
+        output = heartMonitorReference.getApower();
+        Debug.Log(output);
+    }
 
- }
+    public void reverseOutput()
+    {
+        if (forward == true)
+        {
+            forward = false;
+        }
+        else
+        {
+            forward = true;
+        }
+    }
 
 
- // Update is called once per frame
- private void Update()
+    // Update is called once per frame
+    private void Update()
  {
      //Using raycast to see if the user mouse if over the dial object
      ray = Camera.main.ScreenPointToRay(Input.mousePosition);

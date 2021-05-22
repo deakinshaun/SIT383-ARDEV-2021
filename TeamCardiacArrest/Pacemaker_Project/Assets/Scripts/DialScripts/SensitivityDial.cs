@@ -17,10 +17,25 @@ public class SensitivityDial : MonoBehaviour
     public TextMeshPro text3D;
     public TextMeshPro reverse;
 
+    public HeartMonitor heartMonitorReference;
+
     // Start is called before the first frame update
     void Start()
     {
+        sensitivty = heartMonitorReference.getVpower();
+        Debug.Log(sensitivty);
+    }
 
+    public void reverseSensitivty()
+    {
+        if (forward == true)
+        {
+            forward = false;
+        }
+        else
+        {
+            forward = true;
+        }
     }
 
 
@@ -38,6 +53,7 @@ public class SensitivityDial : MonoBehaviour
                     if (sensitivty < 200.00)
                     {
                         sensitivty ++ ;
+                        heartMonitorReference.setVpower(sensitivty);
                         transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, 0.5f, 0.0f));
                         text3D.text = sensitivty.ToString("0.00") + " mV";
                         if ((sensitivty % 50) == 0)
@@ -51,6 +67,7 @@ public class SensitivityDial : MonoBehaviour
                     if (sensitivty > 0)
                     {
                         sensitivty--;
+                        heartMonitorReference.setVpower(sensitivty);
                         transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, -0.5f, 0.0f));
                         text3D.text = sensitivty.ToString("0.00") + " mV";
                         if ((sensitivty % 50) == 0)

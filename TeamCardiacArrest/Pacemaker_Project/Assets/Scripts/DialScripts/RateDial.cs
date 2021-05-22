@@ -32,7 +32,7 @@ public class RateDial : MonoBehaviour
 
 
     //This is not being used, but will be used if i manage to get a button working within the prefab properly
-   /*
+   
     public void reverseRate()
     {
         if (forward == true)
@@ -44,7 +44,7 @@ public class RateDial : MonoBehaviour
             forward = true;
         }
     }
-   */
+   
 
 
     // Update is called once per frame

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HeartMonitor : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class HeartMonitor : MonoBehaviour
     //Linked to sensitivity dial - Chris
     public float Vpower = 2.1f;
     public string difficulty;
+
+    //Creating public 3DText objects to be assigned in the editor - Chris
+    public TextMeshPro debugTimeSeries;
+    public TextMeshPro debugBPM;
+
 
     //saved (Not Implemented)
     /*
@@ -261,7 +267,7 @@ public class HeartMonitor : MonoBehaviour
         }
         else
 		{
-            //debugText.text = "Starting: " + (100.0f * timeSeries.Count / numReading) + "%";     //This
+            debugTimeSeries.text = "Starting: " + (100.0f * timeSeries.Count / numReading) + "%";     //This
         }
     }
 
@@ -270,7 +276,7 @@ public class HeartMonitor : MonoBehaviour
     {
         while (true)
         {
-            //if (!enter) debugText.text = BPM.ToString() + " bpm";       //This
+            if (!enter) debugBPM.text = BPM.ToString() + " bpm";       //This
             yield return new WaitForSeconds(time);
             enter = false;
         }
