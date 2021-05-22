@@ -131,15 +131,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         switch (ddGroup.value)
         {
             case 0:
-            tex = LobbyRoom;
-            break;
-
-            case 1:
             tex = SoloRoom;
             break;
 
-            case 2:
+            case 1:
             tex = GroupRoom;
+            break;
+
+            case 2:
+            tex = LobbyRoom;
             break;
             
             default:
@@ -270,6 +270,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         soundsMan.EndSimulation();
         PhotonNetwork.LeaveRoom();
+        ddGroup.value = 2;
         RoomSelect.SetActive(true);
         RoomCanvas.SetActive(false);               
     }
