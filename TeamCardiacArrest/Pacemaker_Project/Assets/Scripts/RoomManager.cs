@@ -131,15 +131,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         switch (ddGroup.value)
         {
             case 0:
-            tex = SoloRoom;
+            tex = LobbyRoom;
             break;
 
             case 1:
-            tex = GroupRoom;
+            tex = SoloRoom;
             break;
 
             case 2:
-            tex = LobbyRoom;
+            tex = GroupRoom;
             break;
             
             default:
@@ -235,7 +235,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LeaveRoom();
         } 
-        else if (ddGroup.value == 0 && ddType.value ==1)
+        else if (ddGroup.value == 0)
         {
             GameObject avatar = new GameObject(); 
             avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
@@ -270,7 +270,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         soundsMan.EndSimulation();
         PhotonNetwork.LeaveRoom();
-        ddGroup.value = 2;
         RoomSelect.SetActive(true);
         RoomCanvas.SetActive(false);               
     }
