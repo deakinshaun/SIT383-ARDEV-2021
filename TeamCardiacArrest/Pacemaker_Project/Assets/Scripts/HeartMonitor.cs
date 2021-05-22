@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class HeartMonitor : MonoBehaviour
 {
-    //public SoundManager sound;    
-    
+    private SoundManager sound;    
     
     //List of spectrum values
     private List<double> timeSeries = new List<double>();
@@ -38,15 +37,18 @@ public class HeartMonitor : MonoBehaviour
     public float savedApower;
     public float savedVpower;
 
+    //GameObject Links
     public GameObject timeSeriesParent;
     public GameObject frequencySeriesParent;
     public GameObject barTemplate;
 
+    //UI Connection
     public Text debugText;
     public Text toggleText;
     public Button toggleButton;
     public Button recordButton;
 
+    //State
     private bool enter;
     private bool playRecording;
 
@@ -170,17 +172,21 @@ public class HeartMonitor : MonoBehaviour
         //Sample acceleration
         Vector3 acc = Input.acceleration;
 
-        timeSeries.Add(acc.magnitude);
-        /*
+        if (timeSeries.Count < numReading)
+		{
+            timeSeries.Add(acc.magnitude);
+		}
+        
         switch (difficulty)
         {
             case "easy":
                 timeSeries.Add(0.5f);
                 break;
             case "hard":
+                timeSeries.Add(acc.magnitude);
                 break;            
         }
-        */
+        
 
 
         while (timeSeries.Count > numReading)
@@ -235,12 +241,6 @@ public class HeartMonitor : MonoBehaviour
                 smoothedPeak = smoothingFactor * smoothedPeak + (1.0f - smoothingFactor) * peakFreq;
              
                 drawChart(timeSeries, timeSeriesParent);
-
-                //Heartbeat Sound using Aya's sounds
-                if (peakFreq > 3.5f)
-				{
-                    //sound.beep();
-				}
             }
 
             else
@@ -256,6 +256,7 @@ public class HeartMonitor : MonoBehaviour
         }
     }
 
+    //Delay between bpm updates, just like a real ECG
     IEnumerator Display(float time)
     {
         while (true)
@@ -273,11 +274,9 @@ public class HeartMonitor : MonoBehaviour
      * It was however edited by Phillip, original code can be found in the HCHeartbeat folder.
      * Source: https://unitylist.com/p/j7f/Heartbeat-Open-Script-Unity
      * 
-     * Its purpose is to count a precise, realistic intreval for a heartbeat to play
+     * Its purpose is to count an editable, precise and realistic intreval for a heartbeat to play
      * ----------------------------------------------------------------------
      */
-
-
 
     //Frequency
     private float Hertz;
@@ -292,7 +291,9 @@ public class HeartMonitor : MonoBehaviour
     public int stateIndex = 0;
     public int isBeating;
     private bool Lub;
+    public GameObject lubShow;
     
+    //Potential future improvment: Extend how long the pulse lasts via Vpower to simulate different heart conditions
     public void beat()
 	{
         Hertz = BPM / 60f;
@@ -308,7 +309,7 @@ public class HeartMonitor : MonoBehaviour
             {
                 stateIndex = 1;
                 timeSeries.Add(Apower);    //<----
-                //sound.beep();
+                sound.beep();
                 Lub = true;
             }
         }
