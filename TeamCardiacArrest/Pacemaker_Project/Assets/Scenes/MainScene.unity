@@ -1633,6 +1633,7 @@ GameObject:
   - component: {fileID: 414065245}
   - component: {fileID: 414065244}
   - component: {fileID: 414065246}
+  - component: {fileID: 414065247}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: MainCamera
@@ -1685,6 +1686,21 @@ MonoBehaviour:
   m_MaxNumberOfMovingImages: 1
   m_TrackedImagePrefab: {fileID: 8358344095314494105, guid: 4e50ea3a6c6fda54f8f50a9bac110bfa,
     type: 3}
+--- !u!114 &414065247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414065243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c156018c93c8db40a3f56d6d015eed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomSelection: {fileID: 631522602}
+  roomManagerContainer: {fileID: 160599556}
+  roomCube: {fileID: 1235867011}
 --- !u!1 &416149260
 GameObject:
   m_ObjectHideFlags: 0
