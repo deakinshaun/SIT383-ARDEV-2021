@@ -69,6 +69,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        Debug.Log("You found meMaster");
         PhotonNetwork.JoinLobby();       
     }
     // Update is called once per frame
@@ -78,11 +79,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby ()
     {
         Debug.Log("You made to the lobby!");
-        Debug.Log(voiceManager.name);
+        
         voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
+        Debug.Log(voiceManager.name);
+        Vibration2.CreateOneShot(3, 255);
         if (voiceTest != null)
         {
         DebugText.text = "You found me!";
+            Debug.Log("You found me");
         }
 
     }
@@ -249,7 +253,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             if (ddType.value == 0)
             {
-                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
+                //PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount * 0.1f), 0f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), -9.0f), Quaternion.identity, 0); //making z -10 instwad of 0 for test
                 // Arsession origin.transform position = point;
                 message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
                 Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");

@@ -322,7 +322,7 @@ public class HeartMonitor : MonoBehaviour
             if (remainPeriodMillisec <= 0f)
             {
                 stateIndex = 1;
-                timeSeries.Add(Apower);    //<----
+                timeSeries.Add((Apower / 10));    //<---- Gonna divide this by an arbitrary value to see if it fixes monitor issues
                 //sound.beep(); //Comenting this out because it causes null ref
                 Lub = true;
             }
@@ -336,7 +336,7 @@ public class HeartMonitor : MonoBehaviour
             if (startReturnTimeMillisec <= Time.deltaTime / 2)
             {
                 stateIndex = 0;
-                timeSeries.Add(Vpower);   //<-
+                timeSeries.Add((Vpower / 10));   //<- Gonna divide this by an arbitrary value to see if it fixes monitor issues
                 Lub = false;
             }
         }

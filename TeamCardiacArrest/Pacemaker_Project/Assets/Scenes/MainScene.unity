@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -576,7 +576,7 @@ MonoBehaviour:
   ddType: {fileID: 597040241}
   ddGroup: {fileID: 943618109}
   ARcontainer: {fileID: 414065243}
-  voiceManager: {fileID: 3733106226152980412, guid: 6f79de63606b63445b36c108296a1931,
+  voiceManager: {fileID: 6733181247470082824, guid: a4f6498f700ddfc4d922c8867e1ccc91,
     type: 3}
 --- !u!4 &160599558
 Transform:
