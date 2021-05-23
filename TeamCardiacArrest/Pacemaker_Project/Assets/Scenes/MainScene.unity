@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1634,6 +1634,7 @@ GameObject:
   - component: {fileID: 414065244}
   - component: {fileID: 414065246}
   - component: {fileID: 414065247}
+  - component: {fileID: 414065248}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: MainCamera
@@ -1701,6 +1702,19 @@ MonoBehaviour:
   roomSelection: {fileID: 631522602}
   roomManagerContainer: {fileID: 160599556}
   roomCube: {fileID: 1235867011}
+--- !u!114 &414065248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414065243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df31f33fa39c8c044a62db6a1631022e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arCamera: {fileID: 1447865527}
 --- !u!1 &416149260
 GameObject:
   m_ObjectHideFlags: 0

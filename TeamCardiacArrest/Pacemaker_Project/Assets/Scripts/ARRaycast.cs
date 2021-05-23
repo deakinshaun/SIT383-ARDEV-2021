@@ -5,7 +5,7 @@ using UnityEngine;
 public class ARRaycast : MonoBehaviour
 {
 
-    private Camera arCamera;
+    public Camera arCamera;
 
     private Vector2 touchPosition = default;
 
