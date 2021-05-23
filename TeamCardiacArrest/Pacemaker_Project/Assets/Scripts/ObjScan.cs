@@ -41,7 +41,7 @@ public class ObjScan : MonoBehaviour
 			roomSelection.SetActive(false);
 			roomSelection.SetActive(true);
 			roomCube.SetActive(true);
-			//---Room Insertion?
+			roomManager.OnStart();
 		}
 	}
 

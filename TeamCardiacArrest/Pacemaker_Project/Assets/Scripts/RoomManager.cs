@@ -52,15 +52,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        OnStart();
+        //OnStart();
     }
     
-    void OnStart()
+    public void OnStart()
     {
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
         Debug.Log("Connected!");
-
     }
 
     public override void OnConnectedToMaster()

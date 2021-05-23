@@ -14,7 +14,7 @@ public class HeartMonitor : MonoBehaviour
     //Number of sensor readings
     private int numReading = 128;
 
-    private float width = 2.0f; //Width of spectrum chart
+    private float width = 1.5f; //Width of spectrum chart
     private float timeOffset = 0.0f;  //Offset to center of the spectrum chart
 
     private int timeStep = 4; //Number of adjacent bins that are condensed into one
@@ -321,7 +321,7 @@ public class HeartMonitor : MonoBehaviour
             if (remainPeriodMillisec <= 0f)
             {
                 stateIndex = 1;
-                timeSeries.Add((Apower / 10));    //<---- Gonna divide this by an arbitrary value to see if it fixes monitor issues
+                timeSeries.Add(Apower); 
                 //sound.beep(); //Comenting this out because it causes null ref
                 Lub = true;
             }
@@ -335,7 +335,7 @@ public class HeartMonitor : MonoBehaviour
             if (startReturnTimeMillisec <= Time.deltaTime / 2)
             {
                 stateIndex = 0;
-                timeSeries.Add((Vpower / 10));   //<- Gonna divide this by an arbitrary value to see if it fixes monitor issues
+                timeSeries.Add(Vpower);  
                 Lub = false;
             }
         }
