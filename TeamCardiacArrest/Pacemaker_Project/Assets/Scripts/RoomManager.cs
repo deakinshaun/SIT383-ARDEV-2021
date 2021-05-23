@@ -76,8 +76,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();       
         Debug.Log("You found me, Master");
         DebugText.text = "You found me, Master";
-        RoomOptions roomopts = new RoomOptions();
-        PhotonNetwork.JoinOrCreateRoom("Lobby", roomopts, new TypedLobby("Lobby", LobbyType.Default));        
     }
     // Update is called once per frame
 
@@ -99,7 +97,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log("Failed to create room " + returnCode + " " + message);
     }
 
-/*
+
     public void addRoom(Text name)
     {
         Debug.Log("Adding new room: " + name.text);
@@ -139,7 +137,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     
 
-
+/*
     private void UpdateRooms()
     {
         int row = 0;
@@ -176,7 +174,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         UpdateRooms();
     }
 
-
+*/
     public static string getName (GameObject o)
     {
         if (o.GetComponent<PhotonView>() != null)
@@ -196,7 +194,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         
     }
-*/
+
     public void JoinRoom(string roomName)
     {
         allowJoin = true;
@@ -229,6 +227,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        setRoomTexture(CubeRoom);
         voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
         Debug.Log(voiceManager.name);
         Vibration2.CreateOneShot(3, 255);
@@ -237,11 +236,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
         DebugText.text = "You found me!";
             Debug.Log("You found me");
         }
-        RoomCanvas.SetActive(true);
-//        Room r = PhotonNetwork.CurrentRoom;
-//        ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
-//        p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
-//        r.SetCustomProperties(p);
+        Room r = PhotonNetwork.CurrentRoom;
+        ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
+        p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
+        r.SetCustomProperties(p);
+        message.text= (r.Name);
+
         if (!allowJoin)
         {
             PhotonNetwork.LeaveRoom();
@@ -281,11 +281,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        soundsMan.EndSimulation();
         PhotonNetwork.LeaveRoom();
+        soundsMan.EndSimulation();
+        message.text = "Leaving room";
         ddGroup.value = 2;
-        RoomSelect.SetActive(true);
+        PhotonNetwork.JoinLobby();
         RoomCanvas.SetActive(false);               
+        RoomSelect.SetActive(true);
     }
 
     private void removeRoomObject (GameObject room)
