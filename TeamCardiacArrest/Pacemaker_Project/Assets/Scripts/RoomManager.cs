@@ -52,30 +52,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        OnStart();
+    }
+    
+    void OnStart()
+    {
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
         Debug.Log("Connected!");
 
-
-        // this is an attempt to instantiate the voice manager prefab, it is returning a null reference exception when i try to instantiate it,
-        // Despite voiceManager.name returning the correct value, i have no idea why. Also this should be taking place in onJoinedRoom for the final product. -Chris
-
     }
-
-/*
-     public DropdownItemSelected(Dropdown dropdown, int value)
-    {
-        int index = dropdown.selection;
-        int value = dropdown.options[index].value;
-        return value;
-    }
-*/
 
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();       
-        Debug.Log("You found me, Master");
-        DebugText.text = "You found me, Master";
     }
     // Update is called once per frame
 
@@ -137,7 +127,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     
 
-/*
+
     private void UpdateRooms()
     {
         int row = 0;
@@ -174,7 +164,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         UpdateRooms();
     }
 
-*/
+
     public static string getName (GameObject o)
     {
         if (o.GetComponent<PhotonView>() != null)
@@ -282,7 +272,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-        soundsMan.EndSimulation();
         message.text = "Leaving room";
         ddGroup.value = 2;
         PhotonNetwork.JoinLobby();
