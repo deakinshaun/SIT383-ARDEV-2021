@@ -36,6 +36,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject ARcontainer;
 
     private GameObject voiceTest;
+
+    public GameObject CubeRoom;
     
 
     //This Game Object should be the Voice manager prefab, used for photon voice - Chris
@@ -50,22 +52,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        //OnStart();
+    }
+    
+    public void OnStart()
+    {
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
-
-        // this is an attempt to instantiate the voice manager prefab, it is returning a null reference exception when i try to instantiate it,
-        // Despite voiceManager.name returning the correct value, i have no idea why. Also this should be taking place in onJoinedRoom for the final product. -Chris
-
+        Debug.Log("Connected!");
     }
-
-/*
-     public DropdownItemSelected(Dropdown dropdown, int value)
-    {
-        int index = dropdown.selection;
-        int value = dropdown.options[index].value;
-        return value;
-    }
-*/
 
     public override void OnConnectedToMaster()
     {
@@ -78,13 +73,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby ()
     {
         Debug.Log("You made to the lobby!");
-        Debug.Log(voiceManager.name);
-        voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
-        if (voiceTest != null)
-        {
-        DebugText.text = "You found me!";
-        }
+    }
 
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room Created");
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Failed to create room " + returnCode + " " + message);
     }
 
 
@@ -125,44 +124,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
         return room;
     }
 
-    public void setRoomTexture(GameObject room)
-    {
-        Texture tex = room.GetComponent<Texture>();
-        switch (ddGroup.value)
-        {
-            case 0:
-            tex = SoloRoom;
-            break;
-
-            case 1:
-            tex = GroupRoom;
-            break;
-
-            case 2:
-            tex = LobbyRoom;
-            break;
-            
-            default:
-            tex = LobbyRoom;
-            break;
-        }
-    }
-
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Room Created");
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("Failed to create room " + returnCode + " " + message);
-    }
+    
 
 
     private void UpdateRooms()
     {
         int row = 0;
-        int col = 0;
+        int col = 1;
         int columnLimit = 2;
         foreach(GameObject room in displayRooms)
         {
@@ -222,15 +190,47 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName);
     }
 
+    public void setRoomTexture(GameObject room)
+    {
+        Texture tex = room.GetComponent<Texture>();
+        switch (ddGroup.value)
+        {
+            case 0:
+            tex = SoloRoom;
+            break;
+
+            case 1:
+            tex = GroupRoom;
+            break;
+
+            case 2:
+            tex = LobbyRoom;
+            break;
+            
+            default:
+            tex = LobbyRoom;
+            break;
+        }
+    }
 
 
     public override void OnJoinedRoom()
     {
-        RoomCanvas.SetActive(true);
+        setRoomTexture(CubeRoom);
+        voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
+        Debug.Log(voiceManager.name);
+        Vibration2.CreateOneShot(3, 255);
+        if (voiceTest != null)
+        {
+        DebugText.text = "You found me!";
+            Debug.Log("You found me");
+        }
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
         p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
         r.SetCustomProperties(p);
+        message.text= (r.Name);
+
         if (!allowJoin)
         {
             PhotonNetwork.LeaveRoom();
@@ -238,8 +238,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         else if (ddGroup.value == 0)
         {
             GameObject avatar = new GameObject(); 
-            avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
-            ARcontainer.transform.SetParent(avatar.transform);
+            setRoomTexture(CubeRoom);
+            avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
+            avatar.transform.SetParent(ARcontainer.transform);
             voiceTest.transform.SetParent(avatar.transform);
             DebugText.text = "Just you on this run";
             Debug.Log("Just you on this run");
@@ -249,7 +250,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             if (ddType.value == 0)
             {
-                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
+                //PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount * 0.1f), 0f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), -9.0f), Quaternion.identity, 0); //making z -10 instwad of 0 for test
                 // Arsession origin.transform position = point;
                 message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
                 Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");
@@ -268,11 +270,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        soundsMan.EndSimulation();
         PhotonNetwork.LeaveRoom();
+        message.text = "Leaving room";
         ddGroup.value = 2;
-        RoomSelect.SetActive(true);
+        PhotonNetwork.JoinLobby();
         RoomCanvas.SetActive(false);               
+        RoomSelect.SetActive(true);
+        ddGroup.value = 0;
     }
 
     private void removeRoomObject (GameObject room)

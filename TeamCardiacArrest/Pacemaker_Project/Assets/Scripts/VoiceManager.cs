@@ -16,7 +16,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
 
     //public bool button = true;
     //public bool mc = true;
-    public bool micOn = false;
+    public bool micOn = true;
 
     //Commented out for prefab, however we might want to bring these back in tandem with the mute button
     

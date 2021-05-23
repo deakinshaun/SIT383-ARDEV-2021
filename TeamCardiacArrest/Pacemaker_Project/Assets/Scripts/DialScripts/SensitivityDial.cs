@@ -19,6 +19,7 @@ public class SensitivityDial : MonoBehaviour
 
     public HeartMonitor heartMonitorReference;
 
+
     // Start is called before the first frame update
     void Start()
     {
