@@ -36,6 +36,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject ARcontainer;
 
     private GameObject voiceTest;
+
+    public GameObject CubeRoom;
     
 
     //This Game Object should be the Voice manager prefab, used for photon voice - Chris
@@ -74,7 +76,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();       
         Debug.Log("You found me, Master");
         DebugText.text = "You found me, Master";
-        
+        RoomOptions roomopts = new RoomOptions();
+        PhotonNetwork.JoinOrCreateRoom("Lobby", roomopts, new TypedLobby("Lobby", LobbyType.Default));        
     }
     // Update is called once per frame
 
@@ -86,6 +89,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
 
 
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room Created");
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Failed to create room " + returnCode + " " + message);
+    }
+
+/*
     public void addRoom(Text name)
     {
         Debug.Log("Adding new room: " + name.text);
@@ -123,38 +137,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         return room;
     }
 
-    public void setRoomTexture(GameObject room)
-    {
-        Texture tex = room.GetComponent<Texture>();
-        switch (ddGroup.value)
-        {
-            case 0:
-            tex = SoloRoom;
-            break;
-
-            case 1:
-            tex = GroupRoom;
-            break;
-
-            case 2:
-            tex = LobbyRoom;
-            break;
-            
-            default:
-            tex = LobbyRoom;
-            break;
-        }
-    }
-
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Room Created");
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("Failed to create room " + returnCode + " " + message);
-    }
+    
 
 
     private void UpdateRooms()
@@ -213,13 +196,35 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         
     }
-
+*/
     public void JoinRoom(string roomName)
     {
         allowJoin = true;
         PhotonNetwork.JoinRoom(roomName);
     }
 
+    public void setRoomTexture(GameObject room)
+    {
+        Texture tex = room.GetComponent<Texture>();
+        switch (ddGroup.value)
+        {
+            case 0:
+            tex = SoloRoom;
+            break;
+
+            case 1:
+            tex = GroupRoom;
+            break;
+
+            case 2:
+            tex = LobbyRoom;
+            break;
+            
+            default:
+            tex = LobbyRoom;
+            break;
+        }
+    }
 
 
     public override void OnJoinedRoom()
@@ -233,10 +238,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Debug.Log("You found me");
         }
         RoomCanvas.SetActive(true);
-        Room r = PhotonNetwork.CurrentRoom;
-        ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
-        p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
-        r.SetCustomProperties(p);
+//        Room r = PhotonNetwork.CurrentRoom;
+//        ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
+//        p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
+//        r.SetCustomProperties(p);
         if (!allowJoin)
         {
             PhotonNetwork.LeaveRoom();
@@ -244,6 +249,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         else if (ddGroup.value == 0)
         {
             GameObject avatar = new GameObject(); 
+            setRoomTexture(CubeRoom);
             avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
             avatar.transform.SetParent(ARcontainer.transform);
             voiceTest.transform.SetParent(avatar.transform);
