@@ -668,7 +668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &223974227
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5835,7 +5835,7 @@ GameObject:
   - component: {fileID: 1849076702}
   - component: {fileID: 1849076701}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RoomInputText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
