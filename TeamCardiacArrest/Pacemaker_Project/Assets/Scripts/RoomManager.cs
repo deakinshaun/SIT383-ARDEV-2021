@@ -277,6 +277,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         RoomCanvas.SetActive(false);               
         RoomSelect.SetActive(true);
+        ddGroup.value = 0;
     }
 
     private void removeRoomObject (GameObject room)
