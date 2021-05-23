@@ -13,16 +13,12 @@ public class panelAction : MonoBehaviour
     [SerializeField]
     private GameObject DismissButton;
 
-    [SerializeField]
-    private GameObject SelectionWindow;
-
     public GameObject studentPrefab;
     private Camera cam;
 
     public void Dismiss()
     {
         WelcomeWindow.SetActive(false);
-        SelectionWindow.SetActive(true);
 /*
         Instantiate(studentPrefab);
         cam = studentPrefab.GetComponent<UserCam>();
