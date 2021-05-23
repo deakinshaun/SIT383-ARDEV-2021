@@ -18,6 +18,8 @@ public class ARPrefabManager : MonoBehaviour
 			newTexture.name = tex.name;
 			arTextures.Add(tex.name, tex);
 		}
+
+		Instantiate(prefab);
 		
 	}
 	public void Room1Selection()

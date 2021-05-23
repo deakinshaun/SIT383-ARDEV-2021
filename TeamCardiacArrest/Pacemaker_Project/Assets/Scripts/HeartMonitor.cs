@@ -14,7 +14,7 @@ public class HeartMonitor : MonoBehaviour
     //Number of sensor readings
     private int numReading = 128;
 
-    private float width = 6.0f; //Width of spectrum chart
+    private float width = 3.0f; //Width of spectrum chart
     private float timeOffset = 0.0f;  //Offset to center of the spectrum chart
 
     private int timeStep = 4; //Number of adjacent bins that are condensed into one
@@ -34,7 +34,6 @@ public class HeartMonitor : MonoBehaviour
     public string difficulty;
 
     //Creating public 3DText objects to be assigned in the editor - Chris
-    public TextMeshPro debugTimeSeries;
     public TextMeshPro debugBPM;
 
 
@@ -195,7 +194,7 @@ public class HeartMonitor : MonoBehaviour
         switch (difficulty)
         {
             case "easy":
-                timeSeries.Add(0.5f);
+                timeSeries.Add(0.1f);
                 break;
             case "hard":
                 timeSeries.Add(acc.magnitude);
@@ -267,7 +266,7 @@ public class HeartMonitor : MonoBehaviour
         }
         else
 		{
-            debugTimeSeries.text = "Starting: " + (100.0f * timeSeries.Count / numReading) + "%";     //This
+            debugBPM.text = "Starting: " + (100.0f * timeSeries.Count / numReading) + "%";     //This
         }
     }
 
