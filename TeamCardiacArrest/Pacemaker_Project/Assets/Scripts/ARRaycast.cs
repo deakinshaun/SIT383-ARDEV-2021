@@ -23,10 +23,11 @@ public class ARRaycast : MonoBehaviour
             Touch touch = Input.GetTouch(0);
 
             touchPosition = touch.position;
+
             if(touch.phase == TouchPhase.Began)
             {
                 Ray ray = arCamera.ScreenPointToRay(touch.position);
-                RaycastHit hitObject;
+                //RaycastHit hitObject;
                 //Debug.Log(hitObject);
                 /*
                 if (Physics.Raycast(ray, out hitObject))

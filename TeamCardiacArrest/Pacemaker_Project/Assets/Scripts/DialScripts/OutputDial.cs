@@ -16,6 +16,9 @@ public class OutputDial : MonoBehaviour
     private RaycastHit hit;
     public TextMeshPro text3D;
     public TextMeshPro reverse;
+    //public GameObject arSessionOriginContainer;
+    //private Camera arCamera;
+    //GameObject.Find<Camera>
 
     // gives access to required floats for heartbeat manager, set in the editor
     public HeartMonitor heartMonitorReference;
@@ -26,6 +29,8 @@ public class OutputDial : MonoBehaviour
         output = heartMonitorReference.getApower();
         text3D.text = output.ToString("0.00") + " mA";
         Debug.Log(output);
+
+        //arCamera = arSessionOriginContainer.GetComponent<Camera>();
     }
 
     public void reverseOutput()
@@ -81,10 +86,12 @@ public class OutputDial : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
- {
-     //Using raycast to see if the user mouse if over the dial object
-     ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-     if (Physics.Raycast(ray, out hit))
+    {
+        //Using raycast to see if the user mouse if over the dial object
+        //Vector3 pos = Input.mousePosition;
+        //ray = arCamera.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
      {
          if (hit.collider.name == outputBox.name)
          {
@@ -142,6 +149,6 @@ public class OutputDial : MonoBehaviour
 
      }
 
- }
+    }
 }
 
