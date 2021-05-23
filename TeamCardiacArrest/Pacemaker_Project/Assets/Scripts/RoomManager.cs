@@ -52,6 +52,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
+        Debug.Log("Connected!");
+
 
         // this is an attempt to instantiate the voice manager prefab, it is returning a null reference exception when i try to instantiate it,
         // Despite voiceManager.name returning the correct value, i have no idea why. Also this should be taking place in onJoinedRoom for the final product. -Chris
@@ -69,8 +71,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("You found meMaster");
         PhotonNetwork.JoinLobby();       
+        Debug.Log("You found me, Master");
+        DebugText.text = "You found me, Master";
+        
     }
     // Update is called once per frame
 
@@ -79,16 +83,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby ()
     {
         Debug.Log("You made to the lobby!");
-        
-        voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
-        Debug.Log(voiceManager.name);
-        Vibration2.CreateOneShot(3, 255);
-        if (voiceTest != null)
-        {
-        DebugText.text = "You found me!";
-            Debug.Log("You found me");
-        }
-
     }
 
 
@@ -166,7 +160,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     private void UpdateRooms()
     {
         int row = 0;
-        int col = 0;
+        int col = 1;
         int columnLimit = 2;
         foreach(GameObject room in displayRooms)
         {
@@ -230,6 +224,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
+        Debug.Log(voiceManager.name);
+        Vibration2.CreateOneShot(3, 255);
+        if (voiceTest != null)
+        {
+        DebugText.text = "You found me!";
+            Debug.Log("You found me");
+        }
         RoomCanvas.SetActive(true);
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
@@ -242,8 +244,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         else if (ddGroup.value == 0)
         {
             GameObject avatar = new GameObject(); 
-            avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f), Quaternion.identity, 0);
-            ARcontainer.transform.SetParent(avatar.transform);
+            avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
+            avatar.transform.SetParent(ARcontainer.transform);
             voiceTest.transform.SetParent(avatar.transform);
             DebugText.text = "Just you on this run";
             Debug.Log("Just you on this run");
