@@ -1483,8 +1483,8 @@ MonoBehaviour:
   smoothedPeak: 0
   smoothingFactor: 0.98
   BPM: 60
-  Apower: 3.9
-  Vpower: 2.1
+  Apower: 3.8
+  Vpower: 2.2
   difficulty: 
   debugBPM: {fileID: 6429084508039427445}
   timeSeriesParent: {fileID: 5554584630046149881}

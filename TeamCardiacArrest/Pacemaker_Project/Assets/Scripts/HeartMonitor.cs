@@ -28,9 +28,9 @@ public class HeartMonitor : MonoBehaviour
     //Linked to rate dial - Chris
     public float BPM = 60f;
     //Linked to output dial - Chris
-    public float Apower = 3.9f;
+    public float Apower = 3.8f;
     //Linked to sensitivity dial - Chris
-    public float Vpower = 2.1f;
+    public float Vpower = 2.2f;
     public string difficulty;
 
     //Creating public 3DText objects to be assigned in the editor - Chris
@@ -323,7 +323,7 @@ public class HeartMonitor : MonoBehaviour
             {
                 stateIndex = 1;
                 timeSeries.Add(Apower);    //<----
-                sound.beep();
+                //sound.beep(); //Comenting this out because it causes null ref
                 Lub = true;
             }
         }

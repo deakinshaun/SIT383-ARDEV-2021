@@ -23,6 +23,7 @@ public class SensitivityDial : MonoBehaviour
     void Start()
     {
         sensitivty = heartMonitorReference.getVpower();
+        text3D.text = sensitivty.ToString("0.00") + " mV";
         Debug.Log(sensitivty);
     }
 
@@ -38,6 +39,42 @@ public class SensitivityDial : MonoBehaviour
         }
     }
 
+    //Method to check whether dial var is close enough value where vibration occurs, to cover for "fuzzy" floats
+    public static void checkAproxSensitivty(float sensivity)
+    {
+        if (Mathf.Abs(0.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(40.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        if (Mathf.Abs(80.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(120.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(160.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(200.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+
+    }
+
 
     // Update is called once per frame
     private void Update()
@@ -50,30 +87,24 @@ public class SensitivityDial : MonoBehaviour
             {
                 if (forward == true)
                 {
-                    if (sensitivty < 200.00)
+                    if (sensitivty < 200.20)
                     {
-                        sensitivty ++ ;
+                        sensitivty += 0.2f ;
                         heartMonitorReference.setVpower(sensitivty);
                         transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, 0.5f, 0.0f));
                         text3D.text = sensitivty.ToString("0.00") + " mV";
-                        if ((sensitivty % 50) == 0)
-                        {
-                            Vibration2.CreateOneShot(3, 255);
-                        }
+                        checkAproxSensitivty(sensitivty);
                     }
                 }
                 else
                 {
                     if (sensitivty > 0)
                     {
-                        sensitivty--;
+                        sensitivty -= 0.2f;
                         heartMonitorReference.setVpower(sensitivty);
                         transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, -0.5f, 0.0f));
                         text3D.text = sensitivty.ToString("0.00") + " mV";
-                        if ((sensitivty % 50) == 0)
-                        {
-                            Vibration2.CreateOneShot(3, 255);
-                        }
+                        checkAproxSensitivty(sensitivty);
                     }
                 }
             }

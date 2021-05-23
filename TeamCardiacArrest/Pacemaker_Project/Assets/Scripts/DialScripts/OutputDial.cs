@@ -24,6 +24,7 @@ public class OutputDial : MonoBehaviour
     void Start()
     {
         output = heartMonitorReference.getApower();
+        text3D.text = output.ToString("0.00") + " mA";
         Debug.Log(output);
     }
 
@@ -40,6 +41,44 @@ public class OutputDial : MonoBehaviour
     }
 
 
+    //Method to check whether dial var is close enough value where vibration occurs, to cover for "fuzzy" floats
+    public static void checkAproxOutput(float output)
+    {
+        if (Mathf.Abs(0.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(50.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        if (Mathf.Abs(100.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(150.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(200.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(250.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+
+    }
+
+
+
     // Update is called once per frame
     private void Update()
  {
@@ -51,33 +90,39 @@ public class OutputDial : MonoBehaviour
          {
              if (forward == true)
              {
-                 if (output < 250.00)
+                 if (output < 250.20)
                  {
-                     output++;
+                     output += 0.2f;
                      //updating Apower in heart monitor
                      heartMonitorReference.setApower(output);
                      transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, 0.5f, 0.0f));
                      text3D.text = output.ToString("0.00") + " mA";
+                     checkAproxOutput(output);
+                        /*
                      if ((output % 50) == 0)
                      {
                          Vibration2.CreateOneShot(3, 255);
                      }
+                        */
                  }
              }
              else
              {
                  if (output > 0)
                  {
-                     output--;
+                     output -= 0.2f;
                      //updating Apower in heart monitor
                      heartMonitorReference.setApower(output);
                      transform.rotation *= Quaternion.AngleAxis(0.5f, new Vector3(0.0f, -0.5f, 0.0f));
                      text3D.text = output.ToString("0.00") + " mA";
+                     checkAproxOutput(output);
+                        /*
                      if ((output % 50) == 0)
                      {
                          Vibration2.CreateOneShot(3, 255);
                      }
-                 }
+                        */
+                    }
              }
          }
 
