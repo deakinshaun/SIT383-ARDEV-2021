@@ -103,7 +103,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
                     if (pawnEntity == null)
                     {
                         // Instantiate game object at the hit pose.
-                        pawnEntity = Instantiate(PawnPrefab, usefulLocation, hit.Pose.rotation);
+                        pawnEntity = Instantiate(PawnPrefab, usefulLocation, hit.Pose.rotation);//****
 
                         // Instantiate manipulator.
                         manipulator =

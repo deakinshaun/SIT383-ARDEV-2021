@@ -52,7 +52,7 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joind with " + PhotonNetwork.CurrentRoom.PlayerCount + " others.");
-        PhotonNetwork.Instantiate(avatarPrefab.name, new Vector3(), Quaternion.identity, 0);
+        //PhotonNetwork.Instantiate(avatarPrefab.name, new Vector3(), Quaternion.identity, 0);
     }
 
     void Update()
