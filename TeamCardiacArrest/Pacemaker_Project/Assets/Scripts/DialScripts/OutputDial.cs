@@ -54,12 +54,27 @@ public class OutputDial : MonoBehaviour
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
-        else if (Mathf.Abs(50.00f - output) <= 0.01)
+        else if (Mathf.Abs(25.00f - output) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
-        if (Mathf.Abs(100.00f - output) <= 0.01)
+        if (Mathf.Abs(50.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(75.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(100.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(125.00f - output) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
@@ -69,7 +84,22 @@ public class OutputDial : MonoBehaviour
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
+        if (Mathf.Abs(100.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(175.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
         else if (Mathf.Abs(200.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(225.00f - output) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
@@ -138,12 +168,12 @@ public class OutputDial : MonoBehaviour
              if (forward == true)
              {
                  forward = false;
-                 reverse.text = "Swap direcition: Currently reverse";
+                 reverse.text = "Swap direction: Currently reverse";
              }
              else
              {
                  forward = true;
-                 reverse.text = "Swap direcition: Currently forward";
+                 reverse.text = "Swap direction: Currently forward";
              }
          }
 

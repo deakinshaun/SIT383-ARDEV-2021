@@ -48,12 +48,27 @@ public class SensitivityDial : MonoBehaviour
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
-        else if (Mathf.Abs(40.00f - sensivity) <= 0.01)
+        else if (Mathf.Abs(20.00f - sensivity) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
-        if (Mathf.Abs(80.00f - sensivity) <= 0.01)
+        if (Mathf.Abs(40.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(60.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(80.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(100.00f - sensivity) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
@@ -63,7 +78,17 @@ public class SensitivityDial : MonoBehaviour
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
-        else if (Mathf.Abs(160.00f - sensivity) <= 0.01)
+        else if (Mathf.Abs(140.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        if (Mathf.Abs(160.00f - sensivity) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(180.00f - sensivity) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
@@ -120,7 +145,7 @@ public class SensitivityDial : MonoBehaviour
                 else
                 {
                     forward = true;
-                    reverse.text = "Swap direcition: Currently forward";
+                    reverse.text = "Swap direction: Currently forward";
                 }
             }
 

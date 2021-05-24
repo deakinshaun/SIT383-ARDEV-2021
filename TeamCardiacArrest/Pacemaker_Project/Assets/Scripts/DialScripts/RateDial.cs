@@ -95,12 +95,12 @@ public class RateDial : MonoBehaviour
                 if (forward == true)
                 {
                     forward = false;
-                    reverse.text = "Swap direcition: Currently reverse";
+                    reverse.text = "Swap direction: Currently reverse";
                 }
                 else
                 {
                     forward = true;
-                    reverse.text = "Swap direcition: Currently forward";
+                    reverse.text = "Swap direction: Currently forward";
                 }   
             }
         }
