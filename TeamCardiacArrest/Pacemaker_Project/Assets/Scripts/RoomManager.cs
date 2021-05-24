@@ -35,13 +35,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
     private SoundManager soundsMan;
     public GameObject ARcontainer;
 
-    private GameObject voiceTest;
+    //public GameObject VoiceConnection;     - MIC WIP
+
+    //private GameObject voiceTest;
 
     public GameObject CubeRoom;
     
 
     //This Game Object should be the Voice manager prefab, used for photon voice - Chris
-    public GameObject voiceManager;
+    //public GameObject voiceManager;
 
     private bool allowJoin = false;
     List <GameObject> displayRooms = new List<GameObject>();
@@ -60,11 +62,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
         Debug.Log("Connected!");
+
+        //GameObject vc = GetComponent<VoiceConnection>();   - MIC WIP 
+        //vc.Client.AddCallbackTarget(this);                    MIC WIP
+        //vc.ConnectUsingSettings();                          MIC WIP
     }
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinLobby();       
+        PhotonNetwork.JoinLobby();
+        //GameObject vc = GetComponent<VoiceConnection>();    - MIC WIP
     }
     // Update is called once per frame
 
@@ -213,23 +220,41 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
+    /*
+    private void voiceInstance()
+    {
+        PhotonNetwork.Instantiate("voiceManager", new Vector3(), Quaternion.identity, 0);
+    }
+    */
+
 
     public override void OnJoinedRoom()
     {
         setRoomTexture(CubeRoom);
-        voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
-        Debug.Log(voiceManager.name);
-        Vibration2.CreateOneShot(3, 255);
+        //voiceTest = new GameObject(voiceInstance());
+        
+        //Debug.Log(voiceManager.name);
+        //Vibration2.CreateOneShot(3, 255);
+        //if (photonView.IsMine == true)
+        //{
+            //GameObject voiceTest = (GameObject) PhotonNetwork.Instantiate("voiceManager", new Vector3(), Quaternion.identity, 0);
+        //}
+        /*
         if (voiceTest != null)
         {
-        DebugText.text = "You found me!";
+            message.text = "You found me!";
             Debug.Log("You found me");
         }
+        else
+        {
+            message.text = "You DID NOT FINE ME IDIOT!!!!! me!";
+        }
+        */
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
         p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
         r.SetCustomProperties(p);
-        message.text= (r.Name);
+        //message.text= (r.Name);
 
         if (!allowJoin)
         {
@@ -241,7 +266,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             setRoomTexture(CubeRoom);
             avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
             avatar.transform.SetParent(ARcontainer.transform);
-            voiceTest.transform.SetParent(avatar.transform);
+            //voiceTest.transform.SetParent(avatar.transform);
             DebugText.text = "Just you on this run";
             Debug.Log("Just you on this run");
             allowJoin = false;

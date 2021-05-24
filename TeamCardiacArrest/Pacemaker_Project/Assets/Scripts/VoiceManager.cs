@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Voice.Unity;
 using Photon.Realtime;
 using Photon.Pun;
@@ -13,19 +14,26 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     [Tooltip("Maximum length of status message in characters")]
     public int statusMaxLength = 150;
 
+    public Text connectionInfo;
 
-    //public bool button = true;
-    //public bool mc = true;
+
     public bool micOn = true;
 
+   
+    //int count = 1;
+
     //Commented out for prefab, however we might want to bring these back in tandem with the mute button
-    
+
     //public GameObject microphoneIndicator;
     //public Material microphoneOn;
     //public Material microphoneOff;
 
+
     private string previousMessage = " ";
 
+    
+
+    /*
     public void micButton()
     {
         if (micOn)
@@ -42,6 +50,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
         }
 
     }
+    */
 
     private void setStatusText(string message)
     {
@@ -58,17 +67,23 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     }
 
 
-    void Awake()
+    void Start()
     {
         //this is causing an error, but im not sure why tbh
         //status.text = " ";
         setStatusText("Photon Voice Started");
+
+        //photonView = GetComponent<PhotonView>();
+
+
 
         PhotonNetwork.ConnectUsingSettings();
 
         VoiceConnection vc = GetComponent<VoiceConnection>();
         vc.Client.AddCallbackTarget(this);
         vc.ConnectUsingSettings();
+
+        muteMic(vc);
     }
 
 
@@ -78,52 +93,63 @@ public class VoiceManager : MonoBehaviourPunCallbacks
         VoiceConnection vc = GetComponent<VoiceConnection>();
         RoomOptions roomopt = new RoomOptions();
         TypedLobby lobby = new TypedLobby("ApplicationLobby", LobbyType.Default);
-        //romm name should maybe be changed to pCardiac Arrest?
-        vc.Client.OpJoinOrCreateRoom(new EnterRoomParams { RoomName = "SIT383PhotonVoice", RoomOptions = roomopt, Lobby = lobby });
+        vc.Client.OpJoinOrCreateRoom(new EnterRoomParams { RoomName = "Caridac Arrest Mic Test", RoomOptions = roomopt, Lobby = lobby });
+        connectionInfo.text = "Connected to master";
+
+        //VoiceConnection vc = GetComponent<VoiceConnection>();
 
     }
 
     public override void OnJoinedRoom()
     {
-        setStatusText("Joined room with " + PhotonNetwork.CurrentRoom.PlayerCount + " particpants.");
+        //setStatusText("Joined room with " + PhotonNetwork.CurrentRoom.PlayerCount + " particpants.");
+
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
         setStatusText("Disconnected " + cause);
+        //connectionInfo.text = "Disconnected";
+
+        /*
+        PhotonNetwork.ConnectUsingSettings();
+
+        VoiceConnection vc = GetComponent<VoiceConnection>();
+        vc.Client.AddCallbackTarget(this);
+        vc.ConnectUsingSettings();
+        */
     }
 
-    void switchMicrophone()
+    public void switchMicrophone()
     {
         VoiceConnection vc = GetComponent<VoiceConnection>();
         //if ((OVRInput.Get (button)) || (Input.GetAxis ("Fire1") > 0.0f)) 
         //button = true;
-        if (micOn)
+        if (micOn == true)
+        {
+            vc.PrimaryRecorder.TransmitEnabled = false;
+            vc.PrimaryRecorder.DebugEchoMode = false;
+            micOn = false;
+            Debug.Log("MIC ON");
+            status.text = "MIC ON";
+        }
+        else
         {
             vc.PrimaryRecorder.TransmitEnabled = true;
+            vc.PrimaryRecorder.DebugEchoMode = true;
+            micOn = true;
+            Debug.Log("MIC OFF");
+            status.text = "MIC OFF";
         }
 
+    }
 
-
-        //if (button || mc)
-        //{ 
-        //vc.PrimaryRecorder.TransmitEnabled = !vc.PrimaryRecorder.TransmitEnabled; 
-        // }
-        //this can probably be removed, but might come in handy for debugging so ill keep it in for now
-        /*
-         if (microphoneIndicator != null)
-         {
-             if (vc.PrimaryRecorder.TransmitEnabled)
-             {
-                 //Debug.Log("im on!");
-                 microphoneIndicator.GetComponent<MeshRenderer>().material = microphoneOn;
-             }
-             else
-             {
-                 microphoneIndicator.GetComponent<MeshRenderer>().material = microphoneOff;
-             }
-         }   
-        */
+    public void muteMic(VoiceConnection vc)
+    {
+        //VoiceConnection vc = GetComponent<VoiceConnection>();
+        vc.PrimaryRecorder.TransmitEnabled = false;
+        vc.PrimaryRecorder.DebugEchoMode = false;
+        micOn = false;
     }
 
     // Update is called once per frame
@@ -132,28 +158,47 @@ public class VoiceManager : MonoBehaviourPunCallbacks
         //button = Input.anyKeyDown;
 
         //mc = Input.anyKey;
+        //if (photonView.IsMine == true)
+        //{
 
-        VoiceConnection vc = GetComponent<VoiceConnection>();
+        //count++;
 
-        string otherParticipants = "";
-        if (vc.Client.InRoom)
-        {
-            Dictionary<int, Player>.ValueCollection pts = vc.Client.CurrentRoom.Players.Values;
+            VoiceConnection vc = GetComponent<VoiceConnection>();
 
-            foreach (Player p in pts)
+            string otherParticipants = "";
+            if (vc.Client.InRoom)
             {
-                otherParticipants += p.ToStringFull();
+                Dictionary<int, Player>.ValueCollection pts = vc.Client.CurrentRoom.Players.Values;
+
+                foreach (Player p in pts)
+                {
+                    otherParticipants += p.ToStringFull();
+                }
             }
-        }
-        string room = "not in room";
-        if (vc.Client.CurrentRoom != null)
+            string room = "not in room";
+            if (vc.Client.CurrentRoom != null)
+            {
+                room = vc.Client.CurrentRoom.Name;
+            }
+
+            setStatusText(vc.Client.State.ToString() + "server: " + vc.Client.CloudRegion + ":" + vc.Client.CurrentServerAddress + " room: " + room + " participants: " + otherParticipants);
+            
+            Debug.Log(vc.Client.State.ToString() + "server: " + vc.Client.CloudRegion + ":" + vc.Client.CurrentServerAddress + " room: " + room + " participants: " + otherParticipants);
+             connectionInfo.text = vc.Client.CurrentServerAddress + " room: " + room + " participants: " + otherParticipants;
+            //if (count == 100 || count == 200 || count == 300 || count == 400 || count == 600 || count == 700 )
+            // {
+
+        //setStatusText("OEFJNOJDNF");
+        //}
+
+        /*
+        if (count == 100 || count == 200 || count == 300 || count == 400 || count == 600 || count == 700)
         {
-            room = vc.Client.CurrentRoom.Name;
+            switchMicrophone();
         }
+        */
 
-        setStatusText(vc.Client.State.ToString() + "server: " + vc.Client.CloudRegion + ":" + vc.Client.CurrentServerAddress + " room: " + room + " participants: " + otherParticipants);
-
-        switchMicrophone();
+        //}
     }
 
 }
