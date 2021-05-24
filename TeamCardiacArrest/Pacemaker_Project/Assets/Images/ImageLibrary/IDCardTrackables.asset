@@ -25,3 +25,13 @@ MonoBehaviour:
     m_SpecifySize: 0
     m_Name: MedicalID
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4674796354355045636
+      m_GuidHigh: 15310984350341057710
+    m_SerializedTextureGuid:
+      m_GuidLow: 17470659993755560560
+      m_GuidHigh: 1148291447312235322
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: card
+    m_Texture: {fileID: 0}
