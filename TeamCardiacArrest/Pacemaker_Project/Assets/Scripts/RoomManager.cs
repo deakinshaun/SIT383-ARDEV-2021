@@ -250,11 +250,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
             message.text = "You DID NOT FINE ME IDIOT!!!!! me!";
         }
         */
+        
+        GameObject testRoom = CubeRoom;
+        setRoomTexture(CubeRoom);
+
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
         p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
         r.SetCustomProperties(p);
-        //message.text= (r.Name);
+        message.text= (r.Name);
+        GameObject avatar = new GameObject(); 
+
 
         if (!allowJoin)
         {
@@ -262,7 +268,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         } 
         else if (ddGroup.value == 0)
         {
-            GameObject avatar = new GameObject(); 
             setRoomTexture(CubeRoom);
             avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
             avatar.transform.SetParent(ARcontainer.transform);
@@ -276,7 +281,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (ddType.value == 0)
             {
                 //PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount * 0.1f), 0f), Quaternion.identity, 0);
-                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), -9.0f), Quaternion.identity, 0); //making z -10 instwad of 0 for test
+                avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
                 // Arsession origin.transform position = point;
                 message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
                 Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");
