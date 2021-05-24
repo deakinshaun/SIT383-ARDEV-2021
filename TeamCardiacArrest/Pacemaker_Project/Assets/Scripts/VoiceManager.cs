@@ -136,7 +136,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
         else
         {
             vc.PrimaryRecorder.TransmitEnabled = true;
-            vc.PrimaryRecorder.DebugEchoMode = true;
+//            vc.PrimaryRecorder.DebugEchoMode = true;
             micOn = true;
             Debug.Log("MIC OFF");
             status.text = "MIC OFF";
