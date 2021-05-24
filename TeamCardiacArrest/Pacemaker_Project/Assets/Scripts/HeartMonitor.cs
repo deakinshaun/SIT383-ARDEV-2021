@@ -6,8 +6,8 @@ using TMPro;
 
 public class HeartMonitor : MonoBehaviour
 {
-    private SoundManager sound;    
-    
+    private SoundManager sound;
+    //public GameObject soundContainer;
     //List of spectrum values
     private List<double> timeSeries = new List<double>();
 
@@ -178,6 +178,7 @@ public class HeartMonitor : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(Display(2.0f));
+        //sound = soundContainer.GetComponent<SoundManager>();
     }
 
     void FixedUpdate()
@@ -321,7 +322,7 @@ public class HeartMonitor : MonoBehaviour
             if (remainPeriodMillisec <= 0f)
             {
                 stateIndex = 1;
-                timeSeries.Add(Apower); 
+                timeSeries.Add(Apower);
                 //sound.beep(); //Comenting this out because it causes null ref
                 Lub = true;
             }

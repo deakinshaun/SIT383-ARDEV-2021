@@ -13,6 +13,9 @@ public class panelAction : MonoBehaviour
     [SerializeField]
     private GameObject DismissButton;
 
+    [SerializeField]
+    private GameObject helpButton;
+
     public GameObject studentPrefab;
     private Camera cam;
 
@@ -25,4 +28,9 @@ public class panelAction : MonoBehaviour
         cam.setActive();
 */
     }
+
+    public void Help()
+	{
+        WelcomeWindow.SetActive(true);
+	}        
 }
