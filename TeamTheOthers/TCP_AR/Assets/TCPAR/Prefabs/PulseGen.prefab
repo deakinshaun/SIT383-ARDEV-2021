@@ -2335,7 +2335,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278000939298716007}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2428,7 +2428,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278000939323335100}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2597,13 +2597,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screen: {fileID: 7278000939072340498}
   screen2: {fileID: 7278000940517242290}
+  atrialPulseLED: {fileID: 7278000938527057416}
+  ventPulseLED: {fileID: 7278000938671885723}
+  atrialSenseLED: {fileID: 7278000939964614684}
+  ventSenseLED: {fileID: 7278000938800084925}
   screenOffMaterial: {fileID: 2100000, guid: 550c3beb88e137c44abd6e4ac9fff38f, type: 2}
   screenOnMaterial: {fileID: 2100000, guid: d194c78d81ee76b42b136ff0006b2e1c, type: 2}
-  ledGreenMaterial: {fileID: 0}
-  ledBlueMaterial: {fileID: 0}
-  ledOffMaterial: {fileID: 0}
+  ledGreenMaterial: {fileID: 2100000, guid: b94691b2a36c4d64b95218008bdcf061, type: 2}
+  ledBlueMaterial: {fileID: 2100000, guid: e4eb076d057fa094b876b9dc266c9940, type: 2}
+  ledOffMaterial: {fileID: 2100000, guid: ddeff21a1785655408ee604fc2f636fc, type: 2}
   soundClick: {fileID: 8300000, guid: 7bd01a32b7a2b4349b8b6f7d3429adfc, type: 3}
   soundSoftButton: {fileID: 8300000, guid: 8fcf672b0ed39aa46b6e42bcc2958998, type: 3}
+  connectedToPatient: 1
+  pacingMode: 0
+  deviceBPM: 80
 --- !u!82 &1273779770948080928
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2776,7 +2783,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278000939370386799}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2883,7 +2890,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278000939581748590}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3330,7 +3337,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278000939802476726}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3423,7 +3430,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278000939835293232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
