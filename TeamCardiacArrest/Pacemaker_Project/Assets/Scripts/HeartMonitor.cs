@@ -14,7 +14,7 @@ public class HeartMonitor : MonoBehaviour
     //Number of sensor readings
     private int numReading = 128;
 
-    private float width = 1.5f; //Width of spectrum chart
+    private float width = 2.0f; //Width of spectrum chart
     private float timeOffset = 0.0f;  //Offset to center of the spectrum chart
 
     private int timeStep = 4; //Number of adjacent bins that are condensed into one
