@@ -7,7 +7,7 @@ public class ShowLocation : MonoBehaviour
     public GPSTracking locationService;
     public GameObject marker;
 
-    public float globeRadius = 10.0f;
+    public float globeRadius = 0.5f;
     public float rotationSpeed = 30.0f;
 
     void Update()
