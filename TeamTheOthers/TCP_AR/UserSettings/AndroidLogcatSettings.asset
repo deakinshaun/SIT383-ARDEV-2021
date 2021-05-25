@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "192.168.2.83:5555",
     "m_SelectedPackage": {
-        "deviceId": "1c901a5cdb0d7ece",
+        "deviceId": "192.168.2.83:5555",
         "name": "com.DefaultCompany.TCP_AROthers",
-        "processId": 23728,
+        "processId": 22163,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -120,6 +120,12 @@
             "deviceId": "192.168.2.83:5555",
             "name": "com.DefaultCompany.TCP_AROthers",
             "processId": 32359,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.2.83:5555",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 22163,
             "exited": false
         }
     ],
