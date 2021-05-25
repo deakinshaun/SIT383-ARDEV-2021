@@ -4,11 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
+using TMPro;
 
 public class PhotonConnect : MonoBehaviourPunCallbacks
 {
     public GameObject avatarPrefab;
     private string SessionName;
+    public TMP_Text t;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
         path = path + "SessionName.txt";
         StreamReader reader = new StreamReader(path);
         SessionName = reader.ReadToEnd();
+        t.text = "Session ID:" + SessionName;
         reader.Close();
         //SessionName = "Room" + SessionName;
     }

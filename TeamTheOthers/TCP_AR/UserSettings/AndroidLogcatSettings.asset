@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "RFCM906Y2CB",
+    "m_SelectedDeviceId": "192.168.2.83:5555",
     "m_SelectedPackage": {
-        "deviceId": "RFCM906Y2CB",
+        "deviceId": "1c901a5cdb0d7ece",
         "name": "com.DefaultCompany.TCP_AROthers",
-        "processId": 26173,
+        "processId": 23728,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -96,6 +96,12 @@
             "deviceId": "1c901a5cdb0d7ece",
             "name": "com.DefaultCompany.TCP_AROthers",
             "processId": 18439,
+            "exited": false
+        },
+        {
+            "deviceId": "1c901a5cdb0d7ece",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 23728,
             "exited": false
         },
         {

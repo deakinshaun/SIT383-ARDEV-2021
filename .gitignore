@@ -81,3 +81,12 @@ Thumbs.db
 DO NOT TOUCH_CoeurDeTravailleONLY/Assets/Plugins.meta
 TeamAtrialDeficit/Assets/Textures/Vase.jpeg
 *.zip
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86_64/webrtc-audio.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86_64/opus_egpv.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86_64/AudioIn.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86/webrtc-audio.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86/opus_egpv.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86/AudioIn.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/WSA/x86/opus_egpv.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/WSA/x64/opus_egpv.dll.meta
+TeamTheOthers/TCP_AR/Assets/Photon/PhotonVoice/PhotonVoiceLibs/WSA/ARM/opus_egpv.dll.meta
