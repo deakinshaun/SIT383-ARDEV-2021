@@ -35,11 +35,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
     private SoundManager soundsMan;
     public GameObject ARcontainer;
 
-    private GameObject voiceTest;
+    //public GameObject VoiceConnection;     - MIC WIP
+
+    //private GameObject voiceTest;
+
+    public GameObject CubeRoom;
     
 
     //This Game Object should be the Voice manager prefab, used for photon voice - Chris
-    public GameObject voiceManager;
+    //public GameObject voiceManager;
 
     private bool allowJoin = false;
     List <GameObject> displayRooms = new List<GameObject>();
@@ -50,31 +54,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        //OnStart();
+    }
+    
+    public void OnStart()
+    {
         Debug.Log ("Photon manager starting.");
         PhotonNetwork.ConnectUsingSettings();
         Debug.Log("Connected!");
 
-
-        // this is an attempt to instantiate the voice manager prefab, it is returning a null reference exception when i try to instantiate it,
-        // Despite voiceManager.name returning the correct value, i have no idea why. Also this should be taking place in onJoinedRoom for the final product. -Chris
-
+        //GameObject vc = GetComponent<VoiceConnection>();   - MIC WIP 
+        //vc.Client.AddCallbackTarget(this);                    MIC WIP
+        //vc.ConnectUsingSettings();                          MIC WIP
     }
-
-/*
-     public DropdownItemSelected(Dropdown dropdown, int value)
-    {
-        int index = dropdown.selection;
-        int value = dropdown.options[index].value;
-        return value;
-    }
-*/
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinLobby();       
-        Debug.Log("You found me, Master");
-        DebugText.text = "You found me, Master";
-        
+        PhotonNetwork.JoinLobby();
+        //GameObject vc = GetComponent<VoiceConnection>();    - MIC WIP
     }
     // Update is called once per frame
 
@@ -83,6 +80,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby ()
     {
         Debug.Log("You made to the lobby!");
+    }
+
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room Created");
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Failed to create room " + returnCode + " " + message);
     }
 
 
@@ -123,38 +131,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         return room;
     }
 
-    public void setRoomTexture(GameObject room)
-    {
-        Texture tex = room.GetComponent<Texture>();
-        switch (ddGroup.value)
-        {
-            case 0:
-            tex = SoloRoom;
-            break;
-
-            case 1:
-            tex = GroupRoom;
-            break;
-
-            case 2:
-            tex = LobbyRoom;
-            break;
-            
-            default:
-            tex = LobbyRoom;
-            break;
-        }
-    }
-
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Room Created");
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("Failed to create room " + returnCode + " " + message);
-    }
+    
 
 
     private void UpdateRooms()
@@ -220,33 +197,81 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName);
     }
 
+    public void setRoomTexture(GameObject room)
+    {
+        Texture tex = room.GetComponent<Texture>();
+        switch (ddGroup.value)
+        {
+            case 0:
+            tex = SoloRoom;
+            break;
+
+            case 1:
+            tex = GroupRoom;
+            break;
+
+            case 2:
+            tex = LobbyRoom;
+            break;
+            
+            default:
+            tex = LobbyRoom;
+            break;
+        }
+    }
+
+    /*
+    private void voiceInstance()
+    {
+        PhotonNetwork.Instantiate("voiceManager", new Vector3(), Quaternion.identity, 0);
+    }
+    */
 
 
     public override void OnJoinedRoom()
     {
-        voiceTest = PhotonNetwork.Instantiate(voiceManager.name, new Vector3(), Quaternion.identity, 0);
-        Debug.Log(voiceManager.name);
-        Vibration2.CreateOneShot(3, 255);
+        setRoomTexture(CubeRoom);
+        //voiceTest = new GameObject(voiceInstance());
+        
+        //Debug.Log(voiceManager.name);
+        //Vibration2.CreateOneShot(3, 255);
+        //if (photonView.IsMine == true)
+        //{
+            //GameObject voiceTest = (GameObject) PhotonNetwork.Instantiate("voiceManager", new Vector3(), Quaternion.identity, 0);
+        //}
+        /*
         if (voiceTest != null)
         {
-        DebugText.text = "You found me!";
+            message.text = "You found me!";
             Debug.Log("You found me");
         }
-        RoomCanvas.SetActive(true);
+        else
+        {
+            message.text = "You DID NOT FINE ME IDIOT!!!!! me!";
+        }
+        */
+        
+        GameObject testRoom = CubeRoom;
+        setRoomTexture(CubeRoom);
+
         Room r = PhotonNetwork.CurrentRoom;
         ExitGames.Client.Photon.Hashtable p = r.CustomProperties;
         p["notices"] = RoomManager.getName(this.gameObject) + " : " + Time.time + ":joined\n";
         r.SetCustomProperties(p);
+        message.text= (r.Name);
+        GameObject avatar = new GameObject(); 
+
+
         if (!allowJoin)
         {
             PhotonNetwork.LeaveRoom();
         } 
         else if (ddGroup.value == 0)
         {
-            GameObject avatar = new GameObject(); 
+            setRoomTexture(CubeRoom);
             avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
             avatar.transform.SetParent(ARcontainer.transform);
-            voiceTest.transform.SetParent(avatar.transform);
+            //voiceTest.transform.SetParent(avatar.transform);
             DebugText.text = "Just you on this run";
             Debug.Log("Just you on this run");
             allowJoin = false;
@@ -256,7 +281,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (ddType.value == 0)
             {
                 //PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount * 0.1f), 0f), Quaternion.identity, 0);
-                PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(0.0f, ((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), -9.0f), Quaternion.identity, 0); //making z -10 instwad of 0 for test
+                avatar = PhotonNetwork.Instantiate(SetupPrefab.name, new Vector3(((float)PhotonNetwork.CurrentRoom.PlayerCount*0.1f), 0.0f, 0.0f), Quaternion.identity, 0);
                 // Arsession origin.transform position = point;
                 message.text = "You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse";
                 Debug.Log("You are in the room with " + PhotonNetwork.CurrentRoom.PlayerCount + " other people as a nurse");
@@ -275,11 +300,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        soundsMan.EndSimulation();
         PhotonNetwork.LeaveRoom();
+        message.text = "Leaving room";
         ddGroup.value = 2;
-        RoomSelect.SetActive(true);
+        PhotonNetwork.JoinLobby();
         RoomCanvas.SetActive(false);               
+        RoomSelect.SetActive(true);
+        ddGroup.value = 0;
     }
 
     private void removeRoomObject (GameObject room)

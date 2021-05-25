@@ -16,6 +16,9 @@ public class OutputDial : MonoBehaviour
     private RaycastHit hit;
     public TextMeshPro text3D;
     public TextMeshPro reverse;
+    //public GameObject arSessionOriginContainer;
+    //private Camera arCamera;
+    //GameObject.Find<Camera>
 
     // gives access to required floats for heartbeat manager, set in the editor
     public HeartMonitor heartMonitorReference;
@@ -26,6 +29,8 @@ public class OutputDial : MonoBehaviour
         output = heartMonitorReference.getApower();
         text3D.text = output.ToString("0.00") + " mA";
         Debug.Log(output);
+
+        //arCamera = arSessionOriginContainer.GetComponent<Camera>();
     }
 
     public void reverseOutput()
@@ -49,12 +54,27 @@ public class OutputDial : MonoBehaviour
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
-        else if (Mathf.Abs(50.00f - output) <= 0.01)
+        else if (Mathf.Abs(25.00f - output) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
-        if (Mathf.Abs(100.00f - output) <= 0.01)
+        if (Mathf.Abs(50.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(75.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(100.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(125.00f - output) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
@@ -64,7 +84,22 @@ public class OutputDial : MonoBehaviour
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
         }
+        if (Mathf.Abs(100.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(175.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
         else if (Mathf.Abs(200.00f - output) <= 0.01)
+        {
+            //Debug.Log("Numbers are aprox the same");
+            Vibration2.CreateOneShot(3, 255);
+        }
+        else if (Mathf.Abs(225.00f - output) <= 0.01)
         {
             //Debug.Log("Numbers are aprox the same");
             Vibration2.CreateOneShot(3, 255);
@@ -81,10 +116,12 @@ public class OutputDial : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
- {
-     //Using raycast to see if the user mouse if over the dial object
-     ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-     if (Physics.Raycast(ray, out hit))
+    {
+        //Using raycast to see if the user mouse if over the dial object
+        //Vector3 pos = Input.mousePosition;
+        //ray = arCamera.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
      {
          if (hit.collider.name == outputBox.name)
          {
@@ -131,17 +168,17 @@ public class OutputDial : MonoBehaviour
              if (forward == true)
              {
                  forward = false;
-                 reverse.text = "Swap direcition: Currently reverse";
+                 reverse.text = "Swap direction: Currently reverse";
              }
              else
              {
                  forward = true;
-                 reverse.text = "Swap direcition: Currently forward";
+                 reverse.text = "Swap direction: Currently forward";
              }
          }
 
      }
 
- }
+    }
 }
 

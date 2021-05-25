@@ -11,15 +11,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DialARTest.unity
     guid: a5169bdfa980cab4086004522b26eea2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
     path: Assets/Scenes/HeartbeatScene.unity
     guid: 95775cd56ed7fec42a74ae355b429893
-  - enabled: 1
-    path: Assets/test scene.unity
-    guid: 10d796103d1ca25499902a0ca61ee352
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: b0eb9621690019540b098416048d6562,
       type: 2}

@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "RFCM906Y2CB",
+    "m_SelectedDeviceId": "1c901a5cdb0d7ece",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "1c901a5cdb0d7ece",
+        "name": "com.DefaultCompany.TCP_AROthers",
+        "processId": 27459,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -55,6 +55,30 @@
             "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 7873,
             "exited": true
+        },
+        {
+            "deviceId": "R5CR11P132Y",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 6719,
+            "exited": false
+        },
+        {
+            "deviceId": "1c901a5cdb0d7ece",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 5981,
+            "exited": false
+        },
+        {
+            "deviceId": "1c901a5cdb0d7ece",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 26221,
+            "exited": false
+        },
+        {
+            "deviceId": "1c901a5cdb0d7ece",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 27459,
+            "exited": false
         }
     ],
     "m_Tags": {
