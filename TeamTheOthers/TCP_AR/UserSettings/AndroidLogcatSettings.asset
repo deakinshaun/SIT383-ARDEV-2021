@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "1c901a5cdb0d7ece",
         "name": "com.DefaultCompany.TCP_AROthers",
-        "processId": 27459,
+        "processId": 18439,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -78,6 +78,42 @@
             "deviceId": "1c901a5cdb0d7ece",
             "name": "com.DefaultCompany.TCP_AROthers",
             "processId": 27459,
+            "exited": false
+        },
+        {
+            "deviceId": "1c901a5cdb0d7ece",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 29408,
+            "exited": false
+        },
+        {
+            "deviceId": "1c901a5cdb0d7ece",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 3622,
+            "exited": false
+        },
+        {
+            "deviceId": "1c901a5cdb0d7ece",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 18439,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.2.83:5555",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 3042,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.2.83:5555",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 17332,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.2.83:5555",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 32359,
             "exited": false
         }
     ],

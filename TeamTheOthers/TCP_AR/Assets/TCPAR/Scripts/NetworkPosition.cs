@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System;
 
-public class NetworkPosition : MonoBehaviour
+public class NetworkPosition : MonoBehaviour, IPunObservable
 {
     private PhotonView photonView;
     Vector3 realPosition;
@@ -24,16 +25,19 @@ public class NetworkPosition : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, realPosition, 1f);
             transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 1f);
+            Debug.Log("hit");
         }
     }
 
-    void onPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
+        Debug.Log("yes");
+        if (stream.IsWriting)
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-        }else
+        }
+        else
         {
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();

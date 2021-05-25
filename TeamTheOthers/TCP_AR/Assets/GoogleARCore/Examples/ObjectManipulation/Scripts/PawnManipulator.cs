@@ -22,17 +22,20 @@ namespace GoogleARCore.Examples.ObjectManipulation
 {
     using GoogleARCore;
     using UnityEngine;
+    using Photon.Pun;
+    using System;
 
     /// <summary>
     /// Controls the placement of objects via a tap gesture.
     /// </summary>
-    public class PawnManipulator : Manipulator
+    public class PawnManipulator : Manipulator, IPunObservable
     {
         /// <summary>
         /// The first-person camera being used to render the passthrough camera image (i.e. AR
         /// background).
         /// </summary>
         public Camera FirstPersonCamera;
+        private PhotonView photonView;
 
         /// <summary>
         /// A prefab to place when a raycast from a user touch hits a plane.
@@ -102,9 +105,10 @@ namespace GoogleARCore.Examples.ObjectManipulation
 
                     if (pawnEntity == null)
                     {
+
                         // Instantiate game object at the hit pose.
                         pawnEntity = Instantiate(PawnPrefab, usefulLocation, hit.Pose.rotation);//****
-
+                        //pawnEntity = (GameObject)PhotonNetwork.Instantiate(PawnPrefab.name, usefulLocation, hit.Pose.rotation, 0);
                         // Instantiate manipulator.
                         manipulator =
                             Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
@@ -121,7 +125,9 @@ namespace GoogleARCore.Examples.ObjectManipulation
 
                         // Select the placed object.
                         manipulator.GetComponent<Manipulator>().Select();
-                    } else {
+                    }
+                    else
+                    {
                         Anchor newAnchor = hit.Trackable.CreateAnchor(hit.Pose);
                         manipulator.transform.SetPositionAndRotation(hit.Pose.position, hit.Pose.rotation);
                         manipulator.transform.parent = newAnchor.transform;
@@ -135,12 +141,17 @@ namespace GoogleARCore.Examples.ObjectManipulation
             // Debug.Log("Raycasting to button from " + rayStartPosition);
             // if (Physics.Raycast(rayStartPosition, -Vector3.up, out hit))
             // {
-               
+
             //     if (hit.transform.gameObject.tag == "ar_btn") {
             //         hit.transform.SendMessage ("HitByRay");
             //         Debug.Log("Button hit by ray.");
             //     }
             // }
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            Debug.Log("yes");
         }
     }
 }

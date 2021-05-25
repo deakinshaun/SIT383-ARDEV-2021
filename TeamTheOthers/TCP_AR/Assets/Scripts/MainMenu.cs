@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
         }
 
         SetSessionName();
-        SceneManager.LoadScene("SampleScene"); // change when we get a better name for this scene.
+        SceneManager.LoadScene("BaseScene"); 
     }
 
     public void SetSessionName()
