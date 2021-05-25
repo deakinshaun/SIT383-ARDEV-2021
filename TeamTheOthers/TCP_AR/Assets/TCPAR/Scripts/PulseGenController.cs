@@ -33,6 +33,11 @@ public class PulseGenController : MonoBehaviour
     public GameObject atrialSenseLED;
     public GameObject ventSenseLED;
 
+    public GameObject heartVis;
+
+    [Header("Screen Text")]
+    public GameObject rateText;
+
     [Header("Materials")]
     public Material screenOffMaterial;
     public Material screenOnMaterial;
@@ -58,10 +63,12 @@ public class PulseGenController : MonoBehaviour
     private int currentControllerBPM = 80;
 
     private int currentAvInterval = 160; // A-V Interval milliseconds
-    private int signalLengthTime = 500; // Time that the signal raises for (not accurate, but determines LED timing
+    private int signalLengthTime = 160; // Time that the signal raises for (not accurate, but determines LED timing
 
     //private Timer nextPulseTimer = null;
     //private Timer nextVentPulseTimer = null;
+
+    private List<DateTime> irregularBeatQueue = new List<DateTime>();
 
     private DateTime nextPulseTime = DateTime.Now;
     private DateTime nextVentPulseTime = DateTime.Now;
@@ -75,15 +82,44 @@ public class PulseGenController : MonoBehaviour
     public bool _pulsingVent = false;
     public bool _senseVent = false;
 
+    // Shake detection
+    float accelerometerUpdateInterval = 1.0f / 60.0f;
+    // The greater the value of LowPassKernelWidthInSeconds, the slower the
+    // filtered value will converge towards current input sample (and vice versa).
+    float lowPassKernelWidthInSeconds = 1.0f;
+    // This next parameter is initialized to 2.0 per Apple's recommendation,
+    // or at least according to Brady! ;)
+    float shakeDetectionThreshold = 2.0f;
+
+    float lowPassFilterFactor;
+    Vector3 lowPassValue;
+
     void Start()
     {
         _ShowAndroidToastMessage("Simulation limited to DDD mode");
+        UpdateScreen();
         InitiatePacing();
+
+        // Shake detection
+        lowPassFilterFactor = accelerometerUpdateInterval / lowPassKernelWidthInSeconds;
+        shakeDetectionThreshold *= shakeDetectionThreshold;
+        lowPassValue = Input.acceleration;
     }
 
     void Update()
-        // TODO: Move timing into update loop... SIGH!
     {
+        // Shake Detection 
+        Vector3 acceleration = Input.acceleration;
+        lowPassValue = Vector3.Lerp(lowPassValue, acceleration, lowPassFilterFactor);
+        Vector3 deltaAcceleration = acceleration - lowPassValue;
+
+        if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
+        {
+            _ShowAndroidToastMessage("Device shake detected!");
+            QueueIrregularBeats();    
+        }
+
+        // State Changes
         if (pulsingStateChange) {
             if (_pulsingAtrial)
             {
@@ -121,6 +157,11 @@ public class PulseGenController : MonoBehaviour
         pulsingStateChange = false;
     }
 
+    private void UpdateScreen()
+    {
+        rateText.GetComponent<TMPro.TMP_Text>().SetText(currentControllerBPM.ToString());
+    }
+
     private void FixedUpdate()
     {
         //Debug.Log("Comparing " + (System.DateTime.Now.Millisecond) + " with " + nextPulseTime.Millisecond);
@@ -132,7 +173,6 @@ public class PulseGenController : MonoBehaviour
                 // next pulse time has lapsed
                 nextPulseTime = System.DateTime.MaxValue;
                 
-
                 OnPulseEvent();
             }
         }
@@ -162,6 +202,19 @@ public class PulseGenController : MonoBehaviour
             _pulsingVent = false;
             pulsingStateChange = true;
         }
+
+        if (irregularBeatQueue.Count > 0)
+        {
+            if (System.DateTime.Compare(System.DateTime.Now, irregularBeatQueue[0]) > 0)
+            {
+                lastAtrialPulseTime = irregularBeatQueue[0];
+                // sensed beat detected
+                nextPulseTime = System.DateTime.MaxValue;
+
+                SensedPulse();
+                irregularBeatQueue.RemoveAt(0);
+            }
+        }
     }
 
     void StopPacing()
@@ -189,7 +242,7 @@ public class PulseGenController : MonoBehaviour
         // Create a timer with a interval based on the intended BPM
         // Timer (in millisenconds) is set to rate (BPM) / 60 (mins) * 1000 (ms)
         nextPulseTime = System.DateTime.Now;
-        nextPulseTime = nextPulseTime.AddMilliseconds(currentControllerBPM / 60 * 1000);
+        nextPulseTime = nextPulseTime.AddMilliseconds(60.0f / currentControllerBPM * 1000);
 
 
         //nextPulseTimer = new System.Timers.Timer(currentControllerBPM / 60 * 1000);
@@ -214,10 +267,12 @@ public class PulseGenController : MonoBehaviour
     void SensedPulse()
     {
         //nextPulseTimer.Stop();
-       // nextVentPulseTimer.Stop();
+        // nextVentPulseTimer.Stop();
+        heartVis.SendMessage("Beat");
 
         Debug.unityLogger.Log("TCPAR", "Device sensed atrial event.");
         lastPulse = DateTime.Now.Millisecond;
+        lastAtrialPulseTime = DateTime.Now;
 
         UpdateDeviceStates();
 
@@ -228,7 +283,7 @@ public class PulseGenController : MonoBehaviour
 
         // Timer (in millisenconds) is set to rate (BPM) * 1000 (ms)
         nextPulseTime = System.DateTime.Now;
-        nextPulseTime = nextPulseTime.AddMilliseconds(currentControllerBPM / 60 * 1000);
+        nextPulseTime = nextPulseTime.AddMilliseconds(60.0f / currentControllerBPM * 1000);
 
         // Next pulse is scheduled
 
@@ -238,7 +293,8 @@ public class PulseGenController : MonoBehaviour
 
     void OnPulseEvent()
     {
-       // nextPulseTimer.Stop();
+        heartVis.SendMessage("Beat");
+        // nextPulseTimer.Stop();
         // Ensure Ventricular pulse has been cancelled if scheduled
         //nextVentPulseTimer.Stop();
 
@@ -256,9 +312,9 @@ public class PulseGenController : MonoBehaviour
 
         // Timer (in millisenconds) is set to rate (BPM) * 1000 (ms)
         nextPulseTime = System.DateTime.Now;
-        nextPulseTime = nextPulseTime.AddMilliseconds(currentControllerBPM / 60 * 1000);
+        nextPulseTime = nextPulseTime.AddMilliseconds(60.0f / currentControllerBPM * 1000);
 
-        Debug.unityLogger.Log("TCPAR", "Next pulse set for in " + currentControllerBPM / 60 * 1000 + "ms");
+        Debug.unityLogger.Log("TCPAR", "Next pulse set for in " + 60.0f / currentControllerBPM * 1000 + "ms");
         //nextPulseTimer.Interval = (currentControllerBPM / 60 * 1000);
         //nextPulseTimer.Elapsed += OnPulseEvent;
 
@@ -304,6 +360,12 @@ public class PulseGenController : MonoBehaviour
         _pulsingVent = true;
     }
 
+    void OnRateAffect(int increase)
+    {
+        deviceBPM += increase;
+        rateText.GetComponent<TMPro.TMP_Text>().SetText(currentControllerBPM.ToString());
+    }
+
 
     /* Message 'Action' Callable Functions */
 
@@ -314,11 +376,51 @@ public class PulseGenController : MonoBehaviour
         PlaySound(soundClick);
     }
 
+    void HeartButtonPressed()
+    {
+        SensedPulse();
+        _ShowAndroidToastMessage("Pulse Sensed!");
+        PlaySound(soundClick);
+    }
+
     void UnknownButtonFunction()
     {
         Debug.unityLogger.Log("TCPAR", "Button clicked with unknown function!");
         _ShowAndroidToastMessage("Button clicked with unknown function!");
     }
+
+    void RateDialLeft()
+    {
+        Debug.unityLogger.Log("TCPAR", "Rate Dial turned left.");
+        OnRateAffect(-2);
+        PlaySound(soundClick);
+    }
+
+    void RateDialRight()
+    {
+        Debug.unityLogger.Log("TCPAR", "Rate Dial turned right.");
+        OnRateAffect(2);
+        PlaySound(soundClick);
+    }
+
+
+    private void QueueIrregularBeats()
+    {
+        // Add a random number of irregular beats
+        System.Random rnd = new System.Random();
+        irregularBeatQueue.Add(DateTime.Now.AddMilliseconds(rnd.Next(420, 1200)));
+        var numSenseBeats = rnd.Next(0, 5);
+        for (int i = 0; i <= numSenseBeats; i++)
+        {
+            // Add a random number of irregular beats (up to 5 from the first in the queue)
+            irregularBeatQueue.Add(irregularBeatQueue[irregularBeatQueue.Count - 1].AddMilliseconds(rnd.Next(420, 1200)));
+        }
+        
+
+        _ShowAndroidToastMessage("Irregular sensed beats queued " + numSenseBeats);
+    }
+
+
 
     /* Local Functions */
 

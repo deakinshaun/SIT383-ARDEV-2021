@@ -12,3 +12,10 @@ Creative Commons(Creative Commons — Attribution 3.0 Unported, http://creativecom
 originaljun
 from freesound.org
 https://freesound.org/people/orginaljun/sounds/150382/
+
+Heartbeat:
+Creative Commons(Creative Commons — Attribution 3.0 Unported, http://creativecommons.org/licenses/by/3.0)
+418866__name__heartbeat-loop
+.name
+from freesound.org
+https://freesound.org/people/.name/sounds/418866/
