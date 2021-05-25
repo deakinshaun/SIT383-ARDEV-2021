@@ -1,60 +1,60 @@
 {
-    "m_SelectedDeviceId": "1c901a5cdb0d7ece",
+    "m_SelectedDeviceId": "RFCM906Y2CB",
     "m_SelectedPackage": {
-        "deviceId": "1c901a5cdb0d7ece",
+        "deviceId": "RFCM906Y2CB",
         "name": "com.DefaultCompany.TCP_AROthers",
-        "processId": 18439,
+        "processId": 26173,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "RFCM906Y2CB",
-            "name": "com.sec.android.app.launcher",
-            "processId": 1608,
-            "exited": false
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "org.thoughtcrime.securesms",
-            "processId": 3486,
-            "exited": false
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.facebook.orca",
-            "processId": 26931,
-            "exited": false
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 25072,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 2427,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 5156,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
-            "name": "com.DefaultCompany.ObjectManipulationU3D",
-            "processId": 6834,
-            "exited": true
-        },
-        {
-            "deviceId": "RFCM906Y2CB",
             "name": "com.DefaultCompany.ObjectManipulationU3D",
             "processId": 7873,
             "exited": true
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 10744,
+            "exited": true
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 6077,
+            "exited": true
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 10144,
+            "exited": true
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.android.settings",
+            "processId": 4926,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 15729,
+            "exited": true
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 23199,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCM906Y2CB",
+            "name": "com.DefaultCompany.TCP_AROthers",
+            "processId": 26173,
+            "exited": false
         },
         {
             "deviceId": "R5CR11P132Y",
@@ -167,7 +167,7 @@
         "MemoryGroup": 2,
         "Behavior": 0
     },
-    "m_Filter": "TCPAR",
+    "m_Filter": "Rotation",
     "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }
